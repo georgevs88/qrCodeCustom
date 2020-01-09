@@ -1,0 +1,58 @@
+<?page id="testZul" title="Zona Imóvel" cacheable="false" 
+	language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window use="pmcg.imti.view.Zimcad" id="zim"
+		title="Zona Imóvel" border="normal" shadow="false" width="318px"
+		height="380px" position="center" mode="overlapped" sizable="false"
+		closable="false" onCreate="zim.initComponentes()">
+		<separator height="7px"/>
+		<grid>
+			<columns>
+				<column width="137px" align="right" />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<hbox>
+						<label value="Inscrição Imobiliária:" />
+					</hbox>
+					<hbox>
+						<textbox id="insc" width="130px" maxlength="11" value="@{zim.inscricao}" onOK="zim.pesquisarInsc()" onFocus="zim.alterouInsc()"/>
+						<image src="/images/imgBuscar.png" onClick="zim.pesquisarInsc()"/>
+					</hbox>
+				</row>
+				<row>
+					<hbox>
+						<label value="Zona(s):" />
+					</hbox>
+					<hbox>
+						<combobox id="zona" width="134px" readonly="true" model="@{zim.listZona}" selectedItem="@{zim.zonVO}" disabled="@{zim.disableResult}">
+							<comboitem self="@{each=zon}" value="@{zon}" label="@{zon.codzon}"/>
+						</combobox>
+						<image src="/images/externo/add.png" onClick="zim.inserirZona()" visible="@{zim.enableResult}"/> 
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<separator height="5px"/>
+		<hbox>
+			<separator width="139px"/>
+			<listbox model="@{zim.listZim}" width="150px" height="217px" disabled="@{zim.disableResult}">
+				<listhead>
+					<listheader width="30px"/>
+					<listheader width="120px"/>
+				</listhead>
+				<listitem self="@{each=c}" value="@{c}">
+					<listcell> 
+						<image src="/images/externo/No_16x16.png" onClick="zim.excluirZona(self.parent.parent.value)"/> 
+					</listcell>
+					<listcell label="@{c.zonzim}"/>
+				</listitem>
+			</listbox>
+		</hbox>
+	</window>
+</zk>

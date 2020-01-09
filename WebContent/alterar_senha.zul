@@ -1,0 +1,38 @@
+<?page title="PMCG - CIM"?>
+<?link rel="shortcut icon" type="image/png" href="images/externo/brasaoPref01.png"?>
+<?link href="css/bootstrap.min.css" rel="stylesheet"?>
+<?link href="css/signin.css" rel="stylesheet"?>
+<?meta name="keywords" content="cim" ?>
+<?meta http-equiv="X-UA-Compatible" content="IE=9" ?>
+<zk xmlns:h="native">
+<window border="none" width="100%" id="mainPage" use="pmcg.imti.view.ext.Altsenha" onCreate="mainPage.initComponentes(5);mainPage.initAlt();" style="padding-top: 0px;">
+	<style src="/css/componentes.css"></style>
+	<h:main>
+		<include id="headerPart" src="/layout-parts/header.zul"></include>
+		<h:section>
+			<h:div class="container">
+				<h:div class="masthead">
+					<include id="menuPart" src="/layout-parts/menu.zul"></include>
+					<h:form class="form-signin" style="margin-top: 50px;margin-bottom: 150px;">
+				    	<h:h3 class="form-signin-heading">Informe os dados de acesso</h:h3>
+				    	<vbox>
+				    		<label value="Login"/>
+							<textbox id="login" value="@{mainPage.login}" name="login" maxlength="14" width="310px" disabled="true" style="text-align:center;"/>
+				    		<label value="Senha Atual"/>
+							<textbox id="atual" type="password" value="@{mainPage.atual}" width="310px"/>
+							<label value="Nova Senha"/>
+							<textbox id="nova" type="password" value="@{mainPage.nova}" width="310px"/>
+							<label value="Confirmar Nova Senha"/>
+							<textbox id="conf" type="password" value="@{mainPage.conf}" width="310px"/>
+		 			   	</vbox>
+			 			<button class="btn btn-lg btn-primary btn-block" label="Alterar Senha" onClick="mainPage.alterar()"/>
+			 		</h:form>
+				</h:div>
+			</h:div>
+		</h:section>
+		<include id="footerPart" src="/layout-parts/footer.zul"></include>
+	</h:main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</window>
+</zk>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Cai">
+	<typeAlias alias="CaiVO" type="pmcg.fcn.domain.CaiVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="CaiVO">
+		<result property="iddcai" column="iddcai" />
+		<result property="nprcai" column="nprcai" />
+		<result property="sitcai" column="sitcai" />
+		<result property="motcai" column="motcai" />
+		<result property="imucai" column="imucai" />
+		<result property="alvcai" column="alvcai" />
+		<result property="datcai" column="datcai" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="dcocai" column="dcocai" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="CaiVO">
+		<result property="iddcai" column="iddcai" />
+		<result property="nprcai" column="nprcai" />
+		<result property="sitcai" column="sitcai" />
+		<result property="motcai" column="motcai" />
+		<result property="imucai" column="imucai" />
+		<result property="alvcai" column="alvcai" />
+		<result property="datcai" column="datcai" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="dcocai" column="dcocai" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncai WHERE iddcai = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncai WHERE iddcai = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CaiVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncai
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcai" prepend=" AND ">
+				iddcai = #iddcai:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nprcai" prepend=" AND ">
+				nprcai ILIKE '%' || #nprcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sitcai" prepend=" AND ">
+				sitcai ILIKE '%' || #sitcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="motcai" prepend=" AND ">
+				motcai ILIKE '%' || #motcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="imucai" prepend=" AND ">
+				imucai ILIKE '%' || #imucai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alvcai" prepend=" AND ">
+				alvcai ILIKE '%' || #alvcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datcai" prepend=" AND ">
+				to_char(datcai,'dd/MM/yyyy') =
+				to_char(#datcai:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="CaiVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncai
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcai" prepend=" AND "> iddcai =
+				#iddcai:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nprcai" prepend=" AND ">
+				nprcai ILIKE '%' || #nprcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sitcai" prepend=" AND ">
+				sitcai ILIKE '%' || #sitcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="motcai" prepend=" AND ">
+				motcai ILIKE '%' || #motcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="imucai" prepend=" AND ">
+				imucai ILIKE '%' || #imucai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alvcai" prepend=" AND ">
+				alvcai ILIKE '%' || #alvcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datcai" prepend=" AND ">
+				to_char(datcai,'dd/MM/yyyy') =
+				to_char(#datcai:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncai
+	</select>
+
+	<insert id="insReg" parameterClass="CaiVO">
+		<selectKey keyProperty="iddcai" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqcai')
+		</selectKey>
+		INSERT INTO fcn.fcncai(iddcai,nprcai,sitcai,motcai,imucai,alvcai,datcai,usualt,datalt,dcocai)
+		VALUES (#iddcai:NUMERIC#, UPPER(#nprcai:VARCHAR#),
+		UPPER(#sitcai:VARCHAR#), UPPER(#motcai:VARCHAR#),
+		UPPER(#imucai:VARCHAR#), #alvcai:VARCHAR#,#datcai:TIMESTAMP#, UPPER(#usualt:VARCHAR#),now(),#dcocai:BOOLEAN# )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="CaiVO">
+		UPDATE 
+			fcn.fcncai 
+		SET 
+			nprcai = UPPER(#nprcai:VARCHAR#),
+			sitcai = UPPER(#sitcai:VARCHAR#),
+			motcai = UPPER(#motcai:VARCHAR#),
+			imucai = UPPER(#imucai:VARCHAR#),
+			alvcai = #alvcai:VARCHAR#,
+			datcai = #datcai:TIMESTAMP#,
+			usualt = UPPER(#usualt:VARCHAR#),
+			datalt = now(),
+			dcocai = #dcocai:BOOLEAN#
+		WHERE 
+			iddcai = #iddcai:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcncai WHERE iddcai = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcncai WHERE iddcai in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="CaiVO"
+		resultClass="Integer">
+		SELECT count(iddcai) FROM fcn.fcncai
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcai" prepend=" AND "> iddcai =
+				#iddcai:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nprcai" prepend=" AND ">
+				nprcai ILIKE '%' || #nprcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sitcai" prepend=" AND ">
+				sitcai ILIKE '%' || #sitcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="motcai" prepend=" AND ">
+				motcai ILIKE '%' || #motcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="imucai" prepend=" AND ">
+				imucai ILIKE '%' || #imucai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alvcai" prepend=" AND ">
+				alvcai ILIKE '%' || #alvcai:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datcai" prepend=" AND ">
+				to_char(datcai,'dd/MM/yyyy') =
+				to_char(#datcai:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<update id="updImucai" parameterClass="CaiVO">
+		update 
+			fcn.fcncai
+		set 
+			imucai = #imucai:VARCHAR#
+		where 
+			iddcai = #iddcai:NUMERIC#
+	</update>
+	
+	<select id="getRegByImucai" parameterClass="String" resultClass="CaiVO">
+		SELECT * FROM fcn.fcncai WHERE imucai = #value:VARCHAR#
+	</select>
+</sqlMap> 
+ 

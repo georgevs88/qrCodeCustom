@@ -1,0 +1,202 @@
+<?page title="PMCG - Integrar"?>
+<?link rel="shortcut icon" type="image/png" href="images/externo/brasaoPref01.png"?>
+<?link href="/css/bootstrap.min.css" rel="stylesheet"?>
+<?meta name="keywords" content="integrar" ?>
+<?meta http-equiv="X-UA-Compatible" content="IE=9" ?>
+<zk xmlns:h="native">
+<window border="none" width="100%" id="mainPage" use="pmcg.imti.view.ext.Licenciamento" onCreate="mainPage.initComponentes(4);mainPage.initLic()">
+	<style src="/css/componentes.css"></style>
+	<h:main>
+		<include id="headerPart" src="/layout-parts/header.zul"></include>
+		<h:section>
+			<h:div class="container">
+				<h:div class="masthead">
+					<include id="menuPart" src="/layout-parts/menu.zul"></include>
+					<h:h2>Informe os Dados do Processo</h:h2>
+					<h:div class="row">
+						<h:div class="col-md-3">
+							Nº Processo (Ex. "MS22016...")
+						</h:div>
+						<h:div class="col-md-2">
+							<textbox id="protocolo" value="@{mainPage.processo}" width="100%" style="text-align:center;"/>
+						</h:div>
+					</h:div>
+					<h:div class="row">
+						<h:div class="col-md-3">
+							Inscrição Municipal
+						</h:div>
+						<h:div class="col-md-2">
+							<textbox id="insmun" value="@{mainPage.insmun}" width="100%" style="text-align:center;"/>
+						</h:div>
+					</h:div>
+					<h:div class="row">
+				        <h:div class="col-md-12">
+				       		<hbox pack="center" width="100%">
+								<button class="btn btn-info" label="Consultar" onClick="mainPage.pesquisar()" />
+							</hbox>
+						</h:div>
+					</h:div>
+					<div visible="@{mainPage.dadosEncontrados}">
+						<separator height="20px"/>
+						<h:h2>Empresa</h:h2>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								CPF/CNJ
+							</h:div>
+							<h:div class="col-md-10">
+								<label value="@{mainPage.dados.cpfcnpj}" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								Razão Social
+							</h:div>
+							<h:div class="col-md-10">
+								<label value="@{mainPage.dados.nomraz}" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								E-mail Requerente
+							</h:div>
+							<h:div class="col-md-10">
+								<label value="@{mainPage.dados.emareq}" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+					</div>
+					<div visible="@{mainPage.dadosEncontrados}">
+						<separator height="20px"/>
+						<h:h2>Viabilidade</h:h2>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								Protocolo
+							</h:div>
+							<h:div class="col-md-2">
+								<label value="@{mainPage.dados.provia}" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+							<h:div class="col-md-2">
+								Risco Meio Ambiente
+							</h:div>
+							<h:div class="col-md-2">
+								<image src="@{mainPage.dados.imgamb}"/>
+								<label value="@{mainPage.dados.risamb}" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+							<h:div class="col-md-2">
+								Risco Vigilância Sanitária
+							</h:div>
+							<h:div class="col-md-2">
+								<image src="@{mainPage.dados.imgvig}"/>
+								<label value="@{mainPage.dados.risvig}" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+						<h:h2>SEMADUR - Licenciamento Meio Ambiente</h:h2>
+						<h:div class="row">
+					        <h:div class="col-md-12">
+					       		<hbox pack="center" width="100%">
+									<button class="btn btn-success" label="Imprimir Licença" onClick="mainPage.imprimirLicenca(1)" visible="@{mainPage.RiscoBaixoMA}"/>
+								</hbox>
+							</h:div>
+						</h:div>
+						<h:div class="row">
+					        <h:div class="col-md-12">
+					       		<hbox pack="center" width="100%" visible="@{mainPage.naoRiscoBaixoMA}">
+									<h:h4 style="color: #c00202;">Licença não disponível: Processo de Médio/Alto Risco.</h:h4>
+								</hbox>
+							</h:div>
+						</h:div>
+						<h:h2>SESAU - Licenciamento Vigilância Sanitária</h:h2>
+						<h:div class="row">
+					        <h:div class="col-md-12">
+					       		<hbox pack="center" width="100%">
+									<button class="btn btn-warning" label="Emitir Guia DAM" onClick="mainPage.emitirGuia()" visible="@{mainPage.permEmitirGuia}"/>
+								</hbox>
+							</h:div>
+						</h:div>
+						<div id="divImpressao" align="center" visible="false" style="background-color:#ffe8b1" height="56px">
+							<separator height="5px"/>
+							<hbox>
+								<vbox>
+									<separator height="11px"/>
+									<label id="nrguia" value="Guia gerada com sucesso!" 
+									style="font-weight:bold;font-family:sans-serif;color:#333;font-size:13px;"/>
+								</vbox>
+								<button id="btImpGuia" class="btn btn-lg btn-default" label="Imprimir Guia" target="_blank"/>
+							</hbox>
+						</div>
+						<h:div class="row">
+					        <h:div class="col-md-12">
+					       		<hbox pack="center" width="100%">
+									<button class="btn btn-success" label="Imprimir Licença" onClick="mainPage.imprimirLicenca(2)" visible="@{mainPage.permEmitirLicencaVS}"/>
+								</hbox>
+							</h:div>
+						</h:div>
+						<h:div class="row">
+					        <h:div class="col-md-12">
+					       		<hbox pack="center" width="100%" visible="@{mainPage.naoRiscoBaixoVS}">
+									<h:h4 style="color: #c00202;">Licença não disponível: Processo de Médio/Alto Risco.</h:h4>
+								</hbox>
+							</h:div>
+						</h:div>
+						<h:h2>BOMBEIROS</h:h2>
+						<h:div class="row">
+					        <h:div class="col-md-12">
+					       		<hbox pack="center" width="100%">
+									<a href="http://sistemas.bombeiros.ms.gov.br/" style="font-weight:bold;font-family:sans-serif;font-size:28px;" target="_blank">CVCBM On-line</a>
+								</hbox>
+							</h:div>
+						</h:div>
+<!-- 						<h:h2>Anexos</h:h2> -->
+<!-- 						<div visible="@{mainPage.via.permitidoanexar}"> -->
+<!-- 							<h:div class="row"> -->
+<!-- 								<h:div class="col-md-1"> -->
+<!-- 									Arquivo -->
+<!-- 								</h:div> -->
+<!-- 								<h:div class="col-md-9"> -->
+<!-- 									<textbox value="@{mainPage.up.nomeArquivo}" width="100%" disabled="true"/> -->
+<!-- 								</h:div> -->
+<!-- 								<h:div class="col-md-2"> -->
+<!-- 									<button id="selArq" label="Selecionar Arquivo" upload="true" onUpload="mainPage.upload(event)" /> -->
+<!-- 								</h:div> -->
+<!-- 							</h:div> -->
+<!-- 							<h:div class="row"> -->
+<!-- 								<h:div class="col-md-1"> -->
+<!-- 									Descrição -->
+<!-- 								</h:div> -->
+<!-- 								<h:div class="col-md-11"> -->
+<!-- 									<textbox id="desarq" width="100%" value="@{mainPage.descricaoArquivo}"/> -->
+<!-- 								</h:div> -->
+<!-- 							</h:div>	 -->
+<!-- 							<h:div class="row"> -->
+<!-- 						        <h:div class="col-md-12"> -->
+<!-- 						       		<hbox pack="center" width="100%"> -->
+<!-- 										<button class="btn btn-info" label="Adicionar" onClick="mainPage.anexar()" /> -->
+<!-- 										<button class="btn btn-default" label="Cancelar" onClick="mainPage.cancelarAnexo()" /> -->
+<!-- 									</hbox> -->
+<!-- 								</h:div> -->
+<!-- 							</h:div> -->
+<!-- 						</div> -->
+<!-- 						<h:div class="row"> -->
+<!-- 					        <h:div class="col-md-12">		 -->
+<!-- 								<listbox id="listAnx" width="100%" model="@{mainPage.listAnx}" emptyMessage="Nenhum anexo encontrado."> -->
+<!-- 									<listhead> -->
+<!-- 										<listheader label="Descrição" /> -->
+<!-- 										<listheader label="Arquivo" /> -->
+<!-- 									</listhead> -->
+<!-- 									<listitem self="@{each=anex}" value="@{anex}"> -->
+<!-- 										<listcell label="@{anex.desanx}" /> -->
+<!-- 										<listcell label="@{anex.nomanx}" /> -->
+<!-- 									</listitem> -->
+<!-- 								</listbox> -->
+<!-- 							</h:div> -->
+<!-- 						</h:div> -->
+					</div>
+				</h:div>
+				<separator height="20px"/>
+			</h:div>
+		</h:section>
+		<include id="footerPart" src="layout-parts/footer.zul"></include>
+	</h:main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</window>
+</zk>

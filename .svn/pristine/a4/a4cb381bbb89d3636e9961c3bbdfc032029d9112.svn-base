@@ -1,0 +1,110 @@
+<?page title="Licenças/Dispensas Emitidas" cacheable="false" language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window use="pmcg.imti.view.Lmacad" id="wLma" title="Licenças/Dispensas Emitidas" width="850px" height="550px" border="normal" shadow="false" position="center"
+		mode="modal" sizable="false" closable="true" onCreate="wLma.initComponentes()" contentStyle="overflow:auto;">
+		<vbox>
+			<separator height="15px"/>
+			<grid>
+		    	<columns>
+		    		<column align="right" width="100px"/>
+		    		<column align="left" width="160px"/>
+		    		<column align="right" width="100px"/>
+		    		<column align="left" width="160px"/>
+		    		<column align="right" width="100px"/>
+		    		<column align="left" width="160px"/>
+		    	</columns>
+		    	<rows>
+		    		<row>
+		    			<label value="Situação:"/>
+						<combobox id="sitlma" readonly="true" width="110px" selectedItem="@{wLma.lmaVO.sitlma}" style="text-align:center;font-weight:bold;font-size: 13px;">
+							<comboitem value="A" label="ATIVA"/>
+							<comboitem value="C" label="CANCELADA"/>
+							<comboitem value="S" label="SUSPENSA"/>
+						</combobox>
+		    		</row>
+		    		<row>
+		    			<label value="Ano:"/>
+		    			<intbox id="anolma" value="@{wLma.lmaVO.anolma}" disabled="true" width="45px" style="text-align:center;font-weight:bold;font-size: 16px;"/>
+		    			<label value="Espécie:"/>
+						<combobox id="esplma" readonly="true" width="110px" selectedItem="@{wLma.lmaVO.esplma}" style="text-align:center;font-weight:bold;font-size: 16px;">
+							<comboitem value="DISPENSA" label="DISPENSA" />
+							<comboitem value="LP" label="LP" />
+							<comboitem value="LI" label="LI" />
+							<comboitem value="LO" label="LO" />
+							<comboitem value="LAS" label="LAS" />
+							<comboitem value="AUTORIZAÇÃO" label="AUTORIZAÇÃO" />
+						</combobox>
+		    			<label value="Nr. Licença:"/>
+						<textbox id="numlma" readonly="true" value="@{wLma.lmaVO.numlma}" disabled="true" width="45px" style="text-align:center;font-weight:bold;font-size: 16px;"/>
+					</row>
+					<row>
+						<label value="Nr processo:"/>
+						<textbox id="prolma" value="@{wLma.lmaVO.prolma}" width="145px" style="text-align:center;font-weight:bold;font-size: 16px;text-transform:uppercase;"/>
+						<label value="Emissão:"/>
+						<datebox id="emilma" value="@{wLma.lmaVO.emilma}"/>
+						<label value="Validade:"/>
+						<datebox id="vallma" value="@{wLma.lmaVO.vallma}"/>
+					</row>
+					<row spans="1,7">
+		    			<label value="Requerente:"/>
+						<textbox id="reqlma" value="@{wLma.lmaVO.reqlma}" width="712px" style="text-transform:uppercase;font-weight:bold;font-size: 13px;"/>
+					</row>
+					<row spans="1,7">
+		    			<label value="Atividade:"/>
+						<textbox id="atvlma" value="@{wLma.lmaVO.atvlma}" rows="2" width="712px" style="text-transform:uppercase;"/>
+					</row>
+					<row spans="1,7">
+		    			<label value="Endereço:"/>
+						<textbox id="edrlma" value="@{wLma.lmaVO.edrlma}" width="712px" style="text-transform:uppercase;"/>
+					</row>
+					<row spans="1,1,3,1">
+		    			<label value="Região Urbana:"/>
+		    			<combobox id="reglma" readonly="true" width="150px" selectedItem="@{wLma.lmaVO.reglma}">
+		    				<comboitem value="ANHANDUI" label="ANHANDUI" />
+							<comboitem value="ANHANDUIZINHO" label="ANHANDUIZINHO" />
+							<comboitem value="BANDEIRA" label="BANDEIRA" />
+							<comboitem value="CENTRO" label="CENTRO" />
+							<comboitem value="IMBIRUSSU" label="IMBIRUSSU" />
+							<comboitem value="LAGOA" label="LAGOA" />
+							<comboitem value="PROSA" label="PROSA" />
+							<comboitem value="ROCHEDINHO" label="ROCHEDINHO" />
+							<comboitem value="SEGREDO" label="SEGREDO" />
+							<comboitem value="ZONA RURAL" label="ZONA RURAL" />
+						</combobox>
+						<label value="Não Autorizado Música?"/>
+						<checkbox id="muslma" checked="@{wLma.lmaVO.muslma}"/>
+					</row>
+					<row spans="1,5">
+						<label value="Analista:"/>
+						<combobox id="analma" model="@{wLma.listAnalista}" selectedItem="@{wLma.anaSel}" readonly="true" width="350px" style="text-transform:uppercase;">
+							<comboitem self="@{each=ana}" style="text-transform:uppercase" label="@{ana.nomusu}" value="@{ana}" />
+						</combobox>
+					</row>
+					<row spans="1,5">
+						<label value="Analista 2:"/>
+						<combobox id="anclma" model="@{wLma.listAnalistaC}" selectedItem="@{wLma.ancSel}" readonly="true" width="350px" style="text-transform:uppercase;">
+							<comboitem self="@{each=anc}" style="text-transform:uppercase" label="@{anc.nomusu}" value="@{anc}" />
+						</combobox>
+					</row>
+					<row spans="1,5">
+		    			<label value="Elaborado por:"/>
+		    			<combobox id="elalma" model="@{wLma.listElaborado}" selectedItem="@{wLma.elaSel}" readonly="true" width="350px" style="text-transform:uppercase;">
+							<comboitem self="@{each=ela}" style="text-transform:uppercase" label="@{ela.nomusu}" value="@{ela}" />
+						</combobox>
+					</row>
+					<row spans="1,5">
+		    			<label value="Assinatura:"/>
+						<textbox id="asslma" value="@{wLma.lmaVO.asslma}" width="350px" style="text-transform:uppercase;"/>
+					</row>
+					<row spans="1,7">
+		    			<label value="Observações:"/>
+						<textbox id="obslma" value="@{wLma.lmaVO.obslma}" width="712px" rows="2" style="text-transform:uppercase;"/>
+					</row>
+		    	</rows>
+		    </grid>
+		</vbox>
+	</window>
+</zk>

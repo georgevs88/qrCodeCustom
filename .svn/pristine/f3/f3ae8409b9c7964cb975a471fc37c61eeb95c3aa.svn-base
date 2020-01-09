@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+ 
+ <sqlMap namespace="webusu">
+ 
+ 		<typeAlias alias="WebusuVO" type="pmcg.imti.domain.WebusuVO"/>
+ 		
+ 		<select id="buscaRegByCriterio" parameterClass="WebusuVO" resultClass="WebusuVO">
+ 				SELECT * FROM webusu
+	 				<dynamic prepend="Where">
+	 					<isNotNull property="codusu" prepend="AND">
+	 							codusu=#codusu:NUMERIC#
+	 					</isNotNull>
+	 					<isNotNull property="logusu" prepend="AND">
+	 							logusu ilike #logusu:VARCHAR#
+	 					</isNotNull>
+	 					<isNotNull property="nomusu" prepend="AND">
+	 							nomusu ilike '%' || #nomusu:VARCHAR# || '%'
+	 					</isNotNull> 				
+	 				</dynamic>
+ 				ORDER BY nomusu ASC
+ 					
+ 		</select> 
+ 		
+ 		<select id="countRegByCriterio" parameterClass="WebusuVO" resultClass="Integer">
+ 				SELECT count (*) FROM webusu
+	 				<dynamic prepend="Where">
+	 					<isNotNull property="codusu" prepend="AND">
+	 							codusu=#codusu:NUMERIC#
+	 					</isNotNull>
+	 					<isNotNull property="logusu" prepend="AND">
+	 							logusu ilike #logusu:VARCHAR#
+	 					</isNotNull>
+	 					<isNotNull property="nomusu" prepend="AND">
+	 							nomusu ilike '%' || #nomusu:VARCHAR# || '%'
+	 					</isNotNull> 				
+	 				</dynamic> 					
+ 		</select> 	
+ 		
+ 		<select id="getRegByCod" parameterClass="Integer" resultClass="WebusuVO">
+ 				SELECT * FROM webusu 
+ 				WHERE codusu = #value:NUMERIC#
+ 		</select>
+ 		
+ 		<select id="buscarLogin" parameterClass="String" resultClass="WebusuVO">
+ 				SELECT * FROM webusu
+ 				WHERE logusu = #value:VARCHAR#
+ 		</select>	
+ 		
+	<select id="getUsuByLoginSenha" parameterClass="WebusuVO" resultClass="WebusuVO">
+		SELECT 
+			* 
+		FROM 
+			webusu
+		WHERE 
+			logusu = #logusu:VARCHAR#
+			AND	senusu = md5(#senusu:VARCHAR#)
+	</select>	
+	
+	<select id="verificaAcessoUPS" parameterClass="hashmap" resultClass="Boolean">
+		select 
+			case when count(0) > 0 then true else false end as acesso 
+		from 
+			webups ups
+			join webusu usu on usu.codusu = ups.codusu
+		where 
+			logusu = #logusu:VARCHAR#
+			and codprf = #codprf:NUMERIC#
+			and codsis = #codsis:NUMERIC#
+	</select>	
+	 		
+ </sqlMap>

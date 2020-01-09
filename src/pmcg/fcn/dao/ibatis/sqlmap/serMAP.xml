@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Ser">
+	<typeAlias alias="SerVO" type="pmcg.fcn.domain.SerVO" />
+
+	<resultMap id="mapComplexQuery" class="SerVO">
+		<result property="codser" column="codser" />
+		<result property="desser" column="desser" />
+		<result property="datalt" column="datalt" />
+		<result property="usualt" column="usualt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Integer" resultClass="SerVO">
+		SELECT * FROM sos.sosser WHERE codser = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Integer"
+		resultMap="mapComplexQuery">
+		SELECT * FROM sos.sosser WHERE codser = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="SerVO"
+		resultClass="SerVO">
+		SELECT * FROM sos.sosser
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codser" prepend=" AND ">
+				codser = #codser:NUMERIC#
+			</isNotNull>
+			<isNotNull property="desser" prepend=" AND ">
+				UPPER(desser) LIKE '%' || UPPER(#desser:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				UPPER(usualt) LIKE '%' || UPPER(#usualt:VARCHAR#) || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="SerVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM sos.sosser
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codser" prepend=" AND "> codser =
+				#codser:NUMERIC#
+			</isNotNull>
+			<isNotNull property="desser" prepend=" AND ">
+				UPPER(desser) LIKE '%' || UPPER(#desser:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				UPPER(usualt) LIKE '%' || UPPER(#usualt:VARCHAR#) || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultClass="SerVO">
+		SELECT * FROM sos.sosser
+	</select>
+
+	<insert id="insReg" parameterClass="SerVO">
+		<selectKey keyProperty="codser" resultClass="Integer">
+			SELECT NEXTVAL('sos.sosser_codser_seq')
+		</selectKey>
+		INSERT INTO sos.sosser(codser,desser,datalt,usualt) VALUES
+		(#codser:NUMERIC#, UPPER(#desser:VARCHAR#),#datalt:TIMESTAMP#,
+		UPPER(#usualt:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="SerVO">
+		UPDATE sos.sosser SET desser= UPPER(#desser:VARCHAR#),datalt=
+		#datalt:TIMESTAMP#,usualt= UPPER(#usualt:VARCHAR#) WHERE codser =
+		#codser:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Integer">
+		DELETE FROM sos.sosser WHERE codser = #value:NUMERIC#
+	</delete>
+	<delete id="delRegByCods" parameterClass="String">
+		DELETE FROM sos.sosser WHERE codser in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="SerVO"
+		resultClass="Integer">
+		SELECT count(codser) FROM sos.sosser
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codser" prepend=" AND "> codser =
+				#codser:NUMERIC#
+			</isNotNull>
+			<isNotNull property="desser" prepend=" AND ">
+				UPPER(desser) LIKE '%' || UPPER(#desser:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				UPPER(usualt) LIKE '%' || UPPER(#usualt:VARCHAR#) || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getCountByNome" parameterClass="SerVO" resultClass="Integer">
+		SELECT count(*) FROM sos.sosser
+		WHERE UPPER (desser)=
+		UPPER(#desser:VARCHAR#)
+		<isNotNull property="codser" prepend="AND">
+			codser != #codser:NUMERIC#
+		</isNotNull>
+	</select>	
+</sqlMap> 
+ 

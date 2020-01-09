@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Cad">
+	<typeAlias alias="CadVO" type="pmcg.fcn.domain.CadVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="CadVO">
+		<result property="iddcad" column="iddcad" />
+		<result property="cpfcad" column="cpfcad" />
+		<result property="nomcad" column="nomcad" />
+		<result property="ddtcad" column="ddtcad" />
+		<result property="telcad" column="telcad" />
+		<result property="ramcad" column="ramcad" />
+		<result property="ddccad" column="ddccad" />
+		<result property="celcad" column="celcad" />
+		<result property="ddfcad" column="ddfcad" />
+		<result property="faxcad" column="faxcad" />
+		<result property="emacad" column="emacad" />
+		<result property="tpccad" column="tpccad" />
+		<result property="crccad" column="crccad" />
+		<result property="scrcad" column="scrcad" />
+		<result property="dtrcad" column="dtrcad" />
+		<result property="dtccad" column="dtccad" />
+		<result property="ufccad" column="ufccad" />
+		<result property="sencad" column="sencad" />
+		<result property="dtpcad" column="dtpcad" />
+		<result property="dnrcad" column="dnrcad" />
+		<result property="doecad" column="doecad" />
+		<result property="duocad" column="duocad" />
+		<result property="dexcad" column="dexcad" />
+		<result property="edrcad" column="edrcad" />
+		<result property="cpccad" column="cpccad" />
+		<result property="nrscad" column="nrscad" />
+		<result property="dnacad" column="dnacad" />
+		<result property="sexcad" column="sexcad" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="admcad" column="admcad" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="CadVO">
+		<result property="iddcad" column="iddcad" />
+		<result property="cpfcad" column="cpfcad" />
+		<result property="nomcad" column="nomcad" />
+		<result property="ddtcad" column="ddtcad" />
+		<result property="telcad" column="telcad" />
+		<result property="ramcad" column="ramcad" />
+		<result property="ddccad" column="ddccad" />
+		<result property="celcad" column="celcad" />
+		<result property="ddfcad" column="ddfcad" />
+		<result property="faxcad" column="faxcad" />
+		<result property="emacad" column="emacad" />
+		<result property="tpccad" column="tpccad" />
+		<result property="crccad" column="crccad" />
+		<result property="scrcad" column="scrcad" />
+		<result property="dtrcad" column="dtrcad" />
+		<result property="dtccad" column="dtccad" />
+		<result property="ufccad" column="ufccad" />
+		<result property="sencad" column="sencad" />
+		<result property="dtpcad" column="dtpcad" />
+		<result property="dnrcad" column="dnrcad" />
+		<result property="doecad" column="doecad" />
+		<result property="duocad" column="duocad" />
+		<result property="dexcad" column="dexcad" />
+		<result property="edrcad" column="edrcad" />
+		<result property="cpccad" column="cpccad" />
+		<result property="nrscad" column="nrscad" />
+		<result property="dnacad" column="dnacad" />
+		<result property="sexcad" column="sexcad" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="admcad" column="admcad" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncad WHERE iddcad = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncad WHERE iddcad = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CadVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncad
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcad" prepend=" AND ">
+				iddcad = #iddcad:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcad" prepend=" AND ">
+				cpfcad ILIKE '%' || #cpfcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomcad" prepend=" AND ">
+				nomcad ILIKE '%' || #nomcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddtcad" prepend=" AND ">
+				ddtcad ILIKE '%' || #ddtcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telcad" prepend=" AND ">
+				telcad ILIKE '%' || #telcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ramcad" prepend=" AND ">
+				ramcad ILIKE '%' || #ramcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddccad" prepend=" AND ">
+				ddccad ILIKE '%' || #ddccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="celcad" prepend=" AND ">
+				celcad ILIKE '%' || #celcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddfcad" prepend=" AND ">
+				ddfcad ILIKE '%' || #ddfcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="faxcad" prepend=" AND ">
+				faxcad ILIKE '%' || #faxcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="emacad" prepend=" AND ">
+				emacad ILIKE '%' || #emacad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tpccad" prepend=" AND ">
+				tpccad ILIKE '%' || #tpccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="crccad" prepend=" AND ">
+				crccad ILIKE '%' || #crccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="scrcad" prepend=" AND ">
+				scrcad ILIKE '%' || #scrcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtrcad" prepend=" AND "> to_char(dtrcad,'dd/MM/yyyy') =
+				to_char(#dtrcad:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dtccad" prepend=" AND "> to_char(dtccad,'dd/MM/yyyy') =
+				to_char(#dtccad:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="ufccad" prepend=" AND ">
+				ufccad ILIKE '%' || #ufccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sencad" prepend=" AND ">
+				sencad ILIKE '%' || #sencad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="CadVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncad
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcad" prepend=" AND "> iddcad = #iddcad:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcad" prepend=" AND ">
+				cpfcad ILIKE '%' || #cpfcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomcad" prepend=" AND ">
+				nomcad ILIKE '%' || #nomcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddtcad" prepend=" AND ">
+				ddtcad ILIKE '%' || #ddtcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telcad" prepend=" AND ">
+				telcad ILIKE '%' || #telcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ramcad" prepend=" AND ">
+				ramcad ILIKE '%' || #ramcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddccad" prepend=" AND ">
+				ddccad ILIKE '%' || #ddccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="celcad" prepend=" AND ">
+				celcad ILIKE '%' || #celcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddfcad" prepend=" AND ">
+				ddfcad ILIKE '%' || #ddfcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="faxcad" prepend=" AND ">
+				faxcad ILIKE '%' || #faxcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="emacad" prepend=" AND ">
+				emacad ILIKE '%' || #emacad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tpccad" prepend=" AND ">
+				tpccad ILIKE '%' || #tpccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="crccad" prepend=" AND ">
+				crccad ILIKE '%' || #crccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="scrcad" prepend=" AND ">
+				scrcad ILIKE '%' || #scrcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtrcad" prepend=" AND "> to_char(dtrcad,'dd/MM/yyyy') =
+				to_char(#dtrcad:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dtccad" prepend=" AND "> to_char(dtccad,'dd/MM/yyyy') =
+				to_char(#dtccad:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="ufccad" prepend=" AND ">
+				ufccad ILIKE '%' || #ufccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sencad" prepend=" AND ">
+				sencad ILIKE '%' || #sencad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncad
+	</select>
+
+	<insert id="insReg" parameterClass="CadVO">
+		<selectKey keyProperty="iddcad" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqcad')
+		</selectKey>
+		INSERT INTO
+		fcn.fcncad(iddcad,cpfcad,nomcad,ddtcad,telcad,ramcad,ddccad,celcad,ddfcad,faxcad,emacad,tpccad,crccad,scrcad,dtrcad,dtccad,ufccad,sencad,dtpcad,dnrcad,doecad,duocad,dexcad,edrcad,cpccad,nrscad,dnacad,sexcad,usualt,datalt)
+		VALUES (#iddcad:NUMERIC#, UPPER(#cpfcad:VARCHAR#), UPPER(#nomcad:VARCHAR#), 
+		UPPER(#ddtcad:VARCHAR#), UPPER(#telcad:VARCHAR#), UPPER(#ramcad:VARCHAR#), UPPER(#ddccad:VARCHAR#),
+		UPPER(#celcad:VARCHAR#), UPPER(#ddfcad:VARCHAR#), UPPER(#faxcad:VARCHAR#), #emacad:VARCHAR#,
+		UPPER(#tpccad:VARCHAR#), UPPER(#crccad:VARCHAR#), UPPER(#scrcad:VARCHAR#),#dtrcad:TIMESTAMP#,#dtccad:TIMESTAMP#,
+		UPPER(#ufccad:VARCHAR#), md5('PMCGIntegrarWEB' || #sencad:VARCHAR#), 
+		UPPER(#dtpcad:VARCHAR#),UPPER(#dnrcad:VARCHAR#),UPPER(#doecad:VARCHAR#),UPPER(#duocad:VARCHAR#),#dexcad:TIMESTAMP#,
+		#edrcad:NUMERIC#,UPPER(#cpccad:VARCHAR#),UPPER(#nrscad:VARCHAR#), #dnacad:TIMESTAMP#, UPPER(#sexcad:VARCHAR#), UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="CadVO">
+		UPDATE 
+			fcn.fcncad 
+		SET 
+			cpfcad= UPPER(#cpfcad:VARCHAR#),
+			nomcad= UPPER(#nomcad:VARCHAR#),
+			ddtcad= UPPER(#ddtcad:VARCHAR#),
+			telcad= UPPER(#telcad:VARCHAR#),
+			ramcad= UPPER(#ramcad:VARCHAR#),
+			ddccad= UPPER(#ddccad:VARCHAR#),
+			celcad= UPPER(#celcad:VARCHAR#),
+			ddfcad= UPPER(#ddfcad:VARCHAR#),
+			faxcad= UPPER(#faxcad:VARCHAR#),
+			emacad= #emacad:VARCHAR#,
+			tpccad= UPPER(#tpccad:VARCHAR#),
+			crccad= UPPER(#crccad:VARCHAR#),
+			scrcad= UPPER(#scrcad:VARCHAR#),
+			dtrcad= #dtrcad:TIMESTAMP#,
+			dtccad= #dtccad:TIMESTAMP#,
+			ufccad= UPPER(#ufccad:VARCHAR#),
+			dtpcad = UPPER(#dtpcad:VARCHAR#),
+			dnrcad = UPPER(#dnrcad:VARCHAR#),
+			doecad = UPPER(#doecad:VARCHAR#),
+			duocad = UPPER(#duocad:VARCHAR#),
+			dexcad = #dexcad:TIMESTAMP#,
+			edrcad = #edrcad:NUMERIC#,
+			cpccad = UPPER(#cpccad:VARCHAR#),
+			nrscad = UPPER(#nrscad:VARCHAR#),
+			usualt= UPPER(#usualt:VARCHAR#),
+			dnacad = #dnacad:TIMESTAMP#, 
+			sexcad = UPPER(#sexcad:VARCHAR#),
+			datalt= now() 
+		WHERE 
+			iddcad = #iddcad:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcncad WHERE iddcad = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcncad WHERE iddcad in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="CadVO" resultClass="Integer">
+		SELECT count(iddcad) FROM fcn.fcncad
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcad" prepend=" AND "> iddcad = #iddcad:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcad" prepend=" AND ">
+				cpfcad ILIKE '%' || #cpfcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomcad" prepend=" AND ">
+				nomcad ILIKE '%' || #nomcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddtcad" prepend=" AND ">
+				ddtcad ILIKE '%' || #ddtcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telcad" prepend=" AND ">
+				telcad ILIKE '%' || #telcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ramcad" prepend=" AND ">
+				ramcad ILIKE '%' || #ramcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddccad" prepend=" AND ">
+				ddccad ILIKE '%' || #ddccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="celcad" prepend=" AND ">
+				celcad ILIKE '%' || #celcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddfcad" prepend=" AND ">
+				ddfcad ILIKE '%' || #ddfcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="faxcad" prepend=" AND ">
+				faxcad ILIKE '%' || #faxcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="emacad" prepend=" AND ">
+				emacad ILIKE '%' || #emacad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tpccad" prepend=" AND ">
+				tpccad ILIKE '%' || #tpccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="crccad" prepend=" AND ">
+				crccad ILIKE '%' || #crccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="scrcad" prepend=" AND ">
+				scrcad ILIKE '%' || #scrcad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtrcad" prepend=" AND "> to_char(dtrcad,'dd/MM/yyyy') =
+				to_char(#dtrcad:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dtccad" prepend=" AND "> to_char(dtccad,'dd/MM/yyyy') =
+				to_char(#dtccad:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="ufccad" prepend=" AND ">
+				ufccad ILIKE '%' || #ufccad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sencad" prepend=" AND ">
+				sencad ILIKE '%' || #sencad:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getCadByCPF" parameterClass="String" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncad
+		WHERE cpfcad = #cpfcad:VARCHAR#
+	</select>
+	
+	<select id="getCadByLoginSenha" parameterClass="CadVO" resultClass="CadVO">
+		SELECT 
+			* 
+		FROM 
+			fcn.fcncad
+		WHERE 
+			cpfcad = #cpfcad:VARCHAR#
+			AND	sencad = md5('PMCGIntegrarWEB' || #sencad:VARCHAR#)
+	</select>
+	
+	<update id="updSenha" parameterClass="CadVO">
+		UPDATE 
+			fcn.fcncad 
+		SET 
+			sencad = md5('PMCGIntegrarWEB' || #sencad:VARCHAR#)
+		WHERE 
+			iddcad = #iddcad:NUMERIC#
+	</update>
+	
+	<select id="getCadByCpfEmaDna" parameterClass="CadVO" resultClass="CadVO">
+		SELECT 
+			* 
+		FROM 
+			fcn.fcncad
+		WHERE 
+			cpfcad = #cpfcad:VARCHAR#
+			AND	lower(emacad) = lower(#emacad:VARCHAR#)
+			AND dnacad = #dnacad:TIMESTAMP#
+	</select>
+</sqlMap> 
+ 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Njr">
+	<typeAlias alias="NjrVO" type="pmcg.imti.domain.NjrVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="NjrVO">
+		<result property="iddnjr" column="iddnjr" />
+		<result property="codnjr" column="codnjr" />
+		<result property="desnjr" column="desnjr" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="NjrVO">
+		<result property="iddnjr" column="iddnjr" />
+		<result property="codnjr" column="codnjr" />
+		<result property="desnjr" column="desnjr" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.fcnnjr WHERE iddnjr = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM public.fcnnjr WHERE iddnjr = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="NjrVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.fcnnjr
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddnjr" prepend=" AND ">
+				iddnjr = #iddnjr:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codnjr" prepend=" AND ">
+				codnjr ILIKE '%' || #codnjr:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="desnjr" prepend=" AND ">
+				desnjr ILIKE '%' || #desnjr:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="NjrVO" resultMap="mapComplexQuery">
+		SELECT * FROM public.fcnnjr
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddnjr" prepend=" AND "> iddnjr = #iddnjr:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codnjr" prepend=" AND ">
+				codnjr ILIKE '%' || #codnjr:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="desnjr" prepend=" AND ">
+				desnjr ILIKE '%' || #desnjr:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.fcnnjr
+	</select>
+
+	<insert id="insReg" parameterClass="NjrVO">
+		<selectKey keyProperty="iddnjr" resultClass="Long">
+			SELECT NEXTVAL('public.seqnjr')
+		</selectKey>
+		INSERT INTO public.fcnnjr(iddnjr,codnjr,desnjr) VALUES (#iddnjr:NUMERIC#, UPPER(#codnjr:VARCHAR#),
+		UPPER(#desnjr:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="NjrVO">
+		UPDATE public.fcnnjr SET codnjr= UPPER(#codnjr:VARCHAR#),desnjr= UPPER(#desnjr:VARCHAR#) WHERE iddnjr = #iddnjr:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM public.fcnnjr WHERE iddnjr = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM public.fcnnjr WHERE iddnjr in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="NjrVO" resultClass="Integer">
+		SELECT count(iddnjr) FROM public.fcnnjr
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddnjr" prepend=" AND "> iddnjr = #iddnjr:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codnjr" prepend=" AND ">
+				codnjr ILIKE '%' || #codnjr:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="desnjr" prepend=" AND ">
+				desnjr ILIKE '%' || #desnjr:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByCodnjr" parameterClass="String" resultMap="mapComplexQuerySimple">
+		SELECT * FROM 
+			public.fcnnjr 
+		WHERE 
+			codnjr = #value:VARCHAR#
+	</select>
+</sqlMap> 
+ 

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Cus">
+	<typeAlias alias="CusVO" type="pmcg.fcn.domain.CusVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="CusVO">
+		<result property="iddcus" column="iddcus" />
+		<result property="nomcus" column="nomcus" />
+		<result property="codcus" column="codcus" />
+		<result property="meicus" column="meicus" />
+		<result property="menor_igual_360m" column="menor_igual_360m" />
+		<result property="d360a1000" column="d360a1000" />
+		<result property="menor_igual_500m" column="menor_igual_500m" />
+		<result property="d500a1000" column="d500a1000" />
+		<result property="menor_igual_720m" column="menor_igual_720m" />
+		<result property="maior_720m" column="maior_720m" />
+		<result property="d720a2500" column="d720a2500" />
+		<result property="menor_igual_1000m" column="menor_igual_1000m" />
+		<result property="maior_1000m" column="maior_1000m" />
+		<result property="d1000a5000" column="d1000a5000" />
+		<result property="menor_igual_2500m" column="menor_igual_2500m" />
+		<result property="d2500a5000" column="d2500a5000" />
+		<result property="menor_igual_5000m" column="menor_igual_5000m" />
+		<result property="maior_5000m" column="maior_5000m" />
+		<result property="d5000a10000" column="d5000a10000" />
+		<result property="maior_10000m" column="maior_10000m" />
+		<result property="qq_porte" column="qq_porte" />
+		<result property="catcus" column="catcus" />
+		<result property="clacus" column="clacus" />
+		<result property="cnacus" column="cnacus" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="CusVO">
+		<result property="iddcus" column="iddcus" />
+		<result property="nomcus" column="nomcus" />
+		<result property="codcus" column="codcus" />
+		<result property="meicus" column="meicus" />
+		<result property="menor_igual_360m" column="menor_igual_360m" />
+		<result property="d360a1000" column="d360a1000" />
+		<result property="menor_igual_500m" column="menor_igual_500m" />
+		<result property="d500a1000" column="d500a1000" />
+		<result property="menor_igual_720m" column="menor_igual_720m" />
+		<result property="maior_720m" column="maior_720m" />
+		<result property="d720a2500" column="d720a2500" />
+		<result property="menor_igual_1000m" column="menor_igual_1000m" />
+		<result property="maior_1000m" column="maior_1000m" />
+		<result property="d1000a5000" column="d1000a5000" />
+		<result property="menor_igual_2500m" column="menor_igual_2500m" />
+		<result property="d2500a5000" column="d2500a5000" />
+		<result property="menor_igual_5000m" column="menor_igual_5000m" />
+		<result property="maior_5000m" column="maior_5000m" />
+		<result property="d5000a10000" column="d5000a10000" />
+		<result property="maior_10000m" column="maior_10000m" />
+		<result property="qq_porte" column="qq_porte" />
+		<result property="catcus" column="catcus" />
+		<result property="clacus" column="clacus" />
+		<result property="cnacus" column="cnacus" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Integer" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncus WHERE iddcus = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Integer" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncus WHERE iddcus = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CusVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncus
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcus" prepend=" AND ">
+				iddcus = #iddcus:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomcus" prepend=" AND ">
+				nomcus ILIKE '%' || #nomcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codcus" prepend=" AND ">
+				codcus ILIKE '%' || #codcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="meicus" prepend=" AND ">
+				meicus ILIKE '%' || #meicus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_360m" prepend=" AND ">
+				menor_igual_360m ILIKE '%' || #menor_igual_360m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d360a1000" prepend=" AND ">
+				d360a1000 ILIKE '%' || #d360a1000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_500m" prepend=" AND ">
+				menor_igual_500m ILIKE '%' || #menor_igual_500m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d500a1000" prepend=" AND ">
+				d500a1000 ILIKE '%' || #d500a1000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_720m" prepend=" AND ">
+				menor_igual_720m ILIKE '%' || #menor_igual_720m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_720m" prepend=" AND ">
+				maior_720m ILIKE '%' || #maior_720m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d720a2500" prepend=" AND ">
+				d720a2500 ILIKE '%' || #d720a2500:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_1000m" prepend=" AND ">
+				menor_igual_1000m ILIKE '%' || #menor_igual_1000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_1000m" prepend=" AND ">
+				maior_1000m ILIKE '%' || #maior_1000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d1000a5000" prepend=" AND ">
+				d1000a5000 ILIKE '%' || #d1000a5000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_2500m" prepend=" AND ">
+				menor_igual_2500m ILIKE '%' || #menor_igual_2500m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d2500a5000" prepend=" AND ">
+				d2500a5000 ILIKE '%' || #d2500a5000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_5000m" prepend=" AND ">
+				menor_igual_5000m ILIKE '%' || #menor_igual_5000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_5000m" prepend=" AND ">
+				maior_5000m ILIKE '%' || #maior_5000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d5000a10000" prepend=" AND ">
+				d5000a10000 ILIKE '%' || #d5000a10000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_10000m" prepend=" AND ">
+				maior_10000m ILIKE '%' || #maior_10000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="qq_porte" prepend=" AND ">
+				qq_porte ILIKE '%' || #qq_porte:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="catcus" prepend=" AND ">
+				catcus ILIKE '%' || #catcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="clacus" prepend=" AND ">
+				clacus ILIKE '%' || #clacus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cnacus" prepend=" AND ">
+				cnacus ILIKE '%' || #cnacus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="CusVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncus
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcus" prepend=" AND "> iddcus = #iddcus:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomcus" prepend=" AND ">
+				nomcus ILIKE '%' || #nomcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codcus" prepend=" AND ">
+				codcus ILIKE '%' || #codcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="meicus" prepend=" AND ">
+				meicus ILIKE '%' || #meicus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_360m" prepend=" AND ">
+				menor_igual_360m ILIKE '%' || #menor_igual_360m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d360a1000" prepend=" AND ">
+				d360a1000 ILIKE '%' || #d360a1000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_500m" prepend=" AND ">
+				menor_igual_500m ILIKE '%' || #menor_igual_500m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d500a1000" prepend=" AND ">
+				d500a1000 ILIKE '%' || #d500a1000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_720m" prepend=" AND ">
+				menor_igual_720m ILIKE '%' || #menor_igual_720m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_720m" prepend=" AND ">
+				maior_720m ILIKE '%' || #maior_720m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d720a2500" prepend=" AND ">
+				d720a2500 ILIKE '%' || #d720a2500:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_1000m" prepend=" AND ">
+				menor_igual_1000m ILIKE '%' || #menor_igual_1000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_1000m" prepend=" AND ">
+				maior_1000m ILIKE '%' || #maior_1000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d1000a5000" prepend=" AND ">
+				d1000a5000 ILIKE '%' || #d1000a5000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_2500m" prepend=" AND ">
+				menor_igual_2500m ILIKE '%' || #menor_igual_2500m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d2500a5000" prepend=" AND ">
+				d2500a5000 ILIKE '%' || #d2500a5000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_5000m" prepend=" AND ">
+				menor_igual_5000m ILIKE '%' || #menor_igual_5000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_5000m" prepend=" AND ">
+				maior_5000m ILIKE '%' || #maior_5000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d5000a10000" prepend=" AND ">
+				d5000a10000 ILIKE '%' || #d5000a10000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_10000m" prepend=" AND ">
+				maior_10000m ILIKE '%' || #maior_10000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="qq_porte" prepend=" AND ">
+				qq_porte ILIKE '%' || #qq_porte:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="catcus" prepend=" AND ">
+				catcus ILIKE '%' || #catcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="clacus" prepend=" AND ">
+				clacus ILIKE '%' || #clacus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cnacus" prepend=" AND ">
+				cnacus ILIKE '%' || #cnacus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncus
+	</select>
+
+	<insert id="insReg" parameterClass="CusVO">
+		<selectKey keyProperty="iddcus" resultClass="Integer">
+			SELECT NEXTVAL('fcn.seqcus')
+		</selectKey>
+		INSERT INTO
+		fcn.fcncus(iddcus,nomcus,codcus,meicus,menor_igual_360m,d360a1000,menor_igual_500m,d500a1000,menor_igual_720m,maior_720m,d720a2500,menor_igual_1000m,maior_1000m,d1000a5000,menor_igual_2500m,d2500a5000,menor_igual_5000m,maior_5000m,d5000a10000,maior_10000m,qq_porte,catcus,clacus,cnacus,usualt,datalt)
+		VALUES (#iddcus:NUMERIC#, UPPER(#nomcus:VARCHAR#), UPPER(#codcus:VARCHAR#), UPPER(#meicus:VARCHAR#),
+		UPPER(#menor_igual_360m:VARCHAR#), UPPER(#d360a1000:VARCHAR#), UPPER(#menor_igual_500m:VARCHAR#),
+		UPPER(#d500a1000:VARCHAR#), UPPER(#menor_igual_720m:VARCHAR#), UPPER(#maior_720m:VARCHAR#),
+		UPPER(#d720a2500:VARCHAR#), UPPER(#menor_igual_1000m:VARCHAR#), UPPER(#maior_1000m:VARCHAR#),
+		UPPER(#d1000a5000:VARCHAR#), UPPER(#menor_igual_2500m:VARCHAR#), UPPER(#d2500a5000:VARCHAR#),
+		UPPER(#menor_igual_5000m:VARCHAR#), UPPER(#maior_5000m:VARCHAR#), UPPER(#d5000a10000:VARCHAR#),
+		UPPER(#maior_10000m:VARCHAR#), UPPER(#qq_porte:VARCHAR#), UPPER(#catcus:VARCHAR#), UPPER(#clacus:VARCHAR#),
+		UPPER(#cnacus:VARCHAR#), UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="CusVO">
+		UPDATE fcn.fcncus SET nomcus= UPPER(#nomcus:VARCHAR#),codcus= UPPER(#codcus:VARCHAR#),meicus=
+		UPPER(#meicus:VARCHAR#),menor_igual_360m= UPPER(#menor_igual_360m:VARCHAR#),d360a1000=
+		UPPER(#d360a1000:VARCHAR#),menor_igual_500m= UPPER(#menor_igual_500m:VARCHAR#),d500a1000=
+		UPPER(#d500a1000:VARCHAR#),menor_igual_720m= UPPER(#menor_igual_720m:VARCHAR#),maior_720m=
+		UPPER(#maior_720m:VARCHAR#),d720a2500= UPPER(#d720a2500:VARCHAR#),menor_igual_1000m=
+		UPPER(#menor_igual_1000m:VARCHAR#),maior_1000m= UPPER(#maior_1000m:VARCHAR#),d1000a5000=
+		UPPER(#d1000a5000:VARCHAR#),menor_igual_2500m= UPPER(#menor_igual_2500m:VARCHAR#),d2500a5000=
+		UPPER(#d2500a5000:VARCHAR#),menor_igual_5000m= UPPER(#menor_igual_5000m:VARCHAR#),maior_5000m=
+		UPPER(#maior_5000m:VARCHAR#),d5000a10000= UPPER(#d5000a10000:VARCHAR#),maior_10000m=
+		UPPER(#maior_10000m:VARCHAR#),qq_porte= UPPER(#qq_porte:VARCHAR#),catcus= UPPER(#catcus:VARCHAR#),clacus=
+		UPPER(#clacus:VARCHAR#),cnacus= UPPER(#cnacus:VARCHAR#),usualt= UPPER(#usualt:VARCHAR#),datalt= now() WHERE iddcus =
+		#iddcus:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Integer">
+		DELETE FROM fcn.fcncus WHERE iddcus = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcncus WHERE iddcus in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="CusVO" resultClass="Integer">
+		SELECT count(iddcus) FROM fcn.fcncus
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcus" prepend=" AND "> iddcus = #iddcus:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomcus" prepend=" AND ">
+				nomcus ILIKE '%' || #nomcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codcus" prepend=" AND ">
+				codcus ILIKE '%' || #codcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="meicus" prepend=" AND ">
+				meicus ILIKE '%' || #meicus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_360m" prepend=" AND ">
+				menor_igual_360m ILIKE '%' || #menor_igual_360m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d360a1000" prepend=" AND ">
+				d360a1000 ILIKE '%' || #d360a1000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_500m" prepend=" AND ">
+				menor_igual_500m ILIKE '%' || #menor_igual_500m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d500a1000" prepend=" AND ">
+				d500a1000 ILIKE '%' || #d500a1000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_720m" prepend=" AND ">
+				menor_igual_720m ILIKE '%' || #menor_igual_720m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_720m" prepend=" AND ">
+				maior_720m ILIKE '%' || #maior_720m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d720a2500" prepend=" AND ">
+				d720a2500 ILIKE '%' || #d720a2500:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_1000m" prepend=" AND ">
+				menor_igual_1000m ILIKE '%' || #menor_igual_1000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_1000m" prepend=" AND ">
+				maior_1000m ILIKE '%' || #maior_1000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d1000a5000" prepend=" AND ">
+				d1000a5000 ILIKE '%' || #d1000a5000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_2500m" prepend=" AND ">
+				menor_igual_2500m ILIKE '%' || #menor_igual_2500m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d2500a5000" prepend=" AND ">
+				d2500a5000 ILIKE '%' || #d2500a5000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="menor_igual_5000m" prepend=" AND ">
+				menor_igual_5000m ILIKE '%' || #menor_igual_5000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_5000m" prepend=" AND ">
+				maior_5000m ILIKE '%' || #maior_5000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="d5000a10000" prepend=" AND ">
+				d5000a10000 ILIKE '%' || #d5000a10000:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="maior_10000m" prepend=" AND ">
+				maior_10000m ILIKE '%' || #maior_10000m:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="qq_porte" prepend=" AND ">
+				qq_porte ILIKE '%' || #qq_porte:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="catcus" prepend=" AND ">
+				catcus ILIKE '%' || #catcus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="clacus" prepend=" AND ">
+				clacus ILIKE '%' || #clacus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cnacus" prepend=" AND ">
+				cnacus ILIKE '%' || #cnacus:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByCnae" parameterClass="String" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncus
+		WHERE codcus = #value:VARCHAR#
+		limit 1
+	</select>
+	
+	<update id="updUsosByCod" parameterClass="CusVO">
+		UPDATE 
+			fcn.fcncus 
+		SET 
+			meicus = UPPER(#meicus:VARCHAR#),
+			menor_igual_360m= UPPER(#menor_igual_360m:VARCHAR#),
+			d360a1000 = UPPER(#d360a1000:VARCHAR#),
+			menor_igual_500m = UPPER(#menor_igual_500m:VARCHAR#),
+			d500a1000 = UPPER(#d500a1000:VARCHAR#),
+			menor_igual_720m = UPPER(#menor_igual_720m:VARCHAR#),
+			maior_720m = UPPER(#maior_720m:VARCHAR#),
+			d720a2500 = UPPER(#d720a2500:VARCHAR#),
+			menor_igual_1000m = UPPER(#menor_igual_1000m:VARCHAR#),
+			maior_1000m = UPPER(#maior_1000m:VARCHAR#),
+			d1000a5000 = UPPER(#d1000a5000:VARCHAR#),
+			menor_igual_2500m = UPPER(#menor_igual_2500m:VARCHAR#),
+			d2500a5000 = UPPER(#d2500a5000:VARCHAR#),
+			menor_igual_5000m = UPPER(#menor_igual_5000m:VARCHAR#),
+			maior_5000m = UPPER(#maior_5000m:VARCHAR#),
+			d5000a10000 = UPPER(#d5000a10000:VARCHAR#),
+			maior_10000m = UPPER(#maior_10000m:VARCHAR#),
+			qq_porte= UPPER(#qq_porte:VARCHAR#),
+			usualt = #usualt:VARCHAR#,
+			datalt = now()
+		WHERE 
+			iddcus = #iddcus:NUMERIC#
+	</update>
+</sqlMap> 
+ 

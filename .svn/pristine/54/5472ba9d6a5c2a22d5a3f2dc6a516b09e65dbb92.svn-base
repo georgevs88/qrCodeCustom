@@ -1,0 +1,207 @@
+/*resets*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100.01%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+:focus {
+	outline: 0;
+}
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+blockquote, q
+{
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after
+{
+	content: "";
+	content: none;
+}
+textarea { overflow: auto; }
+input { border: 0px solid white; margin: 0;  padding: 0; }
+/*/resets*/
+
+body {
+	background:#FFF;
+	margin:0;
+	padding:0;
+	font-family:"Open Sans", sans-serif;
+	font-size:13px;
+	color:#333;
+}
+	/* window */
+	.breeze .z-window-embedded {
+		padding:0;
+		margin:0;
+		border:0;
+		background:none;
+	}
+	/* window */
+	
+
+/*content*/
+.content {
+	overflow:hidden;
+	background:#fff;
+}
+/*content*/
+
+
+/*components*/
+.z-groupbox, .z-groupbox .z-groupbox-cnt {
+	background:#f7f6ef;
+	border-color:#f5a70e;
+/* 	border:none; */
+}
+.z-combobox {
+/* 	background:url(../images/components/combo-middle.png) 0px 0px repeat-x; */
+	
+}
+	.z-combobox-inp {
+		height:20px;
+/* 		border:1px solid #f5a70e; */
+		border-left:1px solid #f5a70e;
+		border-bottom:1px solid #f5a70e;
+		border-top:1px solid #f5a70e;
+		margin:0;
+		padding:0 0px 0 0px;
+		font-family:"Open Sans", sans-serif;
+		font-size:12px;
+	}
+		
+	.z-combobox .z-combobox-btn {
+		height:20px;
+		border:1px solid #f5a70e;
+		margin:0px;
+		padding:0;
+	}
+			
+.z-combobox-pp, .z-combobox-pp.z-combobox-shadow {
+	overflow:hidden;
+	border:none;
+	padding:0;
+/* 	background:url(../images/components/combo-body-itens.png) 0 0 repeat-x #666; */
+	
+}
+	.z-comboitem {
+		overflow:hidden;
+		font-family:"Open Sans", sans-serif;
+		font-size:12px;
+		color:#FFF;
+	}
+	.z-comboitem-text {
+		overflow:hidden;
+		padding:5px 10px 5px 10px;
+		font-family:"Open Sans", sans-serif;
+		font-size:12px;
+		color:#000;
+	}
+
+	.z-comboitem.z-comboitem-over .z-comboitem-text,.z-comboitem.z-comboitem-seld .z-comboitem-text {
+		background:#e0ceb4;
+		color:#fff;
+	}
+	
+.z-label {
+	font-family:"Open Sans", sans-serif;
+	font-size:12px;
+	color:#3A352F;
+}
+.z-textbox {
+	overflow:hidden;
+	font-family:"Open Sans", sans-serif;
+	font-size:13px;
+	border-color:#F5A70E;
+}
+.z-intbox {
+	font-family:"Open Sans", sans-serif;
+	font-size:13px;
+	color:#000;
+	border-color:#F5A70E;
+}
+.z-datebox {
+	border-color:#F5A70E;
+}
+	
+	.z-datebox-inp {
+		width:86px;
+		height:30px;
+		padding:0 10px 0 10px;
+		border:none;
+		background:none;
+		font-family:"Open Sans", sans-serif;
+		font-size:13px;
+		color:#000;
+		
+	}
+	.z-datebox-focus .z-datebox-inp {
+		border:none;
+	}
+	.z-datebox .z-datebox-btn {
+		width:34px;
+		height:30px;
+		border:none;
+/* 		background:url(../images/components/icon-date.png) 10px 8px no-repeat; */
+		margin:0;
+		padding:0;
+	}
+		.z-datebox .z-datebox-btn-over,.z-datebox .z-datebox-btn-clk {
+			margin:0;
+			padding:0;
+			border:none;
+		} 
+.z-button-os {
+	font-family:"Open Sans", sans-serif;
+	font-size:13px;
+	color:#3a352f;
+}
+
+/* ====================================== GRID =============*/
+div.z-grid {
+	border:none;
+	background:#f7f6ef;
+}
+
+div.z-grid-body {
+	border:none;
+	background:#f7f6ef;
+}
+
+tr.z-row td.z-row-inner{
+	border:none;
+	background:#f7f6ef;
+	padding:3px;
+}
+
+/* ====================================== GRID =============*/
+/*components*/

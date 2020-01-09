@@ -1,0 +1,82 @@
+<?page title="Status WS" cacheable="false" language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+<?meta http-equiv="X-UA-Compatible" content="IE=9" ?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window border="none" width="100%" id="wSta" use="pmcg.imti.view.ext.Status" onCreate="wSta.initComponentes()">
+		<style src="/ext/cimweb_ext.css"></style>
+		<script type="text/javascript" src="/js/maskedinput-1.2.2.min.js" />
+		<!-- header -->
+		<include id="headerPart" src="/layout-parts/header.zul"/>
+	
+		<!-- corpo -->		
+		<div class="ext-body">
+		
+			<!-- wrapper -->
+<!-- 			<div class="wrapper940-imob"> -->
+					
+				<!-- welcome screen -->
+<!-- 				<div class="wrapper940 read loginContadores"> -->
+					<vbox>
+						<grid style="margin-top: 15px;">
+							<columns>
+								<column label="" width="250px" align="right"/>
+								<column label=""/>
+							</columns>
+							<rows>
+								<row>
+									<label value="url_base" style="color: #C80101;font-weight: bold;font-size: 16px;"/>
+									<label value="https://portalservicos.jucems.ms.gov.br/empreendimento/service/" style="font-weight: bold;font-size: 16px;"/>
+								</row>
+								<row>
+									<label value="url_servico_viabilidade" style="color: #C80101;font-weight: bold;font-size: 16px;"/>
+									<label value="url_base + 'ViabilidadePrefeituraWS'" style="font-weight: bold;font-size: 16px;"/>
+								</row>
+								<row>
+									<label value="url_servico_empreendimento" style="color: #C80101;font-weight: bold;font-size: 16px;"/>
+									<label value="url_base + 'EmpreendimentoPrefeituraWS'" style="font-weight: bold;font-size: 16px;"/>
+								</row>
+								<row>
+									<label value="usuário" style="color: #C80101;font-weight: bold;font-size: 16px;"/>
+									<textbox value="campogrande_ms" style="font-weight: bold;font-size: 16px;" readonly="true"/>
+								</row>
+								<row>
+									<label value="senha" style="color: #C80101;font-weight: bold;font-size: 16px;"/>
+									<textbox id="senha" type="password" value="@{wSta.senha}" style="font-weight: bold;font-size: 16px;"/>
+								</row>
+							</rows>
+						</grid>
+						<separator height="10px"/>
+						<button label="Analisar" onClick="wSta.analisar()" class="btn-sec"/>
+						<separator height="15px"/>
+						<label value="Requisição Viabilidade (recuperaViabilidadesPendentes)" style="color: #666;font-weight: bold;font-size: 25px;"/>
+						<textbox value="@{wSta.requisicaoVia}" rows="3" readonly="true" width="900px"/>
+						<separator height="15px"/>
+						<hbox>
+							<label value="Resposta Viabilidade" style="color: #666;font-weight: bold;font-size: 25px;"/>
+							<label value=" (FALHA)" style="color: #C80101;font-weight: bold;font-size: 25px;" visible="@{wSta.falhaVia}"/>
+						</hbox>
+						<textbox value="@{wSta.respostaVia}" rows="5" readonly="true" width="900px"/>
+						<separator height="15px"/>
+						<label value="Requisição Empreendimento (recuperaEmpreendimentosDeferidosParaPrefeitura)" style="color: #666;font-weight: bold;font-size: 25px;"/>
+						<textbox value="@{wSta.requisicaoEpd}" rows="3" readonly="true" width="900px"/>
+						<separator height="15px"/>
+						<hbox>
+							<label value="Resposta Empreendimento" style="color: #666;font-weight: bold;font-size: 25px;"/>
+							<label value=" (FALHA)" style="color: #C80101;font-weight: bold;font-size: 25px;" visible="@{wSta.falhaEpd}"/>
+						</hbox>
+						<textbox value="@{wSta.respostaEpd}" rows="5" readonly="true" width="900px"/>
+					</vbox>
+<!-- 				</div> -->
+<!-- 			</div> -->
+		</div>
+		<div style="position:relative;bottom:0px;width:100%;" align="left">
+			<div class="footer" align="left">
+				<div style="margin:auto;" align="left">
+					<image src="/images/agetec2.png" class="footer-sec-icon" height="40px"/>
+				</div>
+			</div>
+		</div>	
+	</window>
+</zk>

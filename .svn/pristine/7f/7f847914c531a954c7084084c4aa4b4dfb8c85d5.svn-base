@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Eco">
+	<typeAlias alias="EcoVO" type="pmcg.imti.domain.EcoVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="EcoVO">
+		<result property="codeco" column="codeco" />
+		<result property="tippes" column="tippes" />
+		<result property="codnjr" column="codnjr" />
+		<result property="codcidtra" column="codcidtra" />
+		<result property="codpes" column="codpes" />
+		<result property="tipins" column="tipins" />
+		<result property="insmun" column="insmun" />
+		<result property="insmunant" column="insmunant" />
+		<result property="locest" column="locest" />
+		<result property="protocpe" column="protocpe" />
+		<result property="orgreg" column="orgreg" />
+		<result property="orgregcodest" column="orgregcodest" />
+		<result property="codcidori" column="codcidori" />
+		<result property="doccons" column="doccons" />
+		<result property="porteemp" column="porteemp" />
+		<result property="tipunid" column="tipunid" />
+		<result property="regimefed" column="regimefed" />
+		<result property="nomfan" column="nomfan" />
+		<result property="numregorg" column="numregorg" />
+		<result property="datregorg" column="datregorg" />
+		<result property="datcons" column="datcons" />
+		<result property="livro" column="livro" />
+		<result property="folha" column="folha" />
+		<result property="insest" column="insest" />
+		<result property="dultacs" column="dultacs" />
+		<result property="niretrf" column="niretrf" />
+		<result property="capsoci" column="capsoci" />
+		<result property="capinteg" column="capinteg" />
+		<result property="cotacon" column="cotacon" />
+		<result property="cotates" column="cotates" />
+		<result property="diniregfed" column="diniregfed" />
+		<result property="dfimregfed" column="dfimregfed" />
+		<result property="cnpjmat" column="cnpjmat" />
+		<result property="cnpjucmun" column="cnpjucmun" />
+		<result property="datalt" column="datalt" />
+		<result property="codusualt" column="codusualt" />
+		<result property="numver" column="numver" />
+		<result property="cpfcnpj" column="cpfcnpj" />
+		<result property="nomraz" column="nomraz" />
+		<result property="nomrazres" column="nomrazres" />
+		<result property="numprt" column="numprt" />
+		<result property="codamn" column="codamn" />
+		<result property="codagf" column="codagf" />
+		<result property="codlmn" column="codlmn" />
+		<result property="tipuna" column="tipuna" />
+		<result property="qtdemp" column="qtdemp" />
+		<result property="codcsiarqinc" column="codcsiarqinc" />
+		<result property="codcsiarqalt" column="codcsiarqalt" />
+		<result property="observ" column="observ" />
+		<result property="codmeiarq" column="codmeiarq" />
+		<result property="numregaltorg" column="numregaltorg" />
+		<result property="datregaltorg" column="datregaltorg" />
+		<result property="datcolgra" column="datcolgra" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="EcoVO">
+		<result property="codeco" column="codeco" />
+		<result property="tippes" column="tippes" />
+		<result property="codnjr" column="codnjr" />
+		<result property="codcidtra" column="codcidtra" />
+		<result property="codpes" column="codpes" />
+		<result property="tipins" column="tipins" />
+		<result property="insmun" column="insmun" />
+		<result property="insmunant" column="insmunant" />
+		<result property="locest" column="locest" />
+		<result property="protocpe" column="protocpe" />
+		<result property="orgreg" column="orgreg" />
+		<result property="orgregcodest" column="orgregcodest" />
+		<result property="codcidori" column="codcidori" />
+		<result property="doccons" column="doccons" />
+		<result property="porteemp" column="porteemp" />
+		<result property="tipunid" column="tipunid" />
+		<result property="regimefed" column="regimefed" />
+		<result property="nomfan" column="nomfan" />
+		<result property="numregorg" column="numregorg" />
+		<result property="datregorg" column="datregorg" />
+		<result property="datcons" column="datcons" />
+		<result property="livro" column="livro" />
+		<result property="folha" column="folha" />
+		<result property="insest" column="insest" />
+		<result property="dultacs" column="dultacs" />
+		<result property="niretrf" column="niretrf" />
+		<result property="capsoci" column="capsoci" />
+		<result property="capinteg" column="capinteg" />
+		<result property="cotacon" column="cotacon" />
+		<result property="cotates" column="cotates" />
+		<result property="diniregfed" column="diniregfed" />
+		<result property="dfimregfed" column="dfimregfed" />
+		<result property="cnpjmat" column="cnpjmat" />
+		<result property="cnpjucmun" column="cnpjucmun" />
+		<result property="datalt" column="datalt" />
+		<result property="codusualt" column="codusualt" />
+		<result property="numver" column="numver" />
+		<result property="cpfcnpj" column="cpfcnpj" />
+		<result property="nomraz" column="nomraz" />
+		<result property="nomrazres" column="nomrazres" />
+		<result property="numprt" column="numprt" />
+		<result property="codamn" column="codamn" />
+		<result property="codagf" column="codagf" />
+		<result property="codlmn" column="codlmn" />
+		<result property="tipuna" column="tipuna" />
+		<result property="qtdemp" column="qtdemp" />
+		<result property="codcsiarqinc" column="codcsiarqinc" />
+		<result property="codcsiarqalt" column="codcsiarqalt" />
+		<result property="observ" column="observ" />
+		<result property="codmeiarq" column="codmeiarq" />
+		<result property="numregaltorg" column="numregaltorg" />
+		<result property="datregaltorg" column="datregaltorg" />
+		<result property="datcolgra" column="datcolgra" />
+		
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Integer" resultMap="mapComplexQuerySimple">
+		SELECT * FROM SIATCGR.TBLECO WHERE codeco = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Integer"
+		resultMap="mapComplexQuery">
+		SELECT * FROM SIATCGR.TBLECO WHERE codeco = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="EcoVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM SIATCGR.TBLECO
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codeco" prepend=" AND ">
+				codeco = #codeco:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tippes" prepend=" AND ">
+				UPPER(tippes) LIKE '%' || UPPER(#tippes:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codnjr" prepend=" AND ">
+				codnjr = #codnjr:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcidtra" prepend=" AND ">
+				codcidtra = #codcidtra:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codpes" prepend=" AND ">
+				codpes = #codpes:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipins" prepend=" AND ">
+				UPPER(tipins) LIKE '%' || UPPER(#tipins:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insmun" prepend=" AND ">
+				UPPER(insmun) LIKE '%' || UPPER(#insmun:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insmunant" prepend=" AND ">
+				UPPER(insmunant) LIKE '%' || UPPER(#insmunant:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="locest" prepend=" AND ">
+				UPPER(locest) LIKE '%' || UPPER(#locest:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="protocpe" prepend=" AND ">
+				UPPER(protocpe) LIKE '%' || UPPER(#protocpe:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="orgreg" prepend=" AND ">
+				UPPER(orgreg) LIKE '%' || UPPER(#orgreg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="orgregcodest" prepend=" AND ">
+				orgregcodest = #orgregcodest:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcidori" prepend=" AND ">
+				codcidori = #codcidori:NUMERIC#
+			</isNotNull>
+			<isNotNull property="doccons" prepend=" AND ">
+				UPPER(doccons) LIKE '%' || UPPER(#doccons:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="porteemp" prepend=" AND ">
+				UPPER(porteemp) LIKE '%' || UPPER(#porteemp:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="tipunid" prepend=" AND ">
+				UPPER(tipunid) LIKE '%' || UPPER(#tipunid:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="regimefed" prepend=" AND ">
+				UPPER(regimefed) LIKE '%' || UPPER(#regimefed:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomfan" prepend=" AND ">
+				UPPER(nomfan) LIKE '%' || UPPER(#nomfan:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numregorg" prepend=" AND ">
+				UPPER(numregorg) LIKE '%' || UPPER(#numregorg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datregorg" prepend=" AND ">
+				to_char(datregorg,'dd/MM/yyyy') =
+				to_char(#datregorg:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datcons" prepend=" AND ">
+				to_char(datcons,'dd/MM/yyyy') =
+				to_char(#datcons:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="livro" prepend=" AND ">
+				UPPER(livro) LIKE '%' || UPPER(#livro:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="folha" prepend=" AND ">
+				UPPER(folha) LIKE '%' || UPPER(#folha:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insest" prepend=" AND ">
+				UPPER(insest) LIKE '%' || UPPER(#insest:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="dultacs" prepend=" AND ">
+				to_char(dultacs,'dd/MM/yyyy') =
+				to_char(#dultacs:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="niretrf" prepend=" AND ">
+				UPPER(niretrf) LIKE '%' || UPPER(#niretrf:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="capsoci" prepend=" AND ">
+				capsoci = #capsoci:NUMERIC#
+			</isNotNull>
+			<isNotNull property="capinteg" prepend=" AND ">
+				capinteg = #capinteg:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cotacon" prepend=" AND ">
+				cotacon = #cotacon:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cotates" prepend=" AND ">
+				cotates = #cotates:NUMERIC#
+			</isNotNull>
+			<isNotNull property="diniregfed" prepend=" AND ">
+				to_char(diniregfed,'dd/MM/yyyy') =
+				to_char(#diniregfed:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dfimregfed" prepend=" AND ">
+				to_char(dfimregfed,'dd/MM/yyyy') =
+				to_char(#dfimregfed:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="cnpjmat" prepend=" AND ">
+				UPPER(cnpjmat) LIKE '%' || UPPER(#cnpjmat:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="cnpjucmun" prepend=" AND ">
+				UPPER(cnpjucmun) LIKE '%' || UPPER(#cnpjucmun:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND ">
+				numver = #numver:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcnpj" prepend=" AND ">
+				UPPER(cpfcnpj) LIKE '%' || UPPER(#cpfcnpj:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomraz" prepend=" AND ">
+				UPPER(nomraz) LIKE '%' || UPPER(#nomraz:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomrazres" prepend=" AND ">
+				UPPER(nomrazres) LIKE '%' || UPPER(#nomrazres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numprt" prepend=" AND ">
+				UPPER(numprt) LIKE '%' || UPPER(#numprt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codamn" prepend=" AND ">
+				codamn = #codamn:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codagf" prepend=" AND ">
+				codagf = #codagf:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codlmn" prepend=" AND ">
+				codlmn = #codlmn:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipuna" prepend=" AND ">
+				UPPER(tipuna) LIKE '%' || UPPER(#tipuna:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="qtdemp" prepend=" AND ">
+				qtdemp = #qtdemp:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcsiarqinc" prepend=" AND ">
+				codcsiarqinc = #codcsiarqinc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcsiarqalt" prepend=" AND ">
+				codcsiarqalt = #codcsiarqalt:NUMERIC#
+			</isNotNull>
+			<isNotNull property="observ" prepend=" AND ">
+				UPPER(observ) LIKE '%' || UPPER(#observ:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codmeiarq" prepend=" AND ">
+				codmeiarq = #codmeiarq:NUMERIC#
+			</isNotNull>
+			<isNotNull property="numregaltorg" prepend=" AND ">
+				UPPER(numregaltorg) LIKE '%' || UPPER(#numregaltorg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datregaltorg" prepend=" AND ">
+				to_char(datregaltorg,'dd/MM/yyyy') =
+				to_char(#datregaltorg:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datcolgra" prepend=" AND ">
+				to_char(datcolgra,'dd/MM/yyyy') =
+				to_char(#datcolgra:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="EcoVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM SIATCGR.TBLECO
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codeco" prepend=" AND "> codeco =
+				#codeco:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tippes" prepend=" AND ">
+				UPPER(tippes) LIKE '%' || UPPER(#tippes:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codnjr" prepend=" AND "> codnjr =
+				#codnjr:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcidtra" prepend=" AND "> codcidtra =
+				#codcidtra:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codpes" prepend=" AND "> codpes =
+				#codpes:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipins" prepend=" AND ">
+				UPPER(tipins) LIKE '%' || UPPER(#tipins:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insmun" prepend=" AND ">
+				UPPER(insmun) LIKE '%' || UPPER(#insmun:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insmunant" prepend=" AND ">
+				UPPER(insmunant) LIKE '%' || UPPER(#insmunant:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="locest" prepend=" AND ">
+				UPPER(locest) LIKE '%' || UPPER(#locest:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="protocpe" prepend=" AND ">
+				UPPER(protocpe) LIKE '%' || UPPER(#protocpe:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="orgreg" prepend=" AND ">
+				UPPER(orgreg) LIKE '%' || UPPER(#orgreg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="orgregcodest" prepend=" AND "> orgregcodest =
+				#orgregcodest:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcidori" prepend=" AND "> codcidori =
+				#codcidori:NUMERIC#
+			</isNotNull>
+			<isNotNull property="doccons" prepend=" AND ">
+				UPPER(doccons) LIKE '%' || UPPER(#doccons:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="porteemp" prepend=" AND ">
+				UPPER(porteemp) LIKE '%' || UPPER(#porteemp:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="tipunid" prepend=" AND ">
+				UPPER(tipunid) LIKE '%' || UPPER(#tipunid:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="regimefed" prepend=" AND ">
+				UPPER(regimefed) LIKE '%' || UPPER(#regimefed:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomfan" prepend=" AND ">
+				UPPER(nomfan) LIKE '%' || UPPER(#nomfan:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numregorg" prepend=" AND ">
+				UPPER(numregorg) LIKE '%' || UPPER(#numregorg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datregorg" prepend=" AND ">
+				to_char(datregorg,'dd/MM/yyyy') =
+				to_char(#datregorg:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datcons" prepend=" AND ">
+				to_char(datcons,'dd/MM/yyyy') =
+				to_char(#datcons:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="livro" prepend=" AND ">
+				UPPER(livro) LIKE '%' || UPPER(#livro:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="folha" prepend=" AND ">
+				UPPER(folha) LIKE '%' || UPPER(#folha:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insest" prepend=" AND ">
+				UPPER(insest) LIKE '%' || UPPER(#insest:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="dultacs" prepend=" AND ">
+				to_char(dultacs,'dd/MM/yyyy') =
+				to_char(#dultacs:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="niretrf" prepend=" AND ">
+				UPPER(niretrf) LIKE '%' || UPPER(#niretrf:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="capsoci" prepend=" AND "> capsoci =
+				#capsoci:NUMERIC#
+			</isNotNull>
+			<isNotNull property="capinteg" prepend=" AND "> capinteg =
+				#capinteg:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cotacon" prepend=" AND "> cotacon =
+				#cotacon:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cotates" prepend=" AND "> cotates =
+				#cotates:NUMERIC#
+			</isNotNull>
+			<isNotNull property="diniregfed" prepend=" AND ">
+				to_char(diniregfed,'dd/MM/yyyy') =
+				to_char(#diniregfed:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dfimregfed" prepend=" AND ">
+				to_char(dfimregfed,'dd/MM/yyyy') =
+				to_char(#dfimregfed:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="cnpjmat" prepend=" AND ">
+				UPPER(cnpjmat) LIKE '%' || UPPER(#cnpjmat:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="cnpjucmun" prepend=" AND ">
+				UPPER(cnpjucmun) LIKE '%' || UPPER(#cnpjucmun:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND "> numver =
+				#numver:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcnpj" prepend=" AND ">
+				UPPER(cpfcnpj) LIKE '%' || UPPER(#cpfcnpj:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomraz" prepend=" AND ">
+				UPPER(nomraz) LIKE '%' || UPPER(#nomraz:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomrazres" prepend=" AND ">
+				UPPER(nomrazres) LIKE '%' || UPPER(#nomrazres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numprt" prepend=" AND ">
+				UPPER(numprt) LIKE '%' || UPPER(#numprt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codamn" prepend=" AND "> codamn =
+				#codamn:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codagf" prepend=" AND "> codagf =
+				#codagf:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codlmn" prepend=" AND "> codlmn =
+				#codlmn:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipuna" prepend=" AND ">
+				UPPER(tipuna) LIKE '%' || UPPER(#tipuna:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="qtdemp" prepend=" AND "> qtdemp =
+				#qtdemp:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcsiarqinc" prepend=" AND "> codcsiarqinc =
+				#codcsiarqinc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcsiarqalt" prepend=" AND "> codcsiarqalt =
+				#codcsiarqalt:NUMERIC#
+			</isNotNull>
+			<isNotNull property="observ" prepend=" AND ">
+				UPPER(observ) LIKE '%' || UPPER(#observ:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codmeiarq" prepend=" AND "> codmeiarq =
+				#codmeiarq:NUMERIC#
+			</isNotNull>
+			<isNotNull property="numregaltorg" prepend=" AND ">
+				UPPER(numregaltorg) LIKE '%' || UPPER(#numregaltorg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datregaltorg" prepend=" AND ">
+				to_char(datregaltorg,'dd/MM/yyyy') =
+				to_char(#datregaltorg:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datcolgra" prepend=" AND ">
+				to_char(datcolgra,'dd/MM/yyyy') =
+				to_char(#datcolgra:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM SIATCGR.TBLECO
+	</select>
+
+	<insert id="insReg" parameterClass="EcoVO">
+		INSERT INTO
+		SIATCGR.TBLECO(codeco,tippes,codnjr,codcidtra,codpes,tipins,insmun,insmunant,locest,protocpe,orgreg,orgregcodest,codcidori,doccons,porteemp,tipunid,regimefed,nomfan,numregorg,datregorg,datcons,livro,folha,insest,dultacs,niretrf,capsoci,capinteg,cotacon,cotates,diniregfed,dfimregfed,cnpjmat,cnpjucmun,datalt,codusualt,numver,cpfcnpj,nomraz,nomrazres,numprt,codamn,codagf,codlmn,tipuna,qtdemp,codcsiarqinc,codcsiarqalt,observ,codmeiarq,numregaltorg,datregaltorg,datcolgra)
+		VALUES (#codeco:NUMERIC#,
+		UPPER(#tippes:VARCHAR#),#codnjr:NUMERIC#,#codcidtra:NUMERIC#,#codpes:NUMERIC#,
+		UPPER(#tipins:VARCHAR#), UPPER(#insmun:VARCHAR#),
+		UPPER(#insmunant:VARCHAR#), UPPER(#locest:VARCHAR#),
+		UPPER(#protocpe:VARCHAR#),
+		UPPER(#orgreg:VARCHAR#),#orgregcodest:NUMERIC#,#codcidori:NUMERIC#,
+		UPPER(#doccons:VARCHAR#), UPPER(#porteemp:VARCHAR#),
+		UPPER(#tipunid:VARCHAR#), UPPER(#regimefed:VARCHAR#),
+		UPPER(#nomfan:VARCHAR#),
+		UPPER(#numregorg:VARCHAR#),#datregorg:TIMESTAMP#,#datcons:TIMESTAMP#,
+		UPPER(#livro:VARCHAR#), UPPER(#folha:VARCHAR#),
+		UPPER(#insest:VARCHAR#),#dultacs:TIMESTAMP#,
+		UPPER(#niretrf:VARCHAR#),#capsoci:NUMERIC#,#capinteg:NUMERIC#,#cotacon:NUMERIC#,#cotates:NUMERIC#,#diniregfed:TIMESTAMP#,#dfimregfed:TIMESTAMP#,
+		UPPER(#cnpjmat:VARCHAR#), UPPER(#cnpjucmun:VARCHAR#),sysdate,
+		UPPER(#codusualt:VARCHAR#),#numver:NUMERIC#, UPPER(#cpfcnpj:VARCHAR#),
+		UPPER(#nomraz:VARCHAR#), UPPER(#nomrazres:VARCHAR#),
+		UPPER(#numprt:VARCHAR#),#codamn:NUMERIC#,#codagf:NUMERIC#,#codlmn:NUMERIC#,
+		UPPER(#tipuna:VARCHAR#),#qtdemp:NUMERIC#,#codcsiarqinc:NUMERIC#,#codcsiarqalt:NUMERIC#,
+		UPPER(#observ:VARCHAR#),#codmeiarq:NUMERIC#,
+		UPPER(#numregaltorg:VARCHAR#),#datregaltorg:TIMESTAMP#,#datcolgra:TIMESTAMP#
+		)
+	</insert>
+
+	<update id="updRegByCod" parameterClass="EcoVO">
+		UPDATE SIATCGR.TBLECO SET tippes= UPPER(#tippes:VARCHAR#),codnjr=
+		#codnjr:NUMERIC#,codcidtra= #codcidtra:NUMERIC#,codpes=
+		#codpes:NUMERIC#,tipins= UPPER(#tipins:VARCHAR#),insmun=
+		UPPER(#insmun:VARCHAR#),insmunant= UPPER(#insmunant:VARCHAR#),locest=
+		UPPER(#locest:VARCHAR#),protocpe= UPPER(#protocpe:VARCHAR#),orgreg=
+		UPPER(#orgreg:VARCHAR#),orgregcodest=
+		#orgregcodest:NUMERIC#,codcidori= #codcidori:NUMERIC#,doccons=
+		UPPER(#doccons:VARCHAR#),porteemp= UPPER(#porteemp:VARCHAR#),tipunid=
+		UPPER(#tipunid:VARCHAR#),regimefed= UPPER(#regimefed:VARCHAR#),nomfan=
+		UPPER(#nomfan:VARCHAR#),numregorg=
+		UPPER(#numregorg:VARCHAR#),datregorg= #datregorg:TIMESTAMP#,datcons=
+		#datcons:TIMESTAMP#,livro= UPPER(#livro:VARCHAR#),folha=
+		UPPER(#folha:VARCHAR#),insest= UPPER(#insest:VARCHAR#),dultacs=
+		#dultacs:TIMESTAMP#,niretrf= UPPER(#niretrf:VARCHAR#),capsoci=
+		#capsoci:NUMERIC#,capinteg= #capinteg:NUMERIC#,cotacon=
+		#cotacon:NUMERIC#,cotates= #cotates:NUMERIC#,diniregfed=
+		#diniregfed:TIMESTAMP#,dfimregfed= #dfimregfed:TIMESTAMP#,cnpjmat=
+		UPPER(#cnpjmat:VARCHAR#),cnpjucmun= UPPER(#cnpjucmun:VARCHAR#),datalt=
+		sysdate,codusualt= UPPER(#codusualt:VARCHAR#),numver=
+		#numver:NUMERIC#,cpfcnpj= UPPER(#cpfcnpj:VARCHAR#),nomraz=
+		UPPER(#nomraz:VARCHAR#),nomrazres= UPPER(#nomrazres:VARCHAR#),numprt=
+		UPPER(#numprt:VARCHAR#),codamn= #codamn:NUMERIC#,codagf=
+		#codagf:NUMERIC#,codlmn= #codlmn:NUMERIC#,tipuna=
+		UPPER(#tipuna:VARCHAR#),qtdemp= #qtdemp:NUMERIC#,codcsiarqinc=
+		#codcsiarqinc:NUMERIC#,codcsiarqalt= #codcsiarqalt:NUMERIC#,observ=
+		UPPER(#observ:VARCHAR#),codmeiarq= #codmeiarq:NUMERIC#,numregaltorg=
+		UPPER(#numregaltorg:VARCHAR#),datregaltorg=
+		#datregaltorg:TIMESTAMP#,datcolgra= #datcolgra:TIMESTAMP# WHERE codeco
+		= #codeco:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Integer">
+		DELETE FROM SIATCGR.TBLECO WHERE codeco = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM SIATCGR.TBLECO WHERE codeco in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="EcoVO"
+		resultClass="Integer">
+		SELECT count(codeco) FROM SIATCGR.TBLECO
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codeco" prepend=" AND "> codeco =
+				#codeco:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tippes" prepend=" AND ">
+				UPPER(tippes) LIKE '%' || UPPER(#tippes:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codnjr" prepend=" AND "> codnjr =
+				#codnjr:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcidtra" prepend=" AND "> codcidtra =
+				#codcidtra:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codpes" prepend=" AND "> codpes =
+				#codpes:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipins" prepend=" AND ">
+				UPPER(tipins) LIKE '%' || UPPER(#tipins:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insmun" prepend=" AND ">
+				UPPER(insmun) LIKE '%' || UPPER(#insmun:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insmunant" prepend=" AND ">
+				UPPER(insmunant) LIKE '%' || UPPER(#insmunant:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="locest" prepend=" AND ">
+				UPPER(locest) LIKE '%' || UPPER(#locest:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="protocpe" prepend=" AND ">
+				UPPER(protocpe) LIKE '%' || UPPER(#protocpe:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="orgreg" prepend=" AND ">
+				UPPER(orgreg) LIKE '%' || UPPER(#orgreg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="orgregcodest" prepend=" AND "> orgregcodest =
+				#orgregcodest:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcidori" prepend=" AND "> codcidori =
+				#codcidori:NUMERIC#
+			</isNotNull>
+			<isNotNull property="doccons" prepend=" AND ">
+				UPPER(doccons) LIKE '%' || UPPER(#doccons:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="porteemp" prepend=" AND ">
+				UPPER(porteemp) LIKE '%' || UPPER(#porteemp:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="tipunid" prepend=" AND ">
+				UPPER(tipunid) LIKE '%' || UPPER(#tipunid:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="regimefed" prepend=" AND ">
+				UPPER(regimefed) LIKE '%' || UPPER(#regimefed:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomfan" prepend=" AND ">
+				UPPER(nomfan) LIKE '%' || UPPER(#nomfan:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numregorg" prepend=" AND ">
+				UPPER(numregorg) LIKE '%' || UPPER(#numregorg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datregorg" prepend=" AND ">
+				to_char(datregorg,'dd/MM/yyyy') =
+				to_char(#datregorg:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datcons" prepend=" AND ">
+				to_char(datcons,'dd/MM/yyyy') =
+				to_char(#datcons:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="livro" prepend=" AND ">
+				UPPER(livro) LIKE '%' || UPPER(#livro:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="folha" prepend=" AND ">
+				UPPER(folha) LIKE '%' || UPPER(#folha:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="insest" prepend=" AND ">
+				UPPER(insest) LIKE '%' || UPPER(#insest:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="dultacs" prepend=" AND ">
+				to_char(dultacs,'dd/MM/yyyy') =
+				to_char(#dultacs:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="niretrf" prepend=" AND ">
+				UPPER(niretrf) LIKE '%' || UPPER(#niretrf:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="capsoci" prepend=" AND "> capsoci =
+				#capsoci:NUMERIC#
+			</isNotNull>
+			<isNotNull property="capinteg" prepend=" AND "> capinteg =
+				#capinteg:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cotacon" prepend=" AND "> cotacon =
+				#cotacon:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cotates" prepend=" AND "> cotates =
+				#cotates:NUMERIC#
+			</isNotNull>
+			<isNotNull property="diniregfed" prepend=" AND ">
+				to_char(diniregfed,'dd/MM/yyyy') =
+				to_char(#diniregfed:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dfimregfed" prepend=" AND ">
+				to_char(dfimregfed,'dd/MM/yyyy') =
+				to_char(#dfimregfed:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="cnpjmat" prepend=" AND ">
+				UPPER(cnpjmat) LIKE '%' || UPPER(#cnpjmat:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="cnpjucmun" prepend=" AND ">
+				UPPER(cnpjucmun) LIKE '%' || UPPER(#cnpjucmun:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND "> numver =
+				#numver:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcnpj" prepend=" AND ">
+				UPPER(cpfcnpj) LIKE '%' || UPPER(#cpfcnpj:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomraz" prepend=" AND ">
+				UPPER(nomraz) LIKE '%' || UPPER(#nomraz:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomrazres" prepend=" AND ">
+				UPPER(nomrazres) LIKE '%' || UPPER(#nomrazres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numprt" prepend=" AND ">
+				UPPER(numprt) LIKE '%' || UPPER(#numprt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codamn" prepend=" AND "> codamn =
+				#codamn:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codagf" prepend=" AND "> codagf =
+				#codagf:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codlmn" prepend=" AND "> codlmn =
+				#codlmn:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipuna" prepend=" AND ">
+				UPPER(tipuna) LIKE '%' || UPPER(#tipuna:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="qtdemp" prepend=" AND "> qtdemp =
+				#qtdemp:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcsiarqinc" prepend=" AND "> codcsiarqinc =
+				#codcsiarqinc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codcsiarqalt" prepend=" AND "> codcsiarqalt =
+				#codcsiarqalt:NUMERIC#
+			</isNotNull>
+			<isNotNull property="observ" prepend=" AND ">
+				UPPER(observ) LIKE '%' || UPPER(#observ:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codmeiarq" prepend=" AND "> codmeiarq =
+				#codmeiarq:NUMERIC#
+			</isNotNull>
+			<isNotNull property="numregaltorg" prepend=" AND ">
+				UPPER(numregaltorg) LIKE '%' || UPPER(#numregaltorg:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datregaltorg" prepend=" AND ">
+				to_char(datregaltorg,'dd/MM/yyyy') =
+				to_char(#datregaltorg:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datcolgra" prepend=" AND ">
+				to_char(datcolgra,'dd/MM/yyyy') =
+				to_char(#datcolgra:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getImByCpfcnpj" parameterClass="String" resultClass="hashmap">
+		select insmun,nomraz,nomfan,insmun||' - '||nomfan as IMNOMFAN from TBLECO where cpfcnpj like #value:VARCHAR#
+	</select>
+	
+	<select id="getProxDiaUtil" parameterClass="Date" resultClass="String">
+		SELECT TO_CHAR(
+				SIATCGR.Pkgdsfutil.RecuperaProximoDiaUtil2(#value:TIMESTAMP#)
+				,'DD/MM/YYYY') as DtVencIssqn 
+		FROM DUAL
+	</select>
+	
+	<select id="countImAtivaByCpfcnpj" parameterClass="String" resultClass="Integer">
+		select count(insmun) from TBLECO t where t.cpfcnpj like #value:VARCHAR#
+		and recuperasituacaosiat(t.codeco)='Ativa'
+	</select>
+	
+	<select id="verificaInscCpfcnpj" parameterClass="hashmap" resultClass="Integer">
+		select count(insmun) from TBLECO t where t.cpfcnpj like #cpfcnpj:VARCHAR#
+		and insmun like #insmun:VARCHAR#
+	</select>
+	
+	<select id="getEcoByCpfcnpj" parameterClass="String" resultMap="mapComplexQuery">
+		SELECT * FROM SIATCGR.TBLECO 
+		WHERE cpfcnpj like #value:VARCHAR#
+	</select>
+	
+	<select id="getEcoByIm" parameterClass="String" resultMap="mapComplexQuery">
+		SELECT * FROM SIATCGR.TBLECO 
+		WHERE INSMUN like #value:VARCHAR#
+	</select>
+	
+	<select id="countImNaoAtivaNaoEncerradaByCpfcnpj" parameterClass="String" resultClass="Integer">
+		<![CDATA[
+			select count(insmun) from TBLECO t where t.cpfcnpj like #value:VARCHAR#
+			and recuperasituacaosiat(t.codeco) <> 'Ativa'
+			and recuperasituacaosiat(t.codeco) <> 'Encerrada'
+		]]>
+	</select>
+	
+	<select id="countImByCpfcnpj" parameterClass="String" resultClass="Integer">
+		select count(insmun) from TBLECO t where t.cpfcnpj like #value:VARCHAR#
+		and insmun is not null
+	</select>
+	
+	<select id="getImuByCpfcnpj" parameterClass="String" resultClass="String">
+		select 
+			E.insmun 
+		from 
+			TBLECO E 
+		WHERE 
+			E.CODECO = (SELECT max(EP.codeco) 
+						FROM tbleco EP 
+						WHERE EP.cpfcnpj = #value:VARCHAR# 
+						and siatcgr.recuperasituacaosiat(EP.codeco) = 'Ativa')
+	</select>
+	
+	<select id="getInscricoesSiatByCpfcnpj" parameterClass="String" resultClass="hashmap">
+		select 
+			siatcgr.mascarainscricaomunicipal(e.insmun) as insmun, 
+			siatcgr.recuperasituacaosiat(e.codeco) as situacao,
+			siatcgr.RECUPERAENDERECO(c.codcad,'CAD','E','.',null) as endereco,
+			siatcgr.RECUPERAATVOCPPRINCIPAL(e.codeco, 'S', 'S') as atvocpprincipal
+		from 
+			tbleco e 
+			join tblcad c on c.codeco = e.codeco
+		where 
+			e.cpfcnpj = #value:VARCHAR#
+	</select>
+	
+	<select id="getOcpNivSup" parameterClass="String" resultClass="Integer">
+		select 
+			count(0) as qtd 
+		from 
+			tblocp o 
+		join tblocpcfg oc on o.codocp = oc.codocp
+		where 
+			o.codocp like #value:VARCHAR# || '%'
+			and o.ultniv = 'S'
+			and oc.nivesc = 'NIVES|1'
+	</select>
+	
+	<select id="verificaEcolic" parameterClass="hashmap" resultClass="Integer">
+		SELECT 
+			COUNT(0) 
+		FROM 
+			TBLECO E
+			JOIN TBLECOLIC EL ON EL.CODECO = E.CODECO
+		WHERE 
+			E.INSMUN = #insmun:VARCHAR#
+			AND EL.CODLIC = #codlic:NUMERIC#
+	</select>
+	
+	<insert id="insEcolic" parameterClass="hashmap">
+		INSERT INTO TBLECOLIC
+		SELECT 
+		      NULL CODECOLIC, E.CODECO CODECO, #codlic:NUMERIC# CODLIC, NULL DATINI, NULL DATFIM, 'A' SITUAC, SYSDATE DATALT, 'CIMWEB' CODUSUALT, 1 NUMVER, 
+		      'S' DISLIC, #numlic:VARCHAR# NUMLIC, NULL OBSLIC 
+		FROM
+		      TBLECO E
+		WHERE 
+		      E.INSMUN = #insmun:VARCHAR#
+	</insert>
+	
+	<insert id="insEcolichis" parameterClass="hashmap">
+		INSERT INTO TBLECOLICHIS
+		SELECT 
+		      NULL codecolichis, EL.CODECOLIC,EL.CODECO,EL.CODLIC,EL.DATINI,EL.DATFIM,EL.SITUAC,EL.DATALT,EL.CODUSUALT,
+		      EL.NUMVER,'A' AS SITHIS, EL.DISLIC,EL.NUMLIC,EL.OBSLIC
+		FROM
+		      TBLECO E
+		      JOIN TBLECOLIC EL ON EL.CODECO = E.CODECO
+		WHERE 
+		      E.INSMUN = #insmun:VARCHAR#
+		      AND EL.CODLIC = #codlic:NUMERIC#
+	</insert>
+	
+	<select id="getEcolic" parameterClass="String" resultClass="hashmap">
+		SELECT 
+		    TO_CHAR(EL.DATINI, 'dd/MM/yyyy') AS DATINI, TO_CHAR(EL.DATFIM, 'dd/MM/yyyy') AS DATFIM, EL.SITUAC, TO_CHAR(EL.DATALT, 'dd/MM/yyyy HH24:MI:SS') AS DATALT, EL.CODUSUALT, 
+		    DECODE(EL.DISLIC,'S','SIM','N','NÃO') AS DISLIC, EL.NUMLIC, EL.OBSLIC, L.DESCRI
+		FROM 
+		    TBLECO E
+		    JOIN TBLECOLIC EL ON EL.CODECO = E.CODECO
+		    JOIN TBLLIC L ON L.CODLIC = EL.CODLIC
+		WHERE 
+		    E.INSMUN = #value:VARCHAR#
+		ORDER BY DATALT, CODLIC
+	</select>
+	
+	<select id="getEcolichis" parameterClass="String" resultClass="hashmap">
+		SELECT 
+		    TO_CHAR(EL.DATINI, 'dd/MM/yyyy') AS DATINI, TO_CHAR(EL.DATFIM, 'dd/MM/yyyy') AS DATFIM, 
+		    EL.SITUAC, TO_CHAR(EL.DATALT, 'dd/MM/yyyy HH24:MI:SS') AS DATALT, EL.CODUSUALT, 
+		    DECODE(EL.DISLIC,'S','SIM','N','NÃO') AS DISLIC, EL.NUMLIC, EL.OBSLIC, L.DESCRI
+		FROM 
+		    TBLECO E
+		    JOIN TBLECOLICHIS EL ON EL.CODECO = E.CODECO
+		    JOIN TBLLIC L ON L.CODLIC = EL.CODLIC
+		WHERE 
+		    E.INSMUN = #value:VARCHAR#
+		ORDER BY DATALT, CODLIC
+	</select>
+	
+	<select id="getSociosQlf" parameterClass="String" resultClass="hashmap">
+		SELECT 
+		    NQ.CODQLF, P.CPFCNPJ, P.NOMRAZCOM, ES.DATINIMDT
+		FROM 
+		    TBLECOSAP ES 
+		    JOIN TBLECO E ON E.CODECO = ES.CODECO
+		    JOIN TBLNJRQLF NQ ON NQ.CODNJRQLF = ES.CODNJRQLF
+		    JOIN TBLPES P ON P.CODPES = ES.SOCCODPES
+		WHERE 
+		    E.INSMUN = #value:VARCHAR#
+	</select>
+	
+	<select id="getValorTaxa" parameterClass="String" resultClass="Double">
+		SELECT 
+		    TIAV.VALFIX
+		FROM 
+		    TBLTXD T
+		    JOIN TBLTXDITM TI ON T.CODTXD = TI.CODTXD
+		    JOIN TBLTXDITMATR TIA ON TIA.CODTXDITM = TI.CODTXDITM
+		    JOIN TBLTXDITMATRVAL TIAV ON TIAV.CODTXDITMATR = TIA.CODTXDITMATR
+		WHERE 
+		    T.NUMTXD =  #value:VARCHAR#
+		    AND TO_CHAR(TIAV.DATREF,'yyyy') = TO_CHAR(SYSDATE,'yyyy')
+	</select>
+	
+	<select id="getAtualizaAlvaras" resultClass="hashmap">
+		SELECT * 
+		FROM 
+			TBL_INSMUN_ALVARA 
+		WHERE 
+			VERIFICADO = 'N' 
+		ORDER BY DATALT
+	</select>
+	
+	<update id="updAlvaraVerificado" parameterClass="Long">
+		UPDATE TBL_INSMUN_ALVARA SET VERIFICADO = 'S' WHERE ID = #value:NUMERIC#
+	</update>
+</sqlMap> 
+ 

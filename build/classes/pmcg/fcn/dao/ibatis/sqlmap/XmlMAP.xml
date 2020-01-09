@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Xml">
+	<typeAlias alias="XmlVO" type="pmcg.fcn.domain.XmlVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="XmlVO">
+		<result property="iddxml" column="iddxml" />
+		<result property="tipxml" column="tipxml" />
+		<result property="xmlxml" column="xmlxml" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="XmlVO">
+		<result property="iddxml" column="iddxml" />
+		<result property="tipxml" column="tipxml" />
+		<result property="xmlxml" column="xmlxml" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnxml WHERE iddxml = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnxml WHERE iddxml = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="XmlVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnxml
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddxml" prepend=" AND ">
+				iddxml = #iddxml:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipxml" prepend=" AND ">
+				tipxml ILIKE '%' || #tipxml:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="xmlxml" prepend=" AND ">
+				xmlxml ILIKE '%' || #xmlxml:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="XmlVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnxml
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddxml" prepend=" AND "> iddxml = #iddxml:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipxml" prepend=" AND ">
+				tipxml ILIKE '%' || #tipxml:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="xmlxml" prepend=" AND ">
+				xmlxml ILIKE '%' || #xmlxml:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnxml
+	</select>
+
+	<insert id="insReg" parameterClass="XmlVO">
+		<selectKey keyProperty="iddxml" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqxml')
+		</selectKey>
+		INSERT INTO fcn.fcnxml(iddxml,tipxml,xmlxml,usualt,datalt) 
+		VALUES 
+			(#iddxml:NUMERIC#, #tipxml:VARCHAR#, #xmlxml:VARCHAR#, UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="XmlVO">
+		UPDATE fcn.fcnxml SET 
+		tipxml = #tipxml:VARCHAR#,
+		xmlxml = #xmlxml:VARCHAR#,
+		usualt = UPPER(#usualt:VARCHAR#),
+		datalt = now() 
+		WHERE iddxml = #iddxml:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnxml WHERE iddxml = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnxml WHERE iddxml in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="XmlVO" resultClass="Integer">
+		SELECT count(iddxml) FROM fcn.fcnxml
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddxml" prepend=" AND "> iddxml = #iddxml:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipxml" prepend=" AND ">
+				tipxml ILIKE '%' || #tipxml:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="xmlxml" prepend=" AND ">
+				xmlxml ILIKE '%' || #xmlxml:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap> 
+ 

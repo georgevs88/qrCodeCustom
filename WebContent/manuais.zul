@@ -1,0 +1,58 @@
+<?page title="PMCG - CIM"?>
+<?link rel="shortcut icon" type="image/png" href="images/externo/brasaoPref01.png"?>
+<?link href="/css/bootstrap.min.css" rel="stylesheet"?>
+<?meta name="keywords" content="cim" ?>
+<?meta http-equiv="X-UA-Compatible" content="IE=9" ?>
+<zk xmlns:h="native">
+<window border="none" width="100%" id="mainPage" use="pmcg.imti.view.ext.Manuais" onCreate="mainPage.initComponentes(2);">
+	<style src="/css/componentes.css"></style>
+	<h:main>
+		<include id="headerPart" src="/layout-parts/header.zul"></include>
+		<h:section>
+			<h:div class="container">
+				<h:div class="masthead">
+					<include id="menuPart" src="/layout-parts/menu.zul"></include>
+					<h:h2>Manuais</h:h2>
+				</h:div>
+				<h:div class="row">
+			    	<h:div class="col-md-3">
+			          <h:h3>Registrar Novo Usuário</h:h3>
+			          <div onClick="mainPage.download(1)">
+			          	<h:p><h:a class="btn btn-primary" role="button">Baixar »</h:a></h:p>
+			          </div>
+			        </h:div>
+			        <h:div class="col-md-3">
+			          <h:h3>Viabilidade</h:h3>
+			          <div onClick="mainPage.download(2)">
+			          	<h:p><h:a class="btn btn-primary" role="button">Baixar »</h:a></h:p>
+			          </div>
+			        </h:div>
+			        <h:div class="col-md-3">
+			          <h:h3>Ficha BAE</h:h3>
+			          <div onClick="mainPage.download(3)">
+			          	<h:p><h:a class="btn btn-primary" role="button">Baixar »</h:a></h:p>
+			          </div>
+			        </h:div>
+			        <h:div class="col-md-3">
+			          <h:h3>Anexar Documentos (Protocolo 'CGR' - PMCG)</h:h3>
+			          <div onClick="mainPage.download(4)">
+			          	<h:p><h:a class="btn btn-primary" role="button">Baixar »</h:a></h:p>
+			          </div>
+			        </h:div>
+			    </h:div>
+			    <h:div class="row">
+			    	 <h:div class="col-md-3">
+			          <h:h3>Anexar Documentos (Protocolo 'MSP' - JUCEMS)</h:h3>
+			          <div onClick="mainPage.download(5)">
+			          	<h:p><h:a class="btn btn-primary" role="button">Baixar »</h:a></h:p>
+			          </div>
+			        </h:div>
+			    </h:div>
+			</h:div>
+		</h:section>
+		<include id="footerPart" src="layout-parts/footer.zul"></include>
+	</h:main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</window>
+</zk>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Pma">
+	<typeAlias alias="PmaVO" type="pmcg.fcn.domain.PmaVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="PmaVO">
+		<result property="iddpma" column="iddpma" />
+		<result property="prapma" column="prapma" />
+		<result property="prjpma" column="prjpma" />
+		<result property="datpma" column="datpma" />
+		<result property="reqpma" column="reqpma" />
+		<result property="atvpma" column="atvpma" />
+		<result property="edrpma" column="edrpma" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="obspma" column="obspma" />
+		<result property="anopma" column="anopma" />
+		<result property="epdpma" column="epdpma" />
+		<result property="regpma" column="regpma" />
+		<result property="viapma" column="viapma" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="PmaVO">
+		<result property="iddpma" column="iddpma" />
+		<result property="prapma" column="prapma" />
+		<result property="prjpma" column="prjpma" />
+		<result property="datpma" column="datpma" />
+		<result property="reqpma" column="reqpma" />
+		<result property="atvpma" column="atvpma" />
+		<result property="edrpma" column="edrpma" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="obspma" column="obspma" />
+		<result property="anopma" column="anopma" />
+		<result property="epdpma" column="epdpma" />
+		<result property="regpma" column="regpma" />
+		<result property="viapma" column="viapma" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licpma WHERE iddpma = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM lic.licpma WHERE iddpma = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="PmaVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licpma
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddpma" prepend=" AND ">
+				iddpma = #iddpma:NUMERIC#
+			</isNotNull>
+			<isNotNull property="prapma" prepend=" AND ">
+				prapma ILIKE '%' || #prapma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="prjpma" prepend=" AND ">
+				prjpma ILIKE '%' || #prjpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datpma" prepend=" AND "> 
+				datpma = #datpma:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="reqpma" prepend=" AND ">
+				reqpma ILIKE '%' || #reqpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="atvpma" prepend=" AND ">
+				atvpma ILIKE '%' || #atvpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edrpma" prepend=" AND ">
+				edrpma ILIKE '%' || #edrpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="obspma" prepend=" AND ">
+				obspma ILIKE '%' || #obspma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="anopma" prepend=" AND ">
+				anopma = #anopma:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="PmaVO" resultMap="mapComplexQuery">
+		SELECT * FROM lic.licpma
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddpma" prepend=" AND "> iddpma = #iddpma:NUMERIC#
+			</isNotNull>
+			<isNotNull property="prapma" prepend=" AND ">
+				prapma ILIKE '%' || #prapma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="prjpma" prepend=" AND ">
+				prjpma ILIKE '%' || #prjpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datpma" prepend=" AND "> 
+				datpma = #datpma:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="reqpma" prepend=" AND ">
+				reqpma ILIKE '%' || #reqpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="atvpma" prepend=" AND ">
+				atvpma ILIKE '%' || #atvpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edrpma" prepend=" AND ">
+				edrpma ILIKE '%' || #edrpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="obspma" prepend=" AND ">
+				obspma ILIKE '%' || #obspma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="anopma" prepend=" AND "> anopma = #anopma:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licpma
+	</select>
+
+	<insert id="insReg" parameterClass="PmaVO">
+		<selectKey keyProperty="iddpma" resultClass="Long">
+			SELECT NEXTVAL('lic.seqpma')
+		</selectKey>
+		INSERT INTO lic.licpma(iddpma,prapma,prjpma,datpma,reqpma,atvpma,edrpma,usualt,datalt,obspma,anopma,epdpma,regpma,viapma)
+		VALUES (#iddpma:NUMERIC#, UPPER(#prapma:VARCHAR#), UPPER(#prjpma:VARCHAR#),#datpma:TIMESTAMP#,
+		UPPER(#reqpma:VARCHAR#), UPPER(#atvpma:VARCHAR#), UPPER(#edrpma:VARCHAR#),
+		UPPER(#usualt:VARCHAR#),now(), UPPER(#obspma:VARCHAR#),#anopma:NUMERIC#,#epdpma:NUMERIC#,#regpma:VARCHAR#,#viapma:NUMERIC# )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="PmaVO">
+		UPDATE 
+			lic.licpma 
+		SET 
+			prapma= UPPER(#prapma:VARCHAR#),
+			prjpma= UPPER(#prjpma:VARCHAR#),
+			datpma= #datpma:TIMESTAMP#,
+			reqpma= UPPER(#reqpma:VARCHAR#),
+			atvpma= UPPER(#atvpma:VARCHAR#),
+			edrpma= UPPER(#edrpma:VARCHAR#),
+			usualt= UPPER(#usualt:VARCHAR#),
+			datalt= now(),
+			obspma= UPPER(#obspma:VARCHAR#),
+			anopma= #anopma:NUMERIC#,
+			epdpma = #epdpma:NUMERIC#,
+			regpma = #regpma:VARCHAR#,
+			viapma = #viapma:NUMERIC#
+		WHERE 
+			iddpma = #iddpma:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM lic.licpma WHERE iddpma = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM lic.licpma WHERE iddpma in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="PmaVO" resultClass="Integer">
+		SELECT count(iddpma) FROM lic.licpma
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddpma" prepend=" AND "> iddpma = #iddpma:NUMERIC#
+			</isNotNull>
+			<isNotNull property="prapma" prepend=" AND ">
+				prapma ILIKE '%' || #prapma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="prjpma" prepend=" AND ">
+				prjpma ILIKE '%' || #prjpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datpma" prepend=" AND "> 
+				datpma = #datpma:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="reqpma" prepend=" AND ">
+				reqpma ILIKE '%' || #reqpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="atvpma" prepend=" AND ">
+				atvpma ILIKE '%' || #atvpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edrpma" prepend=" AND ">
+				edrpma ILIKE '%' || #edrpma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="obspma" prepend=" AND ">
+				obspma ILIKE '%' || #obspma:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="anopma" prepend=" AND "> anopma = #anopma:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByPrapma" parameterClass="String" resultMap="mapComplexQuery">
+		SELECT * FROM LIC.LICPMA where trim(prapma)= trim(#value:VARCHAR#)
+	</select>
+</sqlMap> 
+ 

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Col">
+	<typeAlias alias="ColVO" type="pmcg.fcn.domain.ColVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="ColVO">
+		<result property="iddcol" column="iddcol" />
+		<result property="cencol" column="cencol" />
+		<result property="coscol" column="coscol" />
+		<result property="ctucol" column="ctucol" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="ColVO">
+		<result property="iddcol" column="iddcol" />
+		<result property="cencol" column="cencol" />
+		<result property="coscol" column="coscol" />
+		<result property="ctucol" column="ctucol" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncol WHERE iddcol = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncol WHERE iddcol = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="ColVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncol
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcol" prepend=" AND ">
+				iddcol = #iddcol:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cencol" prepend=" AND ">
+				cencol = #cencol:NUMERIC#
+			</isNotNull>
+			<isNotNull property="coscol" prepend=" AND ">
+				coscol ILIKE '%' || #coscol:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ctucol" prepend=" AND ">
+				ctucol ILIKE '%' || #ctucol:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="ColVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncol
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcol" prepend=" AND "> iddcol =
+				#iddcol:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cencol" prepend=" AND "> cencol =
+				#cencol:NUMERIC#
+			</isNotNull>
+			<isNotNull property="coscol" prepend=" AND ">
+				coscol ILIKE '%' || #coscol:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ctucol" prepend=" AND ">
+				ctucol ILIKE '%' || #ctucol:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncol
+	</select>
+
+	<insert id="insReg" parameterClass="ColVO">
+		<selectKey keyProperty="iddcol" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqcol')
+		</selectKey>
+		INSERT INTO
+		fcn.fcncol(iddcol,cencol,coscol,ctucol)
+		VALUES (#iddcol:NUMERIC#,#cencol:NUMERIC#,
+		UPPER(#coscol:VARCHAR#), 
+		UPPER(#ctucol:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="ColVO">
+		UPDATE fcn.fcncol SET cencol= #cencol:NUMERIC#,coscol=
+		UPPER(#coscol:VARCHAR#),ctucol=
+		UPPER(#ctucol:VARCHAR#) WHERE iddcol = #iddcol:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcncol WHERE iddcol = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcncol WHERE iddcol in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="ColVO"
+		resultClass="Integer">
+		SELECT count(iddcol) FROM fcn.fcncol
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcol" prepend=" AND "> iddcol =
+				#iddcol:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cencol" prepend=" AND "> cencol =
+				#cencol:NUMERIC#
+			</isNotNull>
+			<isNotNull property="coscol" prepend=" AND ">
+				coscol ILIKE '%' || #coscol:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ctucol" prepend=" AND ">
+				ctucol ILIKE '%' || #ctucol:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByPro" parameterClass="String" resultClass="ColVO">
+		SELECT col.*
+		FROM fcn.fcnvia via
+		INNER JOIN fcn.fcncol col on col.iddcol = via.colvia
+		WHERE via.provia = #value:VARCHAR#
+	</select>
+</sqlMap> 
+ 

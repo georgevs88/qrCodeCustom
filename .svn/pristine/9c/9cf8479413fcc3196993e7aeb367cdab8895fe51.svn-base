@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="End">
+    <typeAlias alias="EndVO" type="pmcg.fcn.domain.EndVO"/>
+    
+    <select id="getRegByCod" parameterClass="Long" resultClass="EndVO">
+		SELECT * FROM sos.sosend WHERE codend = #value:NUMERIC# 
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="EndVO" resultClass="EndVO">
+		SELECT * FROM sos.sosend 
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codend" prepend=" AND ">
+				codend = #codend:NUMERIC# 
+			</isNotNull>
+			<isNotNull property="cepend" prepend=" AND ">
+				cepend = #cepend:NUMERIC# 
+			</isNotNull>
+			<isNotNull property="tipend" prepend=" AND ">
+				tipend = #tipend:VARCHAR# 
+			</isNotNull>
+			<isNotNull property="logend" prepend=" AND ">
+				logend = #logend:VARCHAR# 
+			</isNotNull>
+			<isNotNull property="baiend" prepend=" AND ">
+				baiend = #baiend:VARCHAR# 
+			</isNotNull>
+			<isNotNull property="cidend" prepend=" AND ">
+				cidend = #cidend:VARCHAR# 
+			</isNotNull>
+			<isNotNull property="ufend" prepend=" AND ">
+				ufend = #ufend:VARCHAR# 
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<insert id="insReg" parameterClass="EndVO">
+		<selectKey keyProperty="codend" resultClass="Long">
+			select nextval('sos.sosend_codend')
+		</selectKey>
+		INSERT INTO sos.sosend 
+		 (codend, tipend, logend, baiend, cidend, ufend, usualt, datalt,cepend) 
+		VALUES 
+		 (#codend:NUMERIC#, #tipend:VARCHAR#, #logend:VARCHAR#, 
+		  #baiend:VARCHAR#, #cidend:VARCHAR#, #ufend:VARCHAR#, 
+		  #usualt:VARCHAR#, NOW(), #cepend:VARCHAR#)
+	</insert>
+	
+	  <update id="updRegByCod" parameterClass="EndVO">
+        UPDATE sos.sosend 
+		   SET tipend = #tipend:VARCHAR#,
+			 logend = #logend:VARCHAR#,
+			 baiend = #baiend:VARCHAR#,
+			 cidend = #cidend:VARCHAR#,
+			 ufend = #ufend:VARCHAR#,
+			 usualt = #usualt:VARCHAR#,
+			 datalt = #datalt:TIMESTAMP#,
+			  cepend = #usualt:VARCHAR#
+		 WHERE codend = #codend:NUMERIC#
+    </update>
+
+    <delete id="delByCod" parameterClass="Long">
+        DELETE FROM scl.sclend
+		 WHERE codend = #value:NUMERIC#
+    </delete>
+    
+    
+    	<select id="getCountByCriterio" parameterClass="EndVO" resultClass="Integer">
+		SELECT count(*) FROM sos.sosend 
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codend" prepend=" AND ">
+				codend = #codend:NUMERIC# 
+			</isNotNull>
+			<isNotNull property="cepend" prepend=" AND ">
+				cepend = #cepend:NUMERIC# 
+			</isNotNull>
+			<isNotNull property="tipend" prepend=" AND ">
+				tipend = #tipend:VARCHAR# 
+			</isNotNull>
+			<isNotNull property="logend" prepend=" AND ">
+				logend = #logend:VARCHAR# 
+			</isNotNull>
+			<isNotNull property="baiend" prepend=" AND ">
+				baiend = #baiend:VARCHAR# 
+			</isNotNull>
+			<isNotNull property="cidend" prepend=" AND ">
+				cidend = #cidend:VARCHAR# 
+			</isNotNull>
+			<isNotNull property="ufend" prepend=" AND ">
+				ufend = #ufend:VARCHAR# 
+			</isNotNull>
+		</dynamic>
+	</select>
+
+</sqlMap>

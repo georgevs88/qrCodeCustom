@@ -1,0 +1,130 @@
+<?page title="PMCG - TIQWEB" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/png" href="images/externo/brasaoPref01.png"?>
+<?link href="css/bootstrap.min.css" rel="stylesheet"?>
+<?link href="css/signin.css" rel="stylesheet"?>
+<?meta name="keywords" content="tiqweb" ?>
+<zk xmlns:h="native">
+<window border="none" width="100%" id="mainPage" use="pmcg.imti.view.Autrel" onCreate="mainPage.initAut();mainPage.initComponentes(1);">
+	<style src="/css/componentes.css"></style>
+	<h:main>
+		<include id="headerPart" src="/layout-parts/header.zul"></include>
+		<h:section>
+			<h:div class="container">
+				<h:div class="masthead">
+					<h:nav class="navbar navbar-default">
+						<h:div class="container-fluid">
+							<h:div class="navbar-header">
+								<h:button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+									aria-expanded="false" aria-controls="navbar">
+									<h:span class="sr-only">Toggle navigation</h:span>
+								</h:button>
+							</h:div>
+							<h:div id="navbar" class="collapse navbar-collapse">
+								<h:ul class="nav navbar-nav">
+									<h:li class="@{mainPage.classHome}" style="@{mainPage.displayHome}">
+										<h:a href="/tiqweb/index.zul">
+											<span class="glyphicon glyphicon-home" />
+											Início
+										</h:a>
+									</h:li>
+								</h:ul>
+							</h:div>
+						</h:div>
+					</h:nav>
+					<h:h2>Consulta Autenticidade - Alvará</h:h2>
+<!-- 				    	<vbox> -->
+<!-- 				    		<label value="Nº Nota"/> -->
+<!-- 							<textbox id="nrnota" width="172px" value="@{mainPage.nrnota}" /> -->
+<!-- 							<label value="Código de Verificação"/> -->
+<!-- 							<textbox id="codver" width="172px" value="@{mainPage.codver}" /> -->
+<!-- 					    </vbox> -->
+<!-- 			 			<button class="btn btn-lg btn-default" label="Verificar" onClick="mainPage.verificar()" style="margin-top: 15px;"/> -->
+						
+					<separator height="10px"/>
+					<div > <!-- visible="@{mainPage.dadosEncontrados}" -->
+						<h:div class="row">
+							<h:div class="col-md-2">
+								Número:
+							</h:div>
+							<h:div class="col-md-2">
+<!-- 								<label value="@{mainPage.cdg.numeroCertidao}" style="font-size: 18px;font-weight: bold;"/> -->
+								<label value="0010246/17-63" style="font-size: 18px;font-weight: bold;"/>
+								
+							</h:div>
+							<h:div class="col-md-2">
+								CPF/CNPJ:
+							</h:div>
+							<h:div class="col-md-6">
+<!-- 								<label value="@{mainPage.cdg.cpfcnpjFormatado}" style="font-size: 18px;font-weight: bold;"/> -->
+								<label value="09.389.346/0001-06" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								Tipo:
+							</h:div>
+							<h:div class="col-md-10">
+<!-- 								<label value="@{mainPage.cdg.tipoFormatado}" style="font-size: 18px;font-weight: bold;"/> -->
+								<label value="ALVARÁ DE LOCALIZAÇÃO E FUNCIONAMENTO" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								Razão Social:
+							</h:div>
+							<h:div class="col-md-10">
+<!-- 								<label value="@{mainPage.cdg.NOMCDG}" style="font-size: 18px;font-weight: bold;"/> -->
+								<label value="AGUIA VISTORIAS VEICULARES LTDA - ME" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								Data Emissão:
+							</h:div>
+							<h:div class="col-md-2">
+<!-- 								<label value="@{mainPage.cdg.dataEmissao}" style="font-size: 18px;font-weight: bold;"/> -->
+								<label value="19/05/2017" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+							<h:div class="col-md-2">
+								Data Validade:
+							</h:div>
+							<h:div class="col-md-2">
+<!-- 								<label value="@{mainPage.cdg.dataValidade}" style="font-size: 18px;font-weight: bold;"/> -->
+								<label value="31/12/2017" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								Código de Autenticidade:
+							</h:div>
+							<h:div class="col-md-10">
+<!-- 								<label value="@{mainPage.cdg.AUTENTICIDADE}" style="font-size: 18px;font-weight: bold;"/> -->
+								<label value="2F3B06054961E7372E14698E9B200A8D" style="font-size: 18px;font-weight: bold;"/>
+							</h:div>
+						</h:div>
+						<separator height="10px"/>
+						<div > <!-- <label value="@{mainPage.cdg.AUTENTICIDADE}" style="font-size: 18px;font-weight: bold;"/> -->
+							<h:div class="alert alert-success" role="alert">
+								Certidão Válida!
+							</h:div>
+						</div>
+<!-- 						<div visible="@{mainPage.visibleVencido}"> -->
+<!-- 							<h:div class="alert alert-danger" role="alert"> -->
+<!-- 								Certidão Vencida! -->
+<!-- 							</h:div> -->
+<!-- 						</div> -->
+<!-- 						<div visible="@{mainPage.visibleNaoValido}"> -->
+<!-- 							<h:div class="alert alert-danger" role="alert"> -->
+<!-- 								Certidão Não Encontrada! -->
+<!-- 							</h:div> -->
+<!-- 						</div> -->
+					</div>
+				</h:div>
+			</h:div>
+		</h:section>
+		<include id="footerPart" src="/layout-parts/footer.zul"></include>
+	</h:main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</window>
+</zk>

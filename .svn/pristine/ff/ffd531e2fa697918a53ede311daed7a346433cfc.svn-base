@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Cso">
+	<typeAlias alias="CsoVO" type="pmcg.fcn.domain.CsoVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="CsoVO">
+		<result property="iddcso" column="iddcso" />
+		<result property="colcso" column="colcso" />
+		<result property="cpfcso" column="cpfcso" />
+		<result property="nomcso" column="nomcso" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="CsoVO">
+		<result property="iddcso" column="iddcso" />
+		<result property="colcso" column="colcso" />
+		<result property="cpfcso" column="cpfcso" />
+		<result property="nomcso" column="nomcso" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncso WHERE iddcso = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncso WHERE iddcso = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CsoVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncso
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcso" prepend=" AND ">
+				iddcso = #iddcso:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colcso" prepend=" AND ">
+				colcso = #colcso:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcso" prepend=" AND ">
+				cpfcso ILIKE '%' || #cpfcso:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomcso" prepend=" AND ">
+				nomcso ILIKE '%' || #nomcso:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="CsoVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncso
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcso" prepend=" AND "> iddcso =
+				#iddcso:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colcso" prepend=" AND "> colcso =
+				#colcso:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcso" prepend=" AND ">
+				cpfcso ILIKE '%' || #cpfcso:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomcso" prepend=" AND ">
+				nomcso ILIKE '%' || #nomcso:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncso
+	</select>
+
+	<insert id="insReg" parameterClass="CsoVO">
+		<selectKey keyProperty="iddcso" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqcso')
+		</selectKey>
+		INSERT INTO fcn.fcncso(iddcso,colcso,cpfcso,nomcso) VALUES
+		(#iddcso:NUMERIC#,#colcso:NUMERIC#, UPPER(#cpfcso:VARCHAR#),
+		UPPER(#nomcso:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="CsoVO">
+		UPDATE fcn.fcncso SET colcso= #colcso:NUMERIC#,cpfcso=
+		UPPER(#cpfcso:VARCHAR#),nomcso= UPPER(#nomcso:VARCHAR#) WHERE iddcso =
+		#iddcso:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcncso WHERE iddcso = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcncso WHERE iddcso in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="CsoVO"
+		resultClass="Integer">
+		SELECT count(iddcso) FROM fcn.fcncso
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcso" prepend=" AND "> iddcso =
+				#iddcso:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colcso" prepend=" AND "> colcso =
+				#colcso:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cpfcso" prepend=" AND ">
+				cpfcso ILIKE '%' || #cpfcso:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomcso" prepend=" AND ">
+				nomcso ILIKE '%' || #nomcso:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByCol" parameterClass="Long" resultClass="CsoVO">
+		SELECT * FROM fcn.fcncso WHERE colcso = #value:NUMERIC#
+	</select>
+</sqlMap> 
+ 

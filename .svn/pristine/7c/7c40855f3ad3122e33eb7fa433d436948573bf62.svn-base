@@ -1,0 +1,29 @@
+<?page title="Relatório de Inscrições Por Período" cacheable="false" language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window use="pmcg.imti.view.Insrel" id="wRel" title="Relatório de Inscrições Por Período" width="315px" height="200px" border="normal" shadow="false" position="center"
+		mode="overlapped" sizable="false" closable="true" onCreate="wRel.initComponentes()" contentStyle="overflow:auto;">
+		<style src="/ext/cimweb_ext.css"></style>
+		<grid style="margin:15px">
+	    	<columns>
+	    		<column align="right" width="120px"/>
+	    		<column />
+	    	</columns>
+	    	<rows>
+	    		<row style="padding:1px;" spans="1,5">
+	    			<label value="Data Inicial:" style="font-size:16px;"/>
+					<datebox id="datini" value="@{wRel.datini}"/>
+				</row>
+				<row style="padding:1px;" spans="1,5">
+	    			<label value="Data Fim:" style="font-size:16px;"/>
+					<datebox id="datfim" value="@{wRel.datfim}"/>
+				</row>
+			</rows>
+		</grid>
+		<div align="center">
+			<button class="btn-sec" label="Imprimir" onClick="wRel.imprimir()"/>
+		</div>
+	</window>
+</zk>

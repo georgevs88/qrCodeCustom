@@ -1,0 +1,24 @@
+<zk xmlns:h="native">
+	<div style="bottom: 90px;background:#257BAC;width:100%;min-height: 42px;" visible="@{mainPage.autenticado}">
+		<h:div class="container">
+			<hbox>
+				<hbox style="margin-top: 12px;">
+					<label value="Usuário:" visible="@{mainPage.autenticado}" style="color:white;font-weight: bold;font-size: 16px;"/>
+					<space width="10px"/>
+					<label value="@{mainPage.usuarioNome}" visible="@{mainPage.autenticado}" style="color:white;font-weight: bold;font-size: 16px;"/>  
+				</hbox>
+				<space width="10px"/>
+				<button label="Desconectar" class="btn btn-lg btn-info btn-xs" visible="@{mainPage.autenticado}" onClick="mainPage.desconectarUsuario()" style="margin-top: 12px;"/>
+			</hbox>
+		</h:div>
+	</div>
+	<h:footer>
+		<h:div class="container">
+			<h:image src="images/agetec2.png" style="float:right;padding-top: 20px;padding-right: 10px;width: 100px;"/>
+			<h:footer class="footer">
+				<h:p style="color: white;margin: 20px 0px 0px;font-style: italic;">Prefeitura Municipal de Campo Grande</h:p>
+				<h:p style="color: white;margin: 10px 0px 0px;font-style: italic;">AGETEC - Agência Municipal de Tecnologia da Informação e Inovação</h:p>
+			</h:footer>
+		</h:div>
+	</h:footer>
+</zk>

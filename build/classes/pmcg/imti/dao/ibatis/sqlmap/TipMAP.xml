@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Tip">
+	<typeAlias alias="TipVO" type="pmcg.imti.domain.TipVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="TipVO">
+		<result property="codtip" column="codtip" />
+		<result property="codarq" column="codarq" />
+		<result property="sistema" column="sistema" />
+		<result property="tipo" column="tipo" />
+		<result property="codigo" column="codigo" />
+		<result property="estati" column="estati" />
+		<result property="desred" column="desred" />
+		<result property="desres" column="desres" />
+		<result property="descom" column="descom" />
+		<result property="datalt" column="datalt" />
+		<result property="codusualt" column="codusualt" />
+		<result property="numver" column="numver" />
+		<result property="config" column="config" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="TipVO">
+		<result property="codtip" column="codtip" />
+		<result property="codarq" column="codarq" />
+		<result property="sistema" column="sistema" />
+		<result property="tipo" column="tipo" />
+		<result property="codigo" column="codigo" />
+		<result property="estati" column="estati" />
+		<result property="desred" column="desred" />
+		<result property="desres" column="desres" />
+		<result property="descom" column="descom" />
+		<result property="datalt" column="datalt" />
+		<result property="codusualt" column="codusualt" />
+		<result property="numver" column="numver" />
+		<result property="config" column="config" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="String" resultMap="mapComplexQuerySimple">
+		SELECT * FROM siatcgr.tbltip WHERE codtip = #value:VARCHAR#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="String" resultMap="mapComplexQuery">
+		SELECT * FROM siatcgr.tbltip WHERE codtip = #value:VARCHAR#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="TipVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM siatcgr.tbltip
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codtip" prepend=" AND ">
+				UPPER(codtip) LIKE '%' || UPPER(#codtip:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codarq" prepend=" AND ">
+				codarq = #codarq:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sistema" prepend=" AND ">
+				UPPER(sistema) LIKE '%' || UPPER(#sistema:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="tipo" prepend=" AND ">
+				UPPER(tipo) LIKE '%' || UPPER(#tipo:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codigo" prepend=" AND ">
+				UPPER(codigo) LIKE '%' || UPPER(#codigo:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="estati" prepend=" AND ">
+				UPPER(estati) LIKE '%' || UPPER(#estati:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="desred" prepend=" AND ">
+				UPPER(desred) LIKE '%' || UPPER(#desred:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="desres" prepend=" AND ">
+				UPPER(desres) LIKE '%' || UPPER(#desres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="descom" prepend=" AND ">
+				UPPER(descom) LIKE '%' || UPPER(#descom:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND ">
+				numver = #numver:NUMERIC#
+			</isNotNull>
+			<isNotNull property="config" prepend=" AND ">
+				UPPER(config) LIKE '%' || UPPER(#config:VARCHAR#) || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="TipVO" resultMap="mapComplexQuery">
+		SELECT * FROM siatcgr.tbltip
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codtip" prepend=" AND ">
+				UPPER(codtip) LIKE '%' || UPPER(#codtip:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codarq" prepend=" AND "> codarq = #codarq:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sistema" prepend=" AND ">
+				UPPER(sistema) LIKE '%' || UPPER(#sistema:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="tipo" prepend=" AND ">
+				UPPER(tipo) LIKE '%' || UPPER(#tipo:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codigo" prepend=" AND ">
+				UPPER(codigo) LIKE '%' || UPPER(#codigo:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="estati" prepend=" AND ">
+				UPPER(estati) LIKE '%' || UPPER(#estati:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="desred" prepend=" AND ">
+				UPPER(desred) LIKE '%' || UPPER(#desred:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="desres" prepend=" AND ">
+				UPPER(desres) LIKE '%' || UPPER(#desres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="descom" prepend=" AND ">
+				UPPER(descom) LIKE '%' || UPPER(#descom:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND "> numver = #numver:NUMERIC#
+			</isNotNull>
+			<isNotNull property="config" prepend=" AND ">
+				UPPER(config) LIKE '%' || UPPER(#config:VARCHAR#) || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM siatcgr.tbltip
+	</select>
+
+	<insert id="insReg" parameterClass="TipVO">
+		<selectKey keyProperty="codtip" resultClass="String">
+			SELECT fcn.seqtipe.nextval from dual
+		</selectKey>
+		INSERT INTO siatcgr.tbltip(codtip,codarq,sistema,tipo,codigo,estati,desred,desres,descom,datalt,codusualt,numver,config)
+		VALUES (#codtip:VARCHAR#,#codarq:NUMERIC#, UPPER(#sistema:VARCHAR#), UPPER(#tipo:VARCHAR#), UPPER(#codigo:VARCHAR#),
+		UPPER(#estati:VARCHAR#), UPPER(#desred:VARCHAR#), UPPER(#desres:VARCHAR#), UPPER(#descom:VARCHAR#),sysdate,
+		UPPER(#codusualt:VARCHAR#),#numver:NUMERIC#, UPPER(#config:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="TipVO">
+		UPDATE siatcgr.tbltip SET codarq= #codarq:NUMERIC#,sistema= UPPER(#sistema:VARCHAR#),tipo= UPPER(#tipo:VARCHAR#),codigo=
+		UPPER(#codigo:VARCHAR#),estati= UPPER(#estati:VARCHAR#),desred= UPPER(#desred:VARCHAR#),desres=
+		UPPER(#desres:VARCHAR#),descom= UPPER(#descom:VARCHAR#),datalt= sysdate,codusualt= UPPER(#codusualt:VARCHAR#),numver=
+		#numver:NUMERIC#,config= UPPER(#config:VARCHAR#) WHERE codtip = #codtip:VARCHAR#
+	</update>
+	
+	<delete id="delByCod" parameterClass="String">
+		DELETE FROM siatcgr.tbltip WHERE codtip = #value:VARCHAR#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM siatcgr.tbltip WHERE codtip in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="TipVO" resultClass="Integer">
+		SELECT count(codtip) FROM siatcgr.tbltip
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codtip" prepend=" AND ">
+				UPPER(codtip) LIKE '%' || UPPER(#codtip:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codarq" prepend=" AND "> codarq = #codarq:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sistema" prepend=" AND ">
+				UPPER(sistema) LIKE '%' || UPPER(#sistema:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="tipo" prepend=" AND ">
+				UPPER(tipo) LIKE '%' || UPPER(#tipo:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="codigo" prepend=" AND ">
+				UPPER(codigo) LIKE '%' || UPPER(#codigo:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="estati" prepend=" AND ">
+				UPPER(estati) LIKE '%' || UPPER(#estati:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="desred" prepend=" AND ">
+				UPPER(desred) LIKE '%' || UPPER(#desred:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="desres" prepend=" AND ">
+				UPPER(desres) LIKE '%' || UPPER(#desres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="descom" prepend=" AND ">
+				UPPER(descom) LIKE '%' || UPPER(#descom:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND "> numver = #numver:NUMERIC#
+			</isNotNull>
+			<isNotNull property="config" prepend=" AND ">
+				UPPER(config) LIKE '%' || UPPER(#config:VARCHAR#) || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByTipo" parameterClass="String" resultMap="mapComplexQuerySimple">
+		SELECT 
+			* 
+		FROM 
+			siatcgr.tbltip
+		WHERE 
+			tipo = #value:VARCHAR#
+		ORDER BY
+			codigo
+	</select>
+	
+	<select id="getTiplogByDesc" parameterClass="String" resultMap="mapComplexQuerySimple">
+		SELECT 
+			* 
+		FROM 
+			siatcgr.tbltip
+		WHERE 
+			tipo = 'TLOG'
+			and descom = #value:VARCHAR#
+	</select>
+	
+	<select id="getTipbaiByDesc" parameterClass="String" resultMap="mapComplexQuerySimple">
+		SELECT 
+			* 
+		FROM 
+			siatcgr.tbltip
+		WHERE 
+			tipo = 'TBAIR'
+			and descom = #value:VARCHAR#
+	</select>
+</sqlMap> 
+ 

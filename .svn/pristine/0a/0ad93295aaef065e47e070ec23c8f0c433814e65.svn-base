@@ -1,0 +1,62 @@
+<?page title="Busca de AIF"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-infabnce"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window use="pmcg.imti.view.Aiflis" id="wLisAif" title="Busca de AIF" border="normal" shadow="false" width="890px"
+		height="580px" position="center" mode="overlapped" sizable="false" closable="true" onCreate="wLisAif.initComponentes()">
+		<paging id="paging" pageSize="15" />
+		<listbox model="@{wLisAif.lista}" width="880px" height="465px" selectedItem="@{wLisAif.item}" onSelect="wLisAif.selecionar()">
+			<listhead>
+				<listheader width="120px">
+					<vbox>
+						<label value="Notificação" style="text-align:center;"/>
+						<textbox value="@{wLisAif.aif.notaif}" onOK="wLisAif.pesquisar()" style="text-transform:uppercase" width="104px"/>
+					</vbox>
+				</listheader>
+				<listheader width="120px">
+					<vbox>
+						<label value="Auto de Infração" style="text-align:center;"/>
+						<textbox value="@{wLisAif.aif.aifaif}" onOK="wLisAif.pesquisar()" style="text-transform:uppercase" width="104px"/>
+					</vbox>
+				</listheader>
+				<listheader width="230px">
+					<vbox>
+						<label value="Nome" style="text-align:center;"/>
+						<textbox value="@{wLisAif.aif.nomaif}" onOK="wLisAif.pesquisar()" style="text-transform:uppercase" width="212px"/>
+					</vbox>
+				</listheader>
+				<listheader width="230px">
+					<vbox>
+						<label value="Endereço" style="text-align:center;"/>
+						<textbox value="@{wLisAif.aif.edraif}" onOK="wLisAif.pesquisar()" style="text-transform:uppercase" width="212px"/>
+					</vbox>
+				</listheader>
+				<listheader>
+					<vbox>
+						<label value="Região Urbana:"/>
+		    			<combobox id="regaif" readonly="true" width="149px" selectedItem="@{wLisAif.aif.regaif}" onSelect="wLisAif.pesquisar()">
+		    				<comboitem value="ANHANDUI" label="ANHANDUI" />
+							<comboitem value="ANHANDUIZINHO" label="ANHANDUIZINHO" />
+							<comboitem value="BANDEIRA" label="BANDEIRA" />
+							<comboitem value="CENTRO" label="CENTRO" />
+							<comboitem value="IMBIRUSSU" label="IMBIRUSSU" />
+							<comboitem value="LAGOA" label="LAGOA" />
+							<comboitem value="PROSA" label="PROSA" />
+							<comboitem value="ROCHEDINHO" label="ROCHEDINHO" />
+							<comboitem value="SEGREDO" label="SEGREDO" />
+							<comboitem value="ZONA RURAL" label="ZONA RURAL" />
+						</combobox>
+					</vbox>
+				</listheader>
+			</listhead>
+			<listitem self="@{each=a}" value="@{a}">
+				<listcell label="@{a.notaif}" style="text-align:center;" />
+				<listcell label="@{a.aifaif}" style="text-align:center;"/>
+				<listcell label="@{a.nomaif}" style="text-align:left;font-size:11px;"/>
+				<listcell label="@{a.edraif}" style="text-align:left;font-size:11px;" />
+				<listcell label="@{a.regaif}" style="text-align:center;"/>
+			</listitem>
+		</listbox>
+	</window>
+</zk>

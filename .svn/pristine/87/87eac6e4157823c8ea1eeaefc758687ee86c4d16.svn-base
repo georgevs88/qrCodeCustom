@@ -1,0 +1,40 @@
+<?page title="PMCG - Integrar"?>
+<?link rel="shortcut icon" type="image/png" href="images/externo/brasaoPref01.png"?>
+<?link href="css/bootstrap.min.css" rel="stylesheet"?>
+<?link href="css/signin.css" rel="stylesheet"?>
+<?meta name="keywords" content="integrar" ?>
+<?meta http-equiv="X-UA-Compatible" content="IE=9" ?>
+<zk xmlns:h="native">
+<window border="none" width="100%" id="mainPage" use="pmcg.imti.view.ext.Acesso" onCreate="mainPage.initComponentes(2)" style="padding-top: 0px;">
+	<style src="/css/componentes.css"></style>
+	<h:main>
+		<include id="headerPart" src="/layout-parts/header.zul"></include>
+		<h:section>
+			<h:div class="container">
+				<h:div class="masthead">
+					<include id="menuPart" src="/layout-parts/menu.zul"></include>
+					<h:form class="form-signin" style="margin-top: 50px;margin-bottom: 150px;">
+				    	<h:h3 class="form-signin-heading">Informe os dados de acesso</h:h3>
+				    	<vbox>
+				    		<label value="CPF"/>
+							<textbox id="login" value="@{mainPage.login}" name="login" maxlength="14" width="310px"/>
+							<label value="Senha"/>
+							<textbox id="senha" type="password" value="@{mainPage.senha}" width="310px" onOK="mainPage.autenticar()"/>
+		 			   	</vbox>
+			 			<button class="btn btn-lg btn-primary btn-block" label="Fazer Login" onClick="mainPage.autenticar()"/>
+			 			<h:div class="row" style="text-align: right;"> 
+			 				Não tem um usuário? <a href="/registrar.zul">Registrar-se</a>
+			 			</h:div>
+			 			<h:div class="row" style="text-align: right;"> 
+			 				<a href="/esqueci.zul">Esqueceu a senha?</a>
+			 			</h:div>
+					</h:form>
+				</h:div>
+			</h:div>
+		</h:section>
+		<include id="footerPart" src="/layout-parts/footer.zul"></include>
+	</h:main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</window>
+</zk>

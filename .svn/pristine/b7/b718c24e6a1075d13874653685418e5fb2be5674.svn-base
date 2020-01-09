@@ -1,0 +1,160 @@
+<?page title="Relação de Processos" cacheable="false" language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window use="pmcg.imti.view.Pmacad" id="wPma" title="Relação de Processos" width="870px" height="640px" border="normal" shadow="false" position="center"
+		mode="modal" sizable="false" closable="true" onCreate="wPma.initComponentes()" contentStyle="overflow:auto;">
+		<vbox>
+			<separator height="15px"/>
+			<grid>
+		    	<columns>
+		    		<column align="right" width="140px"/>
+		    		<column align="left" width="160px"/>
+		    		<column align="right" width="100px"/>
+		    		<column align="left" width="160px"/>
+		    		<column align="right" width="100px"/>
+		    		<column align="left" width="185px"/>
+		    	</columns>
+		    	<rows>
+		    		<row>
+		    			<label value="Nr processo ADM:"/>
+						<textbox id="prapma" value="@{wPma.pmaVO.prapma}" onBlur="wPma.verificaProcesso()" maxlength="30" width="145px" style="text-align:center;font-weight:bold;font-size: 16px;text-transform:uppercase;"/>
+					</row>
+		    		<row>
+		    			<label value="Nr processo JUCEMS:"/>
+		    			<hbox>
+							<textbox id="prjpma" readonly="true" value="@{wPma.pmaVO.prjpma}" width="130px" style="text-align:center;font-weight:bold;font-size: 14px;text-transform:uppercase;"/>
+							<image src="/images/imgBuscar.png" onClick="wPma.buscarProtJucems()"/>
+						</hbox>
+						<label value="Alvará:"/>
+		    			<hbox>
+							<textbox id="alvpma" readonly="true" disabled="true" width="130px" style="text-align:center;font-weight:bold;font-size: 14px;text-transform:uppercase;"/>
+							<image src="/images/imgBuscar.png" tooltiptext="Em construção"/>
+						</hbox>
+		    			<label value="Data:"/>
+						<datebox id="datpma" value="@{wPma.pmaVO.datpma}" style="text-align:center;font-weight:bold;font-size: 14px;"/>
+					</row>
+					<row spans="1,7">
+		    			<label value="Requerente:"/>
+						<textbox id="reqpma" value="@{wPma.pmaVO.reqpma}" width="690px" style="font-weight:bold;font-size: 13px;text-transform:uppercase;"/>
+					</row>
+					<row spans="1,7">
+		    			<label value="Atividade:"/>
+						<textbox id="atvpma" value="@{wPma.pmaVO.atvpma}" width="690px" rows="2" style="text-transform:uppercase;"/>
+					</row>
+					<row spans="1,7">
+		    			<label value="Endereço:"/>
+						<textbox id="edrpma" value="@{wPma.pmaVO.edrpma}" width="690px" style="text-transform:uppercase;"/>
+					</row>
+					<row spans="1,7">
+		    			<label value="Observações:"/>
+						<textbox id="obspma" value="@{wPma.pmaVO.obspma}" width="690px" rows="2" style="text-transform:uppercase;"/>
+					</row>
+					<row>
+						<label value="Região Urbana:"/>
+		    			<combobox id="regpma" readonly="true" width="150px" selectedItem="@{wPma.pmaVO.regpma}">
+							<comboitem value="ANHANDUI" label="ANHANDUI" />
+							<comboitem value="ANHANDUIZINHO" label="ANHANDUIZINHO" />
+							<comboitem value="BANDEIRA" label="BANDEIRA" />
+							<comboitem value="CENTRO" label="CENTRO" />
+							<comboitem value="IMBIRUSSU" label="IMBIRUSSU" />
+							<comboitem value="LAGOA" label="LAGOA" />
+							<comboitem value="PROSA" label="PROSA" />
+							<comboitem value="ROCHEDINHO" label="ROCHEDINHO" />
+							<comboitem value="SEGREDO" label="SEGREDO" />
+							<comboitem value="ZONA RURAL" label="ZONA RURAL" />
+						</combobox>
+						<label value="Usuário:"/>
+						<textbox id="usualt" value="@{wPma.pmaVO.usualt}" disabled="true" width="145px" style="text-transform:uppercase;text-align:center;"/>
+					</row>
+					<row spans="6" visible="@{wPma.visibleRequerimentos}">
+						<groupbox>
+							<caption label="Requerimentos"/>
+							<grid>
+						    	<columns>
+						    		<column align="right" width="60px"/>
+						    		<column align="left" width="100px"/>
+						    		<column align="right" width="70px"/>
+						    		<column align="left" width="100px"/>
+						    		<column align="right" width="80px"/>
+						    		<column align="left" width="140px"/>
+						    		<column align="right" width="60px"/>
+						    		<column align="left"/>
+						    	</columns>
+						    	<rows>
+						    		<row>
+						    			<label value="Data:" style="font-size:11px;"/>
+						    			<datebox id="datrpm" value="@{wPma.rpmVO.datrpm}" style="text-align:center;" width="90px"/>
+										<label value="Espécie:" style="font-size:11px;"/>
+										<combobox id="esprpm" readonly="true" width="90px" selectedItem="@{wPma.rpmVO.esprpm}" style="text-align:center;">
+											<comboitem value="DISPENSA" label="DISPENSA" />
+											<comboitem value="LP" label="LP" />
+											<comboitem value="LI" label="LI" />
+											<comboitem value="LO" label="LO" />
+											<comboitem value="LAS" label="LAS" />
+											<comboitem value="AUTORIZAÇÃO" label="AUTORIZAÇÃO" />
+										</combobox>
+										<label value="Tipo Espécie:" style="font-size:11px;"/>
+										<combobox id="tesrpm" readonly="true" width="125px" selectedItem="@{wPma.rpmVO.tesrpm}" style="text-align:center;">
+											<comboitem value="NORMAL" label="NORMAL" />
+											<comboitem value="2ª VIA" label="2ª VIA" />
+											<comboitem value="AMPLIAÇÃO" label="AMPLIAÇÃO" />
+											<comboitem value="DIVERSIFICAÇÃO" label="DIVERSIFICAÇÃO" />
+											<comboitem value="PRORROGAÇÃO" label="PRORROGAÇÃO" />
+											<comboitem value="RENOVAÇÃO" label="RENOVAÇÃO" />
+											<comboitem value="SUBSTITUIÇÃO" label="SUBSTITUIÇÃO" />
+										</combobox>
+										<label value="Licença:" style="font-size:11px;"/>
+										<hbox>
+											<textbox id="lmarpm" value="@{wPma.lmaVO.licenca}" readonly="true" width="140px" style="text-transform:uppercase;text-align:center;font-weight:bold;font-size: 12px;"/>
+											<image src="/images/imgBuscar.png" onClick="wPma.buscarLicenca()"/>
+											<image src="/images/btnIncluir.png" onClick="wPma.cadastrarLicenca()" width="20px"/>
+										</hbox>
+						    		</row>
+						    		<row>
+						    			<label value="Área (m²):" style="font-size:11px;" tooltiptext="Informe um valor numérico com até duas casas decimais separadas por vírgula."/>
+						    			<textbox id="arerpm" value="@{wPma.rpmVO.arerpmStr}" style="text-align:center;text-transform:uppercase;" width="86px"/>
+						    			<label value="Capacidade:" style="font-size:11px;"/>
+						    			<textbox id="caprpm" value="@{wPma.rpmVO.caprpm}" style="text-align:center;text-transform:uppercase;" width="86px"/>
+						    			<label value="Latitude:" style="font-size:11px;"/>
+						    			<textbox id="latrpm" value="@{wPma.rpmVO.latrpm}" style="text-align:center;text-transform:uppercase;" width="90px"/>
+						    			<label value="Longitude:" style="font-size:11px;"/>
+						    			<textbox id="lonrpm" value="@{wPma.rpmVO.lonrpm}" style="text-align:center;text-transform:uppercase;" width="90px"/>
+						    		</row>
+						    		<row spans="8">
+						    			<div align="center">
+							    			<button label="@{wPma.lblBtnRpm}" image="/images/down.png" onClick="wPma.salvarRpm()"/>
+						    			</div>
+						    		</row>
+						    	</rows>
+						    </grid>
+							<listbox id="listRpm" height="100px" model="@{wPma.pmaVO.listRpm}" selectedItem="@{wPma.rpmVO}" onSelect="wPma.vincular()" style="border:1px solid #277EB7;">
+								<listhead>
+									<listheader width="30px" align="center"/>
+									<listheader width="80px" label="Data" align="center"/>
+									<listheader width="70px" label="Espécie" align="center"/>
+									<listheader width="100px" label="Tipo Espécie" align="center"/>
+									<listheader width="60px" label="Número" align="center"/>
+									<listheader width="250px" label="Licença" align="center"/>
+									<listheader label="Usuário"/>
+								</listhead>
+								<listitem self="@{each=r}" value="@{r}">
+									<listcell style="text-align:center;">
+										<image src="/images/delete.png" onClick="wPma.apagarRpm(self.parent.parent)"/>
+									</listcell>
+									<listcell label="@{r.data}" style="text-align:center;" />
+									<listcell label="@{r.esprpm}" style="text-align:center;"/>
+									<listcell label="@{r.tesrpm}" style="text-align:center;"/>
+									<listcell label="@{r.numrpm}" style="text-align:center;"/>
+									<listcell label="@{r.lmaVO.licenca}" style="text-align:center;font-weight:bold;"/>
+									<listcell label="@{r.usualt}" style="text-align:left;"/>
+								</listitem>
+							</listbox>
+						</groupbox>
+					</row>
+				</rows>
+		    </grid>
+		</vbox>
+	</window>
+</zk>

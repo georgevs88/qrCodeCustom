@@ -1,0 +1,36 @@
+<?page title="PMCG - Integrar"?>
+<?link rel="shortcut icon" type="image/png" href="images/externo/brasaoPref01.png"?>
+<?link href="css/bootstrap.min.css" rel="stylesheet"?>
+<?link href="css/signin.css" rel="stylesheet"?>
+<?meta name="keywords" content="integrar" ?>
+<?meta http-equiv="X-UA-Compatible" content="IE=9" ?>
+<zk xmlns:h="native">
+<window border="none" width="100%" id="mainPage" use="pmcg.imti.view.ext.Esqueci" onCreate="mainPage.initComponentes(2);mainPage.initEsq();" style="padding-top: 0px;">
+	<style src="/css/componentes.css"></style>
+	<h:main>
+		<include id="headerPart" src="/layout-parts/header.zul"></include>
+		<h:section>
+			<h:div class="container">
+				<h:div class="masthead">
+					<include id="menuPart" src="/layout-parts/menu.zul"></include>
+					<h:form class="form-signin" style="margin-top: 50px;margin-bottom: 150px;">
+				    	<h:h3 class="form-signin-heading">Informe os dados do usuário</h:h3>
+				    	<vbox style="margin-bottom: 10px;">
+				    		<label value="CPF"/>
+							<textbox id="cpf" value="@{mainPage.cpf}" maxlength="14" width="310px" style="text-align:center;"/>
+				    		<label value="E-mail"/>
+							<textbox id="email" value="@{mainPage.email}" style="text-transform:lowercase;" width="310px"/>
+							<label value="Data de Nascimento"/>
+							<datebox id="data" value="@{mainPage.data}" class="datezk" width="100%"/>
+		 			   	</vbox>
+			 			<button class="btn btn-lg btn-primary btn-block" label="Enviar Senha" onClick="mainPage.alterar()"/>
+			 		</h:form>
+				</h:div>
+			</h:div>
+		</h:section>
+		<include id="footerPart" src="/layout-parts/footer.zul"></include>
+	</h:main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</window>
+</zk>

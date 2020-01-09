@@ -1,0 +1,322 @@
+<zk xmlns:h="native">
+	<h:h3>Informações Complementares</h:h3>
+	<h:table class="table table-hover" style="padding-top:10px;">
+		<h:tbody>
+<!-- 			<h:tr> -->
+<!--           		<h:td class="col-md-10"> -->
+<!--           			O estabelecimento irá funcionar entre 22:00 hs e 6:00? -->
+<!--           		</h:td> -->
+<!-- 	          	<h:td class="col-md-2"> -->
+<!-- 					<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r01res}"> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!--         	</h:tr> -->
+<!-- 	        <h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Quantidade de assentos existentes ou previstos -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r02res}"> -->
+<!-- 						<comboitem value="1" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="2" label="MENOS DE 300"/> -->
+<!-- 						<comboitem value="2" label="MAIS DE 300"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Quantidade de bombas Diesel e GNV -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r03res}"> -->
+<!-- 						<comboitem value="1" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="2" label="UMA BOMBA"/> -->
+<!-- 						<comboitem value="2" label="MAIS DE UMA BOMBA"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	No estabelecimento será prestado serviço de funilaria e pintura? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r04res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	No estabelecimento se prestará serviços de lavagem de veículos?  -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r05res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+			<h:tr> 
+			    <h:td class="col-md-10"> 
+			    	O estabelecimento terá música?
+			    </h:td>
+			    <h:td class="col-md-2"> 
+			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r06res}">
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+						<comboitem value="S" label="SIM" />
+						<comboitem value="N" label="NÃO"/>
+					</combobox>
+				</h:td>
+			</h:tr>
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá computadores para uso público no estabelecimento? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r07res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá máquinas de jogos de azar no estabelecimento? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r08res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá desmanche de veículos no estabelecimento?  -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r09res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	O estabelecimento é provido de tratamento acústico? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r10res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá bombas de combustível no estabelecimento? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r11res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Quantidade de vagas de estacionamentos existentes ou previstos? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<textbox width="100%" value="@{mainPage.respostas.r12res}"/> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	O estabelecimento terá acesso único para uso residencial e comercial? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r13res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá prestação de serviços de medicina nuclear (ex. raio x ou outros serviços similares)? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r14res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá manipulação de fórmulas farmacêuticas no estabelecimento? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r15res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Você comercializará psicotrópicos (ex. remédios) no estabelecimento? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r16res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	A atividade econômica a ser executada prevê concentração de pessoas? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r17res}"> -->
+<!-- 			    		<comboitem value="1" label="ATÉ 50" /> -->
+<!-- 						<comboitem value="2" label="DE 50 A 500" /> -->
+<!-- 						<comboitem value="3" label="ACIMA DE 500"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	O estabelecimento possui afastamento mínimo de 24 metros, entre limites de terrenos, de Postos de Serviços e Revendedores de derivados de petróleo (postos de combustíveis, revenda de gás de cozinha)? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r18res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá central GLP ou vendas no estabelecimento? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r19res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	O estabelecimento possui afastamento mínimo de 24 metros, entre limites de terrenos, de locais que favoreçam a concentração de público (exemplos: salão de festas, escola, boate, teatro, auditório, centro esportivo)? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r20res}"> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Qual a Classe da área de armazenamento da revenda de GLP? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r21res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="1" label="CLASSE I E/OU II" /> -->
+<!-- 						<comboitem value="2" label="CLASSE III E/OU SUPERIOR"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá manipulação de alimentos? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r22res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Haverá entrega de marmita? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r23res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	O estabelecimento funcionará somente como escritório administrativo? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r24res}"> -->
+<!-- 			    		<comboitem value="A" label="NÃO SE APLICA" /> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	O estabelecimento armazenará e/ou manipulará Produtos Perigosos (líquidos inflamáveis, explosivos, tóxicos, corrosivos, oxidantes, radioativos)? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r25res}"> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	O estabelecimento possuirá vasos de pressão (caldeiras, reservatórios pressurizados, Similares)? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r26res}"> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+<!-- 			<h:tr>  -->
+<!-- 			    <h:td class="col-md-10">  -->
+<!-- 			    	Atividade será desenvolvida dentro da residência? -->
+<!-- 			    </h:td> -->
+<!-- 			    <h:td class="col-md-2">  -->
+<!-- 			    	<combobox class="cmbzk" readonly="true" width="100%" selectedItem="@{mainPage.respostas.r27res}"> -->
+<!-- 						<comboitem value="S" label="SIM" /> -->
+<!-- 						<comboitem value="N" label="NÃO"/> -->
+<!-- 					</combobox> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+		</h:tbody>
+	</h:table>
+</zk>

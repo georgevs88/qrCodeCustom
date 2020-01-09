@@ -1,0 +1,11 @@
+<Context docBase="integrarweb" path="" reloadable="false">
+	
+	<ResourceLink name="jdbc/jndiacessos" global="jdbc/jndiacessos" type="javax.sql.DataSource" />
+	<ResourceLink name="jdbc/jndiTIQU" global="jdbc/jndiTIQU" type="javax.sql.DataSource" />
+	<ResourceLink name="jdbc/jndiefacilpostgres" global="jdbc/jndiefacilpostgres" type="javax.sql.DataSource" />
+	<ResourceLink name="jdbc/jndifcn" global="jdbc/jndifcn" type="javax.sql.DataSource" /> 
+	<ResourceLink name="jdbc/jndisiatcgr" global="jdbc/jndisiatcgr" type="javax.sql.DataSource" /> 
+	<ResourceLink name="jdbc/jndiimgfcn" global="jdbc/jndiimgfcn" type="javax.sql.DataSource" /> 
+	<ResourceLink name="jdbc/jndisos" global="jdbc/jndisos" type="javax.sql.DataSource" />          
+     
+</Context>

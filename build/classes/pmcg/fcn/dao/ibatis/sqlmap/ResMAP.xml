@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Res">
+	<typeAlias alias="ResVO" type="pmcg.fcn.domain.ResVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="ResVO">
+		<result property="iddres" column="iddres" />
+		<result property="colres" column="colres" />
+		<result property="r01res" column="r01res" />
+		<result property="r02res" column="r02res" />
+		<result property="r03res" column="r03res" />
+		<result property="r04res" column="r04res" />
+		<result property="r05res" column="r05res" />
+		<result property="r06res" column="r06res" />
+		<result property="r07res" column="r07res" />
+		<result property="r08res" column="r08res" />
+		<result property="r09res" column="r09res" />
+		<result property="r10res" column="r10res" />
+		<result property="r11res" column="r11res" />
+		<result property="r12res" column="r12res" />
+		<result property="r13res" column="r13res" />
+		<result property="r14res" column="r14res" />
+		<result property="r15res" column="r15res" />
+		<result property="r16res" column="r16res" />
+		<result property="r17res" column="r17res" />
+		<result property="r18res" column="r18res" />
+		<result property="r19res" column="r19res" />
+		<result property="r20res" column="r20res" />
+		<result property="r21res" column="r21res" />
+		<result property="r22res" column="r22res" />
+		<result property="r23res" column="r23res" />
+		<result property="r24res" column="r24res" />
+		<result property="r25res" column="r25res" />
+		<result property="r26res" column="r26res" />
+		<result property="r27res" column="r27res" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="ResVO">
+		<result property="iddres" column="iddres" />
+		<result property="colres" column="colres" />
+		<result property="r01res" column="r01res" />
+		<result property="r02res" column="r02res" />
+		<result property="r03res" column="r03res" />
+		<result property="r04res" column="r04res" />
+		<result property="r05res" column="r05res" />
+		<result property="r06res" column="r06res" />
+		<result property="r07res" column="r07res" />
+		<result property="r08res" column="r08res" />
+		<result property="r09res" column="r09res" />
+		<result property="r10res" column="r10res" />
+		<result property="r11res" column="r11res" />
+		<result property="r12res" column="r12res" />
+		<result property="r13res" column="r13res" />
+		<result property="r14res" column="r14res" />
+		<result property="r15res" column="r15res" />
+		<result property="r16res" column="r16res" />
+		<result property="r17res" column="r17res" />
+		<result property="r18res" column="r18res" />
+		<result property="r19res" column="r19res" />
+		<result property="r20res" column="r20res" />
+		<result property="r21res" column="r21res" />
+		<result property="r22res" column="r22res" />
+		<result property="r23res" column="r23res" />
+		<result property="r24res" column="r24res" />
+		<result property="r25res" column="r25res" />
+		<result property="r26res" column="r26res" />
+		<result property="r27res" column="r27res" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnres WHERE iddres = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnres WHERE iddres = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="ResVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnres
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddres" prepend=" AND ">
+				iddres = #iddres:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colres" prepend=" AND ">
+				colres = #colres:NUMERIC#
+			</isNotNull>
+			<isNotNull property="r01res" prepend=" AND ">
+				r01res ILIKE '%' || #r01res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r02res" prepend=" AND ">
+				r02res ILIKE '%' || #r02res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r03res" prepend=" AND ">
+				r03res ILIKE '%' || #r03res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r04res" prepend=" AND ">
+				r04res ILIKE '%' || #r04res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r05res" prepend=" AND ">
+				r05res ILIKE '%' || #r05res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r06res" prepend=" AND ">
+				r06res ILIKE '%' || #r06res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r07res" prepend=" AND ">
+				r07res ILIKE '%' || #r07res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r08res" prepend=" AND ">
+				r08res ILIKE '%' || #r08res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r09res" prepend=" AND ">
+				r09res ILIKE '%' || #r09res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r10res" prepend=" AND ">
+				r10res ILIKE '%' || #r10res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r11res" prepend=" AND ">
+				r11res ILIKE '%' || #r11res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r12res" prepend=" AND ">
+				r12res ILIKE '%' || #r12res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r13res" prepend=" AND ">
+				r13res ILIKE '%' || #r13res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r14res" prepend=" AND ">
+				r14res ILIKE '%' || #r14res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r15res" prepend=" AND ">
+				r15res ILIKE '%' || #r15res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r16res" prepend=" AND ">
+				r16res ILIKE '%' || #r16res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r17res" prepend=" AND ">
+				r17res ILIKE '%' || #r17res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r18res" prepend=" AND ">
+				r18res ILIKE '%' || #r18res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r19res" prepend=" AND ">
+				r19res ILIKE '%' || #r19res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r20res" prepend=" AND ">
+				r20res ILIKE '%' || #r20res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r21res" prepend=" AND ">
+				r21res ILIKE '%' || #r21res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r22res" prepend=" AND ">
+				r22res ILIKE '%' || #r22res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r23res" prepend=" AND ">
+				r23res ILIKE '%' || #r23res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r24res" prepend=" AND ">
+				r24res ILIKE '%' || #r24res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r25res" prepend=" AND ">
+				r25res ILIKE '%' || #r25res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r26res" prepend=" AND ">
+				r26res ILIKE '%' || #r26res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r27res" prepend=" AND ">
+				r27res ILIKE '%' || #r27res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="ResVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnres
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddres" prepend=" AND "> iddres = #iddres:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colres" prepend=" AND "> colres = #colres:NUMERIC#
+			</isNotNull>
+			<isNotNull property="r01res" prepend=" AND ">
+				r01res ILIKE '%' || #r01res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r02res" prepend=" AND ">
+				r02res ILIKE '%' || #r02res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r03res" prepend=" AND ">
+				r03res ILIKE '%' || #r03res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r04res" prepend=" AND ">
+				r04res ILIKE '%' || #r04res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r05res" prepend=" AND ">
+				r05res ILIKE '%' || #r05res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r06res" prepend=" AND ">
+				r06res ILIKE '%' || #r06res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r07res" prepend=" AND ">
+				r07res ILIKE '%' || #r07res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r08res" prepend=" AND ">
+				r08res ILIKE '%' || #r08res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r09res" prepend=" AND ">
+				r09res ILIKE '%' || #r09res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r10res" prepend=" AND ">
+				r10res ILIKE '%' || #r10res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r11res" prepend=" AND ">
+				r11res ILIKE '%' || #r11res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r12res" prepend=" AND ">
+				r12res ILIKE '%' || #r12res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r13res" prepend=" AND ">
+				r13res ILIKE '%' || #r13res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r14res" prepend=" AND ">
+				r14res ILIKE '%' || #r14res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r15res" prepend=" AND ">
+				r15res ILIKE '%' || #r15res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r16res" prepend=" AND ">
+				r16res ILIKE '%' || #r16res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r17res" prepend=" AND ">
+				r17res ILIKE '%' || #r17res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r18res" prepend=" AND ">
+				r18res ILIKE '%' || #r18res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r19res" prepend=" AND ">
+				r19res ILIKE '%' || #r19res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r20res" prepend=" AND ">
+				r20res ILIKE '%' || #r20res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r21res" prepend=" AND ">
+				r21res ILIKE '%' || #r21res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r22res" prepend=" AND ">
+				r22res ILIKE '%' || #r22res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r23res" prepend=" AND ">
+				r23res ILIKE '%' || #r23res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r24res" prepend=" AND ">
+				r24res ILIKE '%' || #r24res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r25res" prepend=" AND ">
+				r25res ILIKE '%' || #r25res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r26res" prepend=" AND ">
+				r26res ILIKE '%' || #r26res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r27res" prepend=" AND ">
+				r27res ILIKE '%' || #r27res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnres
+	</select>
+
+	<insert id="insReg" parameterClass="ResVO">
+		<selectKey keyProperty="iddres" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqres')
+		</selectKey>
+		INSERT INTO
+		fcn.fcnres(iddres,colres,r01res,r02res,r03res,r04res,r05res,r06res,r07res,r08res,r09res,r10res,r11res,r12res,r13res,r14res,r15res,r16res,r17res,r18res,r19res,r20res,r21res,r22res,r23res,r24res,r25res,r26res,r27res,usualt,datalt)
+		VALUES (#iddres:NUMERIC#,#colres:NUMERIC#, UPPER(#r01res:VARCHAR#), UPPER(#r02res:VARCHAR#), UPPER(#r03res:VARCHAR#),
+		UPPER(#r04res:VARCHAR#), UPPER(#r05res:VARCHAR#), UPPER(#r06res:VARCHAR#), UPPER(#r07res:VARCHAR#),
+		UPPER(#r08res:VARCHAR#), UPPER(#r09res:VARCHAR#), UPPER(#r10res:VARCHAR#), UPPER(#r11res:VARCHAR#),
+		UPPER(#r12res:VARCHAR#), UPPER(#r13res:VARCHAR#), UPPER(#r14res:VARCHAR#), UPPER(#r15res:VARCHAR#),
+		UPPER(#r16res:VARCHAR#), UPPER(#r17res:VARCHAR#), UPPER(#r18res:VARCHAR#), UPPER(#r19res:VARCHAR#),
+		UPPER(#r20res:VARCHAR#), UPPER(#r21res:VARCHAR#), UPPER(#r22res:VARCHAR#), UPPER(#r23res:VARCHAR#),
+		UPPER(#r24res:VARCHAR#), UPPER(#r25res:VARCHAR#), UPPER(#r26res:VARCHAR#), UPPER(#r27res:VARCHAR#),
+		UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="ResVO">
+		UPDATE fcn.fcnres SET colres= #colres:NUMERIC#,r01res= UPPER(#r01res:VARCHAR#),r02res= UPPER(#r02res:VARCHAR#),r03res=
+		UPPER(#r03res:VARCHAR#),r04res= UPPER(#r04res:VARCHAR#),r05res= UPPER(#r05res:VARCHAR#),r06res=
+		UPPER(#r06res:VARCHAR#),r07res= UPPER(#r07res:VARCHAR#),r08res= UPPER(#r08res:VARCHAR#),r09res=
+		UPPER(#r09res:VARCHAR#),r10res= UPPER(#r10res:VARCHAR#),r11res= UPPER(#r11res:VARCHAR#),r12res=
+		UPPER(#r12res:VARCHAR#),r13res= UPPER(#r13res:VARCHAR#),r14res= UPPER(#r14res:VARCHAR#),r15res=
+		UPPER(#r15res:VARCHAR#),r16res= UPPER(#r16res:VARCHAR#),r17res= UPPER(#r17res:VARCHAR#),r18res=
+		UPPER(#r18res:VARCHAR#),r19res= UPPER(#r19res:VARCHAR#),r20res= UPPER(#r20res:VARCHAR#),r21res=
+		UPPER(#r21res:VARCHAR#),r22res= UPPER(#r22res:VARCHAR#),r23res= UPPER(#r23res:VARCHAR#),r24res=
+		UPPER(#r24res:VARCHAR#),r25res= UPPER(#r25res:VARCHAR#),r26res= UPPER(#r26res:VARCHAR#),r27res=
+		UPPER(#r27res:VARCHAR#),usualt= UPPER(#usualt:VARCHAR#),datalt= now() WHERE iddres = #iddres:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnres WHERE iddres = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnres WHERE iddres in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="ResVO" resultClass="Integer">
+		SELECT count(iddres) FROM fcn.fcnres
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddres" prepend=" AND "> iddres = #iddres:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colres" prepend=" AND "> colres = #colres:NUMERIC#
+			</isNotNull>
+			<isNotNull property="r01res" prepend=" AND ">
+				r01res ILIKE '%' || #r01res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r02res" prepend=" AND ">
+				r02res ILIKE '%' || #r02res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r03res" prepend=" AND ">
+				r03res ILIKE '%' || #r03res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r04res" prepend=" AND ">
+				r04res ILIKE '%' || #r04res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r05res" prepend=" AND ">
+				r05res ILIKE '%' || #r05res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r06res" prepend=" AND ">
+				r06res ILIKE '%' || #r06res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r07res" prepend=" AND ">
+				r07res ILIKE '%' || #r07res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r08res" prepend=" AND ">
+				r08res ILIKE '%' || #r08res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r09res" prepend=" AND ">
+				r09res ILIKE '%' || #r09res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r10res" prepend=" AND ">
+				r10res ILIKE '%' || #r10res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r11res" prepend=" AND ">
+				r11res ILIKE '%' || #r11res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r12res" prepend=" AND ">
+				r12res ILIKE '%' || #r12res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r13res" prepend=" AND ">
+				r13res ILIKE '%' || #r13res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r14res" prepend=" AND ">
+				r14res ILIKE '%' || #r14res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r15res" prepend=" AND ">
+				r15res ILIKE '%' || #r15res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r16res" prepend=" AND ">
+				r16res ILIKE '%' || #r16res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r17res" prepend=" AND ">
+				r17res ILIKE '%' || #r17res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r18res" prepend=" AND ">
+				r18res ILIKE '%' || #r18res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r19res" prepend=" AND ">
+				r19res ILIKE '%' || #r19res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r20res" prepend=" AND ">
+				r20res ILIKE '%' || #r20res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r21res" prepend=" AND ">
+				r21res ILIKE '%' || #r21res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r22res" prepend=" AND ">
+				r22res ILIKE '%' || #r22res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r23res" prepend=" AND ">
+				r23res ILIKE '%' || #r23res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r24res" prepend=" AND ">
+				r24res ILIKE '%' || #r24res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r25res" prepend=" AND ">
+				r25res ILIKE '%' || #r25res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r26res" prepend=" AND ">
+				r26res ILIKE '%' || #r26res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="r27res" prepend=" AND ">
+				r27res ILIKE '%' || #r27res:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRespostasByColeta" parameterClass="Long" resultClass="ResVO">
+		SELECT * FROM fcn.fcnres where colres = #value:NUMERIC#
+	</select>
+	
+</sqlMap> 
+ 

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Cpe">
+	<typeAlias alias="CpeVO" type="pmcg.fcn.domain.CpeVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="CpeVO">
+		<result property="iddcpe" column="iddcpe" />
+		<result property="colcpe" column="colcpe" />
+		<result property="copcpe" column="copcpe" />
+		<result property="depcpe" column="depcpe" />
+		<result property="descpe" column="descpe" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="CpeVO">
+		<result property="iddcpe" column="iddcpe" />
+		<result property="colcpe" column="colcpe" />
+		<result property="copcpe" column="copcpe" />
+		<result property="depcpe" column="depcpe" />
+		<result property="descpe" column="descpe" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncpe WHERE iddcpe = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncpe WHERE iddcpe = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CpeVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncpe
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcpe" prepend=" AND ">
+				iddcpe = #iddcpe:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colcpe" prepend=" AND ">
+				colcpe = #colcpe:NUMERIC#
+			</isNotNull>
+			<isNotNull property="copcpe" prepend=" AND ">
+				copcpe ILIKE '%' || #copcpe:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="descpe" prepend=" AND ">
+				descpe ILIKE '%' || #descpe:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="CpeVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncpe
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcpe" prepend=" AND "> iddcpe =
+				#iddcpe:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colcpe" prepend=" AND "> colcpe =
+				#colcpe:NUMERIC#
+			</isNotNull>
+			<isNotNull property="copcpe" prepend=" AND ">
+				copcpe ILIKE '%' || #copcpe:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="descpe" prepend=" AND ">
+				descpe ILIKE '%' || #descpe:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncpe
+	</select>
+
+	<insert id="insReg" parameterClass="CpeVO">
+		<selectKey keyProperty="iddcpe" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqcpe')
+		</selectKey>
+		INSERT INTO fcn.fcncpe(iddcpe,colcpe,copcpe,depcpe,descpe) VALUES
+		(#iddcpe:NUMERIC#,#colcpe:NUMERIC#, UPPER(#copcpe:VARCHAR#),UPPER(#depcpe:VARCHAR#),
+		UPPER(#descpe:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="CpeVO">
+		UPDATE fcn.fcncpe SET colcpe= #colcpe:NUMERIC#,copcpe=
+		UPPER(#copcpe:VARCHAR#),
+		depcpe = UPPER(#depcpe:VARCHAR#),
+		descpe= UPPER(#descpe:VARCHAR#) WHERE iddcpe =
+		#iddcpe:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcncpe WHERE iddcpe = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcncpe WHERE iddcpe in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="CpeVO"
+		resultClass="Integer">
+		SELECT count(iddcpe) FROM fcn.fcncpe
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcpe" prepend=" AND "> iddcpe =
+				#iddcpe:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colcpe" prepend=" AND "> colcpe =
+				#colcpe:NUMERIC#
+			</isNotNull>
+			<isNotNull property="copcpe" prepend=" AND ">
+				copcpe ILIKE '%' || #copcpe:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="descpe" prepend=" AND ">
+				descpe ILIKE '%' || #descpe:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getPerguntasByColeta" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncpe where colcpe = #value:NUMERIC#
+	</select>
+	
+	<select id="getMusicaByIddepd" parameterClass="Long" resultClass="String">
+		select 
+			case when descpe = 'FALSE' THEN 'N' ELSE 'S' END as HAVERAMUSICA
+		from 
+			fcn.fcnepd e 
+			join fcn.fcnpro p on p.iddpro = e.proepd
+			join fcn.fcnmat m on m.promat = p.iddpro
+			join fcn.fcnvia v on v.provia = m.pvimat
+			join fcn.fcncpe cpe on (cpe.colcpe = v.colvia and copcpe = '45')
+		where 
+			e.iddepd = #value:NUMERIC#
+	</select>
+</sqlMap> 
+ 

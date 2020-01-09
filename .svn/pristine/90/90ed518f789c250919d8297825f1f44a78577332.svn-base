@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Tab">
+	<typeAlias alias="TabVO" type="pmcg.fcn.domain.TabVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="TabVO">
+		<result property="iddtab" column="iddtab" />
+		<result property="tabtab" column="tabtab" />
+		<result property="inftab" column="inftab" />
+		<result property="codtab" column="codtab" />
+		<result property="destab" column="destab" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="TabVO">
+		<result property="iddtab" column="iddtab" />
+		<result property="tabtab" column="tabtab" />
+		<result property="inftab" column="inftab" />
+		<result property="codtab" column="codtab" />
+		<result property="destab" column="destab" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcntab WHERE iddtab = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcntab WHERE iddtab = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="TabVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcntab
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddtab" prepend=" AND ">
+				iddtab = #iddtab:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tabtab" prepend=" AND ">
+				tabtab ILIKE '%' || #tabtab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="inftab" prepend=" AND ">
+				inftab ILIKE '%' || #inftab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codtab" prepend=" AND ">
+				codtab ILIKE '%' || #codtab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="destab" prepend=" AND ">
+				destab ILIKE '%' || #destab:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="TabVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcntab
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddtab" prepend=" AND "> iddtab = #iddtab:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tabtab" prepend=" AND ">
+				tabtab ILIKE '%' || #tabtab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="inftab" prepend=" AND ">
+				inftab ILIKE '%' || #inftab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codtab" prepend=" AND ">
+				codtab ILIKE '%' || #codtab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="destab" prepend=" AND ">
+				destab ILIKE '%' || #destab:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcntab
+	</select>
+
+	<insert id="insReg" parameterClass="TabVO">
+		<selectKey keyProperty="iddtab" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqtab')
+		</selectKey>
+		INSERT INTO fcn.fcntab(iddtab,tabtab,inftab,codtab,destab) VALUES (#iddtab:NUMERIC#, UPPER(#tabtab:VARCHAR#),
+		#inftab:VARCHAR#, UPPER(#codtab:VARCHAR#), #destab:VARCHAR#)
+	</insert>
+
+	<update id="updRegByCod" parameterClass="TabVO">
+		UPDATE fcn.fcntab SET tabtab= UPPER(#tabtab:VARCHAR#),inftab= UPPER(#inftab:VARCHAR#),codtab= UPPER(#codtab:VARCHAR#),destab=
+		UPPER(#destab:VARCHAR#) WHERE iddtab = #iddtab:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcntab WHERE iddtab = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcntab WHERE iddtab in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="TabVO" resultClass="Integer">
+		SELECT count(iddtab) FROM fcn.fcntab
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddtab" prepend=" AND "> iddtab = #iddtab:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tabtab" prepend=" AND ">
+				tabtab ILIKE '%' || #tabtab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="inftab" prepend=" AND ">
+				inftab ILIKE '%' || #inftab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codtab" prepend=" AND ">
+				codtab ILIKE '%' || #codtab:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="destab" prepend=" AND ">
+				destab ILIKE '%' || #destab:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getPaisByCodigo" parameterClass="String" resultClass="String">
+		select 
+			tab.destab 
+		from 
+			fcn.fcntab tab
+		where 
+			tab.tabtab = 'PAIS'
+			and tab.codtab = #value:VARCHAR#
+	</select>
+	
+	<select id="getRegByTipo" parameterClass="String" resultClass="TabVO">
+		select 
+			*
+		from 
+			fcn.fcntab tab
+		where 
+			tab.tabtab = #value:VARCHAR#
+	</select>
+	
+	<select id="getLastCodController" resultClass="Integer">
+		select MAX(CAST(codtab as INTEGER)) + 1 AS codigo from fcn.fcntab where tabtab = 'CARGO_MA'
+	</select>
+	
+</sqlMap> 
+ 

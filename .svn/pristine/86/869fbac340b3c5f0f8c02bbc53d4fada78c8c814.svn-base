@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE sqlMapConfig PUBLIC "//iBATIS.com/DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" useStatementNamespaces="true" />
+
+	<transactionManager type="JDBC">
+		<dataSource type="JNDI">
+			<property name="DBJndiContext" value="java:comp/env/jdbc/jndiefacilpostgres" />
+		</dataSource>
+	</transactionManager>
+
+ 
+<!-- 		<transactionManager type="JDBC"> -->
+<!-- 		<dataSource type="SIMPLE"> -->
+<!-- 			<property name="JDBC.Driver" value="oracle.jdbc.driver.OracleDriver" /> -->
+<!-- 			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@10.0.0.31:1521:BDSIAT" /> -->
+<!-- 			<property name="JDBC.Username" value="nfse" /> -->
+<!-- 			<property name="JDBC.Password" value="nfse" /> -->
+<!--  		</dataSource> -->
+<!--  		</transactionManager>  -->
+
+	<sqlMap resource="pmcg/imti/dao/ibatis/sqlmap/ViaMAP.xml" />
+	
+</sqlMapConfig>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Aat">
+	<typeAlias alias="AatVO" type="pmcg.fcn.domain.AatVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="AatVO">
+		<result property="iddaat" column="iddaat" />
+		<result property="aenaat" column="aenaat" />
+		<result property="cnaaat" column="cnaaat" />
+		<result property="staaat" column="staaat" />
+		<result property="usoaat" column="usoaat" />
+		<result property="exeaat" column="exeaat" />
+		<result property="ambaat" column="ambaat" />
+		<result property="bomaat" column="bomaat" />
+		<result property="vigaat" column="vigaat" />
+		<result property="posaat" column="posaat" />
+		<result property="traaat" column="traaat" />
+		<result property="siaaat" column="siaaat" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="AatVO">
+		<result property="iddaat" column="iddaat" />
+		<result property="aenaat" column="aenaat" />
+		<result property="cnaaat" column="cnaaat" />
+		<result property="staaat" column="staaat" />
+		<result property="usoaat" column="usoaat" />
+		<result property="exeaat" column="exeaat" />
+		<result property="ambaat" column="ambaat" />
+		<result property="bomaat" column="bomaat" />
+		<result property="vigaat" column="vigaat" />
+		<result property="posaat" column="posaat" />
+		<result property="traaat" column="traaat" />
+		<result property="siaaat" column="siaaat" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnaat WHERE iddaat = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnaat WHERE iddaat = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="AatVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnaat
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddaat" prepend=" AND ">
+				iddaat = #iddaat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="aenaat" prepend=" AND ">
+				aenaat = #aenaat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="staaat" prepend=" AND ">
+				staaat ILIKE '%' || #staaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usoaat" prepend=" AND ">
+				usoaat ILIKE '%' || #usoaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ambaat" prepend=" AND ">
+				ambaat ILIKE '%' || #ambaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="bomaat" prepend=" AND ">
+				bomaat ILIKE '%' || #bomaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vigaat" prepend=" AND ">
+				vigaat ILIKE '%' || #vigaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="posaat" prepend=" AND ">
+				posaat ILIKE '%' || #posaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="traaat" prepend=" AND ">
+				traaat ILIKE '%' || #traaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="siaaat" prepend=" AND ">
+				siaaat ILIKE '%' || #siaaat:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="AatVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnaat
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddaat" prepend=" AND "> iddaat =
+				#iddaat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="aenaat" prepend=" AND "> aenaat =
+				#aenaat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="staaat" prepend=" AND ">
+				staaat ILIKE '%' || #staaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usoaat" prepend=" AND ">
+				usoaat ILIKE '%' || #usoaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ambaat" prepend=" AND ">
+				ambaat ILIKE '%' || #ambaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="bomaat" prepend=" AND ">
+				bomaat ILIKE '%' || #bomaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vigaat" prepend=" AND ">
+				vigaat ILIKE '%' || #vigaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="posaat" prepend=" AND ">
+				posaat ILIKE '%' || #posaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="traaat" prepend=" AND ">
+				traaat ILIKE '%' || #traaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="siaaat" prepend=" AND ">
+				siaaat ILIKE '%' || #siaaat:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnaat
+	</select>
+
+	<insert id="insReg" parameterClass="AatVO">
+		<selectKey keyProperty="iddaat" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqaat')
+		</selectKey>
+		INSERT INTO
+		fcn.fcnaat(iddaat,aenaat,cnaaat,staaat,usoaat,exeaat,ambaat,bomaat,vigaat,posaat,traaat,siaaat)
+		VALUES (#iddaat:NUMERIC#,#aenaat:NUMERIC#, #cnaaat:VARCHAR#, UPPER(#staaat:VARCHAR#),
+		UPPER(#usoaat:VARCHAR#), #exeaat:BOOLEAN#, UPPER(#ambaat:VARCHAR#),
+		UPPER(#bomaat:VARCHAR#), UPPER(#vigaat:VARCHAR#),
+		UPPER(#posaat:VARCHAR#), UPPER(#traaat:VARCHAR#),
+		UPPER(#siaaat:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="AatVO">
+		UPDATE fcn.fcnaat SET 
+		aenaat = #aenaat:NUMERIC#,
+		cnaaat = #cnaaat:VARCHAR#,
+		staaat = UPPER(#staaat:VARCHAR#),
+		usoaat = UPPER(#usoaat:VARCHAR#),
+		exeaat = #exeaat:BOOLEAN#,
+		ambaat = UPPER(#ambaat:VARCHAR#),
+		bomaat = UPPER(#bomaat:VARCHAR#),
+		vigaat = UPPER(#vigaat:VARCHAR#),
+		posaat = UPPER(#posaat:VARCHAR#),
+		traaat = UPPER(#traaat:VARCHAR#),
+		siaaat = UPPER(#siaaat:VARCHAR#) 
+		WHERE iddaat = #iddaat:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnaat WHERE iddaat = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnaat WHERE iddaat in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="AatVO"
+		resultClass="Integer">
+		SELECT count(iddaat) FROM fcn.fcnaat
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddaat" prepend=" AND "> iddaat =
+				#iddaat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="aenaat" prepend=" AND "> aenaat =
+				#aenaat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="staaat" prepend=" AND ">
+				staaat ILIKE '%' || #staaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usoaat" prepend=" AND ">
+				usoaat ILIKE '%' || #usoaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ambaat" prepend=" AND ">
+				ambaat ILIKE '%' || #ambaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="bomaat" prepend=" AND ">
+				bomaat ILIKE '%' || #bomaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vigaat" prepend=" AND ">
+				vigaat ILIKE '%' || #vigaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="posaat" prepend=" AND ">
+				posaat ILIKE '%' || #posaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="traaat" prepend=" AND ">
+				traaat ILIKE '%' || #traaat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="siaaat" prepend=" AND ">
+				siaaat ILIKE '%' || #siaaat:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByAen" parameterClass="Long" resultClass="AatVO">
+		select aat.* from fcn.fcnaat aat 
+		join fcn.fcnaen aen on aen.iddaen = aat.aenaat
+		where iddaen =  #value:NUMERIC#
+	</select>
+	
+	<select id="getAtividadesByAen" parameterClass="Long" resultClass="hashmap">
+		select 
+			case when length(aat.cnaaat) = 10 then substr(aat.cnaaat,1,4)||'-'||substr(aat.cnaaat,5,1)||'/'||substr(aat.cnaaat,6,2)||'-'||substr(aat.cnaaat,8,3) else aat.cnaaat end as cnae, 
+			case when aat.siaaat = 'B' then 'BAIXO' else case when aat.siaaat = 'M' then 'MEDIO' else 'ALTO' end end as risco, 
+			case when aat.siaaat = 'B' then 'font-weight: bold;text-align:center;font-size:11px;color:rgb(0,128,0)' else case when aat.siaaat = 'M' then 'font-weight: bold;text-align:center;font-size:11px;color:rgb(201,161,0)' else 'font-weight: bold;text-align:center;font-size:11px;color:rgb(209,0,0)' end end as stylerisco,
+			aat.usoaat as uso, aat.usoaat as novouso,
+			aat.staaat, aat.exeaat, case when aat.staaat = 'D' then 'DEFERIDA' else case when aat.staaat = 'P' then 'PARC. DEFERIDA' else 
+			case when aat.staaat = 'I' then 'INDEFERIDA' else case when aat.staaat = 'E' then 'EM EXIGENCIA' else 
+			'' end end end end as status 
+		from 
+			fcn.fcnaat aat 
+			join fcn.fcnaen aen on aen.iddaen = aat.aenaat
+		where 
+			iddaen = #value:NUMERIC#
+	</select>
+</sqlMap> 
+ 

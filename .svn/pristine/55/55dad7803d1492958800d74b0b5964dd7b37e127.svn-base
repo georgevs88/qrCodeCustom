@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Cen">
+	<typeAlias alias="CenVO" type="pmcg.fcn.domain.CenVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="CenVO">
+		<result property="iddcen" column="iddcen" />
+		<result property="atecen" column="atecen" />
+		<result property="autcen" column="autcen" />
+		<result property="iptcen" column="iptcen" />
+		<result property="edrcen" column="edrcen" />
+		<result property="refcen" column="refcen" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="CenVO">
+		<result property="iddcen" column="iddcen" />
+		<result property="atecen" column="atecen" />
+		<result property="autcen" column="autcen" />
+		<result property="iptcen" column="iptcen" />
+		<result property="endereco" select="Edr.getRegByCod" column="iddedr" />
+		<result property="edrcen" column="edrcen" />
+		<result property="refcen" column="refcen" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncen WHERE iddcen = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncen WHERE iddcen = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CenVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncen
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcen" prepend=" AND ">
+				iddcen = #iddcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="atecen" prepend=" AND ">
+				atecen = #atecen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="autcen" prepend=" AND ">
+				autcen = #autcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="iptcen" prepend=" AND ">
+				iptcen ILIKE '%' || #iptcen:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edrcen" prepend=" AND ">
+				edrcen = #edrcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="refcen" prepend=" AND ">
+				refcen ILIKE '%' || #refcen:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="CenVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcncen
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcen" prepend=" AND "> iddcen =
+				#iddcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="atecen" prepend=" AND "> atecen =
+				#atecen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="autcen" prepend=" AND "> autcen =
+				#autcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="iptcen" prepend=" AND ">
+				iptcen ILIKE '%' || #iptcen:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edrcen" prepend=" AND "> edrcen =
+				#edrcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="refcen" prepend=" AND ">
+				refcen ILIKE '%' || #refcen:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcncen
+	</select>
+
+	<insert id="insReg" parameterClass="CenVO">
+		<selectKey keyProperty="iddcen" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqcen')
+		</selectKey>
+		INSERT INTO fcn.fcncen(iddcen,atecen,autcen,iptcen,edrcen,refcen) VALUES
+		(#iddcen:NUMERIC#,#atecen:NUMERIC#,#autcen:NUMERIC#,
+		UPPER(#iptcen:VARCHAR#),#edrcen:NUMERIC#, UPPER(#refcen:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="CenVO">
+		UPDATE fcn.fcncen SET atecen= #atecen:NUMERIC#,autcen= #autcen:NUMERIC#,iptcen=
+		UPPER(#iptcen:VARCHAR#),edrcen= #edrcen:NUMERIC#,refcen=
+		UPPER(#refcen:VARCHAR#) WHERE iddcen = #iddcen:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcncen WHERE iddcen = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcncen WHERE iddcen in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="CenVO"
+		resultClass="Integer">
+		SELECT count(iddcen) FROM fcn.fcncen
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddcen" prepend=" AND "> iddcen =
+				#iddcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="atecen" prepend=" AND "> atecen =
+				#atecen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="autcen" prepend=" AND "> autcen =
+				#autcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="iptcen" prepend=" AND ">
+				iptcen ILIKE '%' || #iptcen:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edrcen" prepend=" AND "> edrcen =
+				#edrcen:NUMERIC#
+			</isNotNull>
+			<isNotNull property="refcen" prepend=" AND ">
+				refcen ILIKE '%' || #refcen:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap> 
+ 

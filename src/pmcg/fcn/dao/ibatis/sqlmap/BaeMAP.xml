@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Bae">
+	<typeAlias alias="BaeVO" type="pmcg.fcn.domain.BaeVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="BaeVO">
+		<result property="iddbae" column="iddbae" />
+		<result property="tpebae" column="tpebae" />
+		<result property="cpfbae" column="cpfbae" />
+		<result property="nombae" column="nombae" />
+		<result property="nfabae" column="nfabae" />
+		<result property="dnabae" column="dnabae" />
+		<result property="sexbae" column="sexbae" />
+		<result property="nivbae" column="nivbae" />
+		<result property="dtcbae" column="dtcbae" />
+		<result property="dtpbae" column="dtpbae" />
+		<result property="dnrbae" column="dnrbae" />
+		<result property="doebae" column="doebae" />
+		<result property="duobae" column="duobae" />
+		<result property="dexbae" column="dexbae" />
+		<result property="psibae" column="psibae" />
+		<result property="pnrbae" column="pnrbae" />
+		<result property="pufbae" column="pufbae" />
+		<result property="pdtbae" column="pdtbae" />
+		<result property="edlbae" column="edlbae" />
+		<result property="edcbae" column="edcbae" />
+		<result property="ddtbae" column="ddtbae" />
+		<result property="telbae" column="telbae" />
+		<result property="ddfbae" column="ddfbae" />
+		<result property="faxbae" column="faxbae" />
+		<result property="ddcbae" column="ddcbae" />
+		<result property="celbae" column="celbae" />
+		<result property="emabae" column="emabae" />
+		<result property="orebae" column="orebae" />
+		<result property="nrrbae" column="nrrbae" />
+		<result property="nirbae" column="nirbae" />
+		<result property="livbae" column="livbae" />
+		<result property="folbae" column="folbae" />
+		<result property="dtrbae" column="dtrbae" />
+		<result property="uatbae" column="uatbae" />
+		<result property="iesbae" column="iesbae" />
+		<result property="capbae" column="capbae" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="iptbae" column="iptbae" />
+		<result property="viabae" column="viabae" />
+		<result property="reqbae" column="reqbae" />
+		<result property="caibae" column="caibae" />
+		<result property="conbae" column="conbae" />
+		<result property="msgbae" column="msgbae" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="BaeVO">
+		<result property="iddbae" column="iddbae" />
+		<result property="tpebae" column="tpebae" />
+		<result property="cpfbae" column="cpfbae" />
+		<result property="nombae" column="nombae" />
+		<result property="nfabae" column="nfabae" />
+		<result property="dnabae" column="dnabae" />
+		<result property="sexbae" column="sexbae" />
+		<result property="nivbae" column="nivbae" />
+		<result property="dtcbae" column="dtcbae" />
+		<result property="dtpbae" column="dtpbae" />
+		<result property="dnrbae" column="dnrbae" />
+		<result property="doebae" column="doebae" />
+		<result property="duobae" column="duobae" />
+		<result property="dexbae" column="dexbae" />
+		<result property="psibae" column="psibae" />
+		<result property="pnrbae" column="pnrbae" />
+		<result property="pufbae" column="pufbae" />
+		<result property="pdtbae" column="pdtbae" />
+		<result property="edlbae" column="edlbae" />
+		<result property="edcbae" column="edcbae" />
+		<result property="ddtbae" column="ddtbae" />
+		<result property="telbae" column="telbae" />
+		<result property="ddfbae" column="ddfbae" />
+		<result property="faxbae" column="faxbae" />
+		<result property="ddcbae" column="ddcbae" />
+		<result property="celbae" column="celbae" />
+		<result property="emabae" column="emabae" />
+		<result property="orebae" column="orebae" />
+		<result property="nrrbae" column="nrrbae" />
+		<result property="nirbae" column="nirbae" />
+		<result property="livbae" column="livbae" />
+		<result property="folbae" column="folbae" />
+		<result property="dtrbae" column="dtrbae" />
+		<result property="uatbae" column="uatbae" />
+		<result property="iesbae" column="iesbae" />
+		<result property="capbae" column="capbae" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="iptbae" column="iptbae" />
+		<result property="viabae" column="viabae" />
+		<result property="reqbae" column="reqbae" />
+		<result property="caibae" column="caibae" />
+		<result property="conbae" column="conbae" />
+		<result property="msgbae" column="msgbae" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnbae WHERE iddbae = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnbae WHERE iddbae = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="BaeVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnbae
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddbae" prepend=" AND ">
+				iddbae = #iddbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tpebae" prepend=" AND ">
+				tpebae ILIKE '%' || #tpebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cpfbae" prepend=" AND ">
+				cpfbae ILIKE '%' || #cpfbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nombae" prepend=" AND ">
+				nombae ILIKE '%' || #nombae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nfabae" prepend=" AND ">
+				nfabae ILIKE '%' || #nfabae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dnabae" prepend=" AND "> to_char(dnabae,'dd/MM/yyyy') =
+				to_char(#dnabae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="sexbae" prepend=" AND ">
+				sexbae ILIKE '%' || #sexbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nivbae" prepend=" AND ">
+				nivbae ILIKE '%' || #nivbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtcbae" prepend=" AND "> to_char(dtcbae,'dd/MM/yyyy') =
+				to_char(#dtcbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dtpbae" prepend=" AND ">
+				dtpbae ILIKE '%' || #dtpbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dnrbae" prepend=" AND ">
+				dnrbae ILIKE '%' || #dnrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="doebae" prepend=" AND ">
+				doebae ILIKE '%' || #doebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="duobae" prepend=" AND ">
+				duobae ILIKE '%' || #duobae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dexbae" prepend=" AND ">
+				to_char(dexbae,'dd/MM/yyyy') = to_char(#dexbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="psibae" prepend=" AND ">
+				psibae ILIKE '%' || #psibae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pnrbae" prepend=" AND ">
+				pnrbae ILIKE '%' || #pnrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pufbae" prepend=" AND ">
+				pufbae ILIKE '%' || #pufbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pdtbae" prepend=" AND "> to_char(pdtbae,'dd/MM/yyyy') =
+				to_char(#pdtbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="edlbae" prepend=" AND ">
+				edlbae = #edlbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="edcbae" prepend=" AND ">
+				edcbae = #edcbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="ddtbae" prepend=" AND ">
+				ddtbae ILIKE '%' || #ddtbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telbae" prepend=" AND ">
+				telbae ILIKE '%' || #telbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddfbae" prepend=" AND ">
+				ddfbae ILIKE '%' || #ddfbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="faxbae" prepend=" AND ">
+				faxbae ILIKE '%' || #faxbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddcbae" prepend=" AND ">
+				ddcbae ILIKE '%' || #ddcbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="celbae" prepend=" AND ">
+				celbae ILIKE '%' || #celbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="emabae" prepend=" AND ">
+				emabae ILIKE '%' || #emabae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="orebae" prepend=" AND ">
+				orebae ILIKE '%' || #orebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nrrbae" prepend=" AND ">
+				nrrbae ILIKE '%' || #nrrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nirbae" prepend=" AND ">
+				nirbae ILIKE '%' || #nirbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="livbae" prepend=" AND ">
+				livbae ILIKE '%' || #livbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="folbae" prepend=" AND ">
+				folbae ILIKE '%' || #folbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtrbae" prepend=" AND "> to_char(dtrbae,'dd/MM/yyyy') =
+				to_char(#dtrbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="uatbae" prepend=" AND "> to_char(uatbae,'dd/MM/yyyy') =
+				to_char(#uatbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="iesbae" prepend=" AND ">
+				iesbae ILIKE '%' || #iesbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="capbae" prepend=" AND ">
+				capbae = #capbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="BaeVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnbae
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddbae" prepend=" AND "> iddbae = #iddbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tpebae" prepend=" AND ">
+				tpebae ILIKE '%' || #tpebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cpfbae" prepend=" AND ">
+				cpfbae ILIKE '%' || #cpfbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nombae" prepend=" AND ">
+				nombae ILIKE '%' || #nombae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nfabae" prepend=" AND ">
+				nfabae ILIKE '%' || #nfabae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dnabae" prepend=" AND "> to_char(dnabae,'dd/MM/yyyy') =
+				to_char(#dnabae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="sexbae" prepend=" AND ">
+				sexbae ILIKE '%' || #sexbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nivbae" prepend=" AND ">
+				nivbae ILIKE '%' || #nivbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtcbae" prepend=" AND "> to_char(dtcbae,'dd/MM/yyyy') =
+				to_char(#dtcbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dtpbae" prepend=" AND ">
+				dtpbae ILIKE '%' || #dtpbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dnrbae" prepend=" AND ">
+				dnrbae ILIKE '%' || #dnrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="doebae" prepend=" AND ">
+				doebae ILIKE '%' || #doebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="duobae" prepend=" AND ">
+				duobae ILIKE '%' || #duobae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dexbae" prepend=" AND ">
+				to_char(dexbae,'dd/MM/yyyy') = to_char(#dexbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="psibae" prepend=" AND ">
+				psibae ILIKE '%' || #psibae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pnrbae" prepend=" AND ">
+				pnrbae ILIKE '%' || #pnrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pufbae" prepend=" AND ">
+				pufbae ILIKE '%' || #pufbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pdtbae" prepend=" AND "> to_char(pdtbae,'dd/MM/yyyy') =
+				to_char(#pdtbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="edlbae" prepend=" AND "> edlbae = #edlbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="edcbae" prepend=" AND "> edcbae = #edcbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="ddtbae" prepend=" AND ">
+				ddtbae ILIKE '%' || #ddtbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telbae" prepend=" AND ">
+				telbae ILIKE '%' || #telbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddfbae" prepend=" AND ">
+				ddfbae ILIKE '%' || #ddfbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="faxbae" prepend=" AND ">
+				faxbae ILIKE '%' || #faxbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddcbae" prepend=" AND ">
+				ddcbae ILIKE '%' || #ddcbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="celbae" prepend=" AND ">
+				celbae ILIKE '%' || #celbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="emabae" prepend=" AND ">
+				emabae ILIKE '%' || #emabae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="orebae" prepend=" AND ">
+				orebae ILIKE '%' || #orebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nrrbae" prepend=" AND ">
+				nrrbae ILIKE '%' || #nrrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nirbae" prepend=" AND ">
+				nirbae ILIKE '%' || #nirbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="livbae" prepend=" AND ">
+				livbae ILIKE '%' || #livbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="folbae" prepend=" AND ">
+				folbae ILIKE '%' || #folbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtrbae" prepend=" AND "> to_char(dtrbae,'dd/MM/yyyy') =
+				to_char(#dtrbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="uatbae" prepend=" AND "> to_char(uatbae,'dd/MM/yyyy') =
+				to_char(#uatbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="iesbae" prepend=" AND ">
+				iesbae ILIKE '%' || #iesbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="capbae" prepend=" AND "> capbae = #capbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnbae
+	</select>
+
+	<insert id="insReg" parameterClass="BaeVO">
+		<selectKey keyProperty="iddbae" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqbae')
+		</selectKey>
+		INSERT INTO
+		fcn.fcnbae(iddbae,tpebae,cpfbae,nombae,nfabae,dnabae,sexbae,nivbae,dtcbae,dtpbae,dnrbae,doebae,duobae,dexbae,psibae,pnrbae,pufbae,pdtbae,edlbae,edcbae,ddtbae,telbae,ddfbae,faxbae,ddcbae,celbae,emabae,orebae,nrrbae,nirbae,livbae,folbae,dtrbae,uatbae,iesbae,capbae,usualt,datalt,iptbae,viabae,reqbae,caibae,conbae,msgbae)
+		VALUES (#iddbae:NUMERIC#, UPPER(#tpebae:VARCHAR#), UPPER(#cpfbae:VARCHAR#), UPPER(#nombae:VARCHAR#),
+		UPPER(#nfabae:VARCHAR#),#dnabae:TIMESTAMP#, UPPER(#sexbae:VARCHAR#), UPPER(#nivbae:VARCHAR#),#dtcbae:TIMESTAMP#,
+		UPPER(#dtpbae:VARCHAR#), UPPER(#dnrbae:VARCHAR#), UPPER(#doebae:VARCHAR#), UPPER(#duobae:VARCHAR#),
+		#dexbae:TIMESTAMP#, UPPER(#psibae:VARCHAR#), UPPER(#pnrbae:VARCHAR#),
+		UPPER(#pufbae:VARCHAR#),#pdtbae:TIMESTAMP#,#edlbae:NUMERIC#,#edcbae:NUMERIC#, UPPER(#ddtbae:VARCHAR#),
+		UPPER(#telbae:VARCHAR#), UPPER(#ddfbae:VARCHAR#), UPPER(#faxbae:VARCHAR#), UPPER(#ddcbae:VARCHAR#),
+		UPPER(#celbae:VARCHAR#), #emabae:VARCHAR#, UPPER(#orebae:VARCHAR#), UPPER(#nrrbae:VARCHAR#),
+		UPPER(#nirbae:VARCHAR#), UPPER(#livbae:VARCHAR#), UPPER(#folbae:VARCHAR#),#dtrbae:TIMESTAMP#,#uatbae:TIMESTAMP#,
+		UPPER(#iesbae:VARCHAR#),#capbae:NUMERIC#, UPPER(#usualt:VARCHAR#),now(),#iptbae:VARCHAR#,#viabae:VARCHAR#, #reqbae:NUMERIC#, #caibae:NUMERIC#, #conbae:NUMERIC#, #msgbae:VARCHAR# )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="BaeVO">
+		UPDATE 
+			fcn.fcnbae 
+		SET 
+			tpebae = UPPER(#tpebae:VARCHAR#),
+			cpfbae = UPPER(#cpfbae:VARCHAR#),
+			nombae = UPPER(#nombae:VARCHAR#),
+			nfabae = UPPER(#nfabae:VARCHAR#),
+			dnabae = #dnabae:TIMESTAMP#,
+			sexbae = UPPER(#sexbae:VARCHAR#),
+			nivbae = UPPER(#nivbae:VARCHAR#),
+			dtcbae = #dtcbae:TIMESTAMP#,
+			dtpbae = UPPER(#dtpbae:VARCHAR#),
+			dnrbae = UPPER(#dnrbae:VARCHAR#),
+			doebae = UPPER(#doebae:VARCHAR#),
+			duobae = UPPER(#duobae:VARCHAR#),
+			dexbae = #dexbae:TIMESTAMP#,
+			psibae = UPPER(#psibae:VARCHAR#),
+			pnrbae = UPPER(#pnrbae:VARCHAR#),
+			pufbae = UPPER(#pufbae:VARCHAR#),
+			pdtbae = #pdtbae:TIMESTAMP#,
+			edlbae = #edlbae:NUMERIC#,
+			edcbae = #edcbae:NUMERIC#,
+			ddtbae = UPPER(#ddtbae:VARCHAR#),
+			telbae = UPPER(#telbae:VARCHAR#),
+			ddfbae = UPPER(#ddfbae:VARCHAR#),
+			faxbae = UPPER(#faxbae:VARCHAR#),
+			ddcbae = UPPER(#ddcbae:VARCHAR#),
+			celbae = UPPER(#celbae:VARCHAR#),
+			emabae = #emabae:VARCHAR#,
+			orebae = UPPER(#orebae:VARCHAR#),
+			nrrbae = UPPER(#nrrbae:VARCHAR#),
+			nirbae = UPPER(#nirbae:VARCHAR#),
+			livbae = UPPER(#livbae:VARCHAR#),
+			folbae = UPPER(#folbae:VARCHAR#),
+			dtrbae = #dtrbae:TIMESTAMP#,
+			uatbae = #uatbae:TIMESTAMP#,
+			iesbae = UPPER(#iesbae:VARCHAR#),
+			capbae = #capbae:NUMERIC#,
+			iptbae = #iptbae:VARCHAR#,
+			usualt = UPPER(#usualt:VARCHAR#),
+			viabae = #viabae:VARCHAR#,
+			reqbae = #reqbae:NUMERIC#,
+			caibae = #caibae:NUMERIC#,
+			conbae = #conbae:NUMERIC#,
+			msgbae = #msgbae:VARCHAR#,
+			datalt = now()
+		WHERE 
+			iddbae = #iddbae:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnbae WHERE iddbae = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnbae WHERE iddbae in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="BaeVO" resultClass="Integer">
+		SELECT count(iddbae) FROM fcn.fcnbae
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddbae" prepend=" AND "> iddbae = #iddbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tpebae" prepend=" AND ">
+				tpebae ILIKE '%' || #tpebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cpfbae" prepend=" AND ">
+				cpfbae ILIKE '%' || #cpfbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nombae" prepend=" AND ">
+				nombae ILIKE '%' || #nombae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nfabae" prepend=" AND ">
+				nfabae ILIKE '%' || #nfabae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dnabae" prepend=" AND "> to_char(dnabae,'dd/MM/yyyy') =
+				to_char(#dnabae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="sexbae" prepend=" AND ">
+				sexbae ILIKE '%' || #sexbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nivbae" prepend=" AND ">
+				nivbae ILIKE '%' || #nivbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtcbae" prepend=" AND "> to_char(dtcbae,'dd/MM/yyyy') =
+				to_char(#dtcbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dtpbae" prepend=" AND ">
+				dtpbae ILIKE '%' || #dtpbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dnrbae" prepend=" AND ">
+				dnrbae ILIKE '%' || #dnrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="doebae" prepend=" AND ">
+				doebae ILIKE '%' || #doebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="duobae" prepend=" AND ">
+				duobae ILIKE '%' || #duobae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dexbae" prepend=" AND ">
+				to_char(dexbae,'dd/MM/yyyy') = to_char(#dexbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="psibae" prepend=" AND ">
+				psibae ILIKE '%' || #psibae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pnrbae" prepend=" AND ">
+				pnrbae ILIKE '%' || #pnrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pufbae" prepend=" AND ">
+				pufbae ILIKE '%' || #pufbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pdtbae" prepend=" AND "> to_char(pdtbae,'dd/MM/yyyy') =
+				to_char(#pdtbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="edlbae" prepend=" AND "> edlbae = #edlbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="edcbae" prepend=" AND "> edcbae = #edcbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="ddtbae" prepend=" AND ">
+				ddtbae ILIKE '%' || #ddtbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telbae" prepend=" AND ">
+				telbae ILIKE '%' || #telbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddfbae" prepend=" AND ">
+				ddfbae ILIKE '%' || #ddfbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="faxbae" prepend=" AND ">
+				faxbae ILIKE '%' || #faxbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ddcbae" prepend=" AND ">
+				ddcbae ILIKE '%' || #ddcbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="celbae" prepend=" AND ">
+				celbae ILIKE '%' || #celbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="emabae" prepend=" AND ">
+				emabae ILIKE '%' || #emabae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="orebae" prepend=" AND ">
+				orebae ILIKE '%' || #orebae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nrrbae" prepend=" AND ">
+				nrrbae ILIKE '%' || #nrrbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nirbae" prepend=" AND ">
+				nirbae ILIKE '%' || #nirbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="livbae" prepend=" AND ">
+				livbae ILIKE '%' || #livbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="folbae" prepend=" AND ">
+				folbae ILIKE '%' || #folbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtrbae" prepend=" AND "> to_char(dtrbae,'dd/MM/yyyy') =
+				to_char(#dtrbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="uatbae" prepend=" AND "> to_char(uatbae,'dd/MM/yyyy') =
+				to_char(#uatbae:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="iesbae" prepend=" AND ">
+				iesbae ILIKE '%' || #iesbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="capbae" prepend=" AND "> capbae = #capbae:NUMERIC#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getBaeLimit" parameterClass="hashmap" resultClass="hashmap">
+		select 
+			b.*, v.njrvia, b.nombae || case when b.nfabae is not null then ' (' || b.nfabae || ')' else '' end as nomnfabae,
+			case when v.evevia = 'I' then 'Inscrição' else 'Alteração' end as evento,
+			case when v.tipvia = 'A' then 'Autônomo' when v.tipvia = 'M' then 'MEI' when v.tipvia = 'C' then 'Cartório/OAB' end as tipvia,
+			case when v.tipvia = 'A' AND v.sauvia = 'E' then 'Estabelecido' when v.tipvia = 'A' AND v.sauvia = 'N' then 'Não Estabelecido' else case when v.tipvia = 'M' then case when v.einvia = 'DO' then 'Domicílio' when v.einvia = 'SP' then 'Sede Permanente' when v.einvia = 'CL' then 'No Cliente' when v.einvia = 'CP' then 'Vias Públicas, com ponto fixo' when v.einvia = 'SP' then 'Vias Públicas, sem ponto fixo' end end end as saueinvia,
+			formatInterval(now() - b.datalt) as qtddias, aen.risaen, 
+			fcn.getEndereco(b.edlbae) as endlocalizacao,
+			fcn.getEndereco(b.edcbae) as endcorrespondencia,
+			fcn.formatacpfcnpj(b.cpfbae) as cpfcnpj,
+			case when cai.sitcai = 'P' then 'Parcialmente Deferido' || ' - ' || to_char(cai.datcai, 'dd/MM/yyyy')
+			     when cai.sitcai = 'D' then 'Deferido' || ' - ' || to_char(cai.datcai, 'dd/MM/yyyy')
+			     when cai.sitcai = 'I' then 'Indeferido' || ' - ' || to_char(cai.datcai, 'dd/MM/yyyy')
+			     else 'Em Estudo' end  as situacao, cai.imucai, cai.motcai, cai.usualt as usucai, to_char(cai.datcai, 'dd/MM/yyyy') as datcai,
+			case when b.caibae is not null then true else false end as temcai, cai.sitcai, cai.dcocai,
+			case when cai.sitcai is null then 
+			   '-' 
+			else
+			   case when cai.sitcai like 'D' then 
+			      'DEFERIDO' 
+			   else 
+			      case when cai.sitcai like 'E' then 
+			         'EM EXIGENCIA' 
+			      else 
+			         case when cai.sitcai like 'I' then 
+					 'INDEFERIDO' 
+				      else 
+					 'PARCIALMENTE'
+				      end 
+			      end 
+			   end
+			end as sitcaidesc, 
+			case when (cai.sitcai is not null and cai.sitcai like 'D') then 
+			   'font-weight:bold;color:rgb(31,181,47);' 
+			else 
+			   case when (cai.sitcai is not null and cai.sitcai like 'I') then 
+			      'font-weight:bold;color:rgb(197,29,29);' 
+			   else 
+			      'font-weight:bold;color:rgb(198,215,3);' 
+			   end
+			end as style,
+			case when cai.sitcai is not null AND (cai.sitcai = 'D' or cai.sitcai = 'P') and cai.imucai is null then true else false end as visibleanalise
+		from 
+			fcn.fcnbae b
+			join fcn.fcnvia v on v.baevia = b.iddbae
+			join fcn.fcnaen aen on aen.iddaen = v.aenvia
+			left join fcn.fcncai cai on cai.iddcai = b.caibae
+		<dynamic prepend=" WHERE ">
+        	<isNotNull property="viabae" prepend=" AND ">
+				b.viabae ILIKE '%' || #viabae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cpfbae" prepend=" AND ">
+				b.cpfbae ILIKE '%' || #cpfbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomnfabae" prepend=" AND ">
+				(b.nombae ilike '%' || #nomnfabae:VARCHAR# || '%' OR b.nfabae ilike '%' || #nomnfabae:VARCHAR# || '%')
+			</isNotNull>
+			<isNotNull property="pendente">
+				<isEqual property="pendente" compareValue="true" prepend="AND">
+					(b.caibae is null or (b.caibae is not null and cai.sitcai = 'E'))
+				</isEqual>
+			</isNotNull>
+			
+			<isNotNull property="respostapendente">
+				<isEqual property="respostapendente" compareValue="true" prepend=" AND ">
+					cai.imucai is null
+					and (cai.sitcai = 'D' OR cai.sitcai = 'P')
+				</isEqual>
+			</isNotNull>
+			<isNotNull property="pendenteouconcluido">
+				<isEqual property="pendenteouconcluido" compareValue="true" prepend=" AND ">
+					(cai.sitcai = 'D' OR cai.sitcai = 'P')
+				</isEqual>
+			</isNotNull>
+		</dynamic>
+		ORDER BY
+			<isNotNull property="pendente">
+				b.datalt
+			</isNotNull>
+			<isNull property="pendente">
+				b.datalt desc
+			</isNull>
+	</select>
+	
+	<select id="countBae" parameterClass="hashmap" resultClass="Integer">
+		select 
+			count(0)
+		from 
+			fcn.fcnbae b
+			join fcn.fcnvia v on v.provia = b.viabae
+			left join fcn.fcncai cai on cai.iddcai = b.caibae
+		<dynamic prepend=" WHERE ">
+        	<isNotNull property="viabae" prepend=" AND ">
+				b.viabae ILIKE '%' || #viabae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cpfbae" prepend=" AND ">
+				b.cpfbae ILIKE '%' || #cpfbae:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomnfabae" prepend=" AND ">
+				(b.nombae ilike '%' || #nomnfabae:VARCHAR# || '%' OR b.nfabae ilike '%' || #nomnfabae:VARCHAR# || '%')
+			</isNotNull>
+			<isNotNull property="pendente">
+				<isEqual property="pendente" compareValue="true" prepend="AND">
+					b.caibae is null or (b.caibae is not null and cai.sitcai = 'E')
+				</isEqual>
+			</isNotNull>
+			
+			<isNotNull property="respostapendente">
+				<isEqual property="respostapendente" compareValue="true" prepend=" AND ">
+					cai.imucai is null
+					and (cai.sitcai = 'D' OR cai.sitcai = 'P')
+				</isEqual>
+			</isNotNull>
+			<isNotNull property="pendenteouconcluido">
+				<isEqual property="pendenteouconcluido" compareValue="true" prepend=" AND ">
+					(cai.sitcai = 'D' OR cai.sitcai = 'P')
+				</isEqual>
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<update id="updCaiBae" parameterClass="BaeVO">
+		UPDATE 
+			fcn.fcnbae 
+		SET 
+			caibae = #caibae:NUMERIC#
+		WHERE 
+			iddbae = #iddbae:NUMERIC#
+	</update>
+	
+	<select id="getBaePendente" parameterClass="hashmap" resultMap="mapComplexQuery">
+		SELECT 
+			bae.*
+		FROM 
+			fcn.fcnvia via
+			join fcn.fcnbae bae on bae.iddbae = via.baevia
+			join fcn.fcncai cai on cai.iddcai = bae.caibae
+		<dynamic prepend=" WHERE ">
+			<isEqual property="respostapendente" compareValue="true" prepend=" AND ">
+				cai.imucai is null
+				and (cai.sitcai = 'D' OR cai.sitcai = 'P')
+			</isEqual>
+			<isEqual property="pendenteouconcluido" compareValue="true" prepend=" AND ">
+				(cai.sitcai = 'D' OR cai.sitcai = 'P')
+			</isEqual>
+		</dynamic>
+	</select>
+	
+	<select id="countBaePendente" parameterClass="hashmap" resultClass="Integer">
+		SELECT 
+			count(0)
+		FROM 
+			fcn.fcnvia via
+			join fcn.fcnbae bae on bae.iddbae = via.baevia
+			join fcn.fcncai cai on cai.iddcai = bae.caibae
+		<dynamic prepend=" WHERE ">
+			<isEqual property="respostapendente" compareValue="true" prepend=" AND ">
+				cai.imucai is null
+				and (cai.sitcai = 'D' OR cai.sitcai = 'P')
+			</isEqual>
+			<isEqual property="pendenteouconcluido" compareValue="true" prepend=" AND ">
+				(cai.sitcai = 'D' OR cai.sitcai = 'P')
+			</isEqual>
+		</dynamic>
+	</select>
+	
+	<select id="getBaeByViabae" parameterClass="String" resultMap="mapComplexQuery">
+		SELECT 
+			bae.*
+		FROM 
+			fcn.fcnvia via
+			join fcn.fcnbae bae on bae.iddbae = via.baevia
+		WHERE bae.viabae = #value:VARCHAR#
+		LIMIT 1
+	</select>
+	
+	<update id="updMensagemSIAT" parameterClass="BaeVO">
+		update 
+			fcn.fcnbae
+		set 
+			msgbae = #msgbae:VARCHAR#
+		where 
+			iddbae = #iddbae:NUMERIC#
+	</update>
+	
+	<select id="getDadosInsmun" resultClass="hashmap" parameterClass="Long">
+		SELECT 
+			bae.iddbae, req.emareq, bae.viabae, fcn.formatacpfcnpj(bae.cpfbae) as cpfcnpj,
+			bae.nombae as nomraz, substr(cai.imucai,1,10) || '-' || substr(cai.imucai,11,1) as insmun
+		FROM 
+			fcn.fcnvia via
+			join fcn.fcnbae bae on bae.iddbae = via.baevia
+			join fcn.fcncai cai on cai.iddcai = bae.caibae
+			join fcn.fcnreq req on req.iddreq = bae.reqbae
+		where 
+			bae.iddbae = #value:NUMERIC#
+	</select>
+</sqlMap> 
+ 

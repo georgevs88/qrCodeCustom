@@ -1,0 +1,269 @@
+<?page title="Configuração CNAE" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window use="pmcg.imti.view.Cnacfg" id="wAtv" title="Configuração CNAE" width="880px" height="520px" border="normal" shadow="false" position="center"
+		mode="overlapped" sizable="false" closable="false" onCreate="wAtv.initComponentes()">
+	<separator height="10px"/>
+	<hbox width="100%" pack="center" align="center">
+		<vbox>
+			<grid width="840px">
+				<columns>
+					<column width="153px" align="right" />
+					<column width="140px" />
+					<column align="left" />
+				</columns>
+				<rows>
+					<row>
+						<label value="CNAE:" style="font-weight:bold;font-size:12px;"/>
+						<textbox value="@{wAtv.cnae}" width="90px" onOK="wAtv.pesquisar()" style="font-weight:bold;font-size:12px;text-align:center;"/>
+						<button label="Pesquisar" width="120px" image="/images/imgBuscar.png" style="border:1px solid #3083BA;background:white" onClick="wAtv.pesquisar()"/>
+					</row>
+					<row spans="1,2">
+						<div align="right">
+							<label value="Código:" style="font-weight:bold;font-size:14px;"/>
+						</div>
+						<label value="@{wAtv.cus.codcus}" style="font-weight:bold;font-size:14px;color:#FF6C00;"/>
+					</row>
+					<row spans="1,2">
+						<div align="right">
+							<label value="Descrição:" style="font-weight:bold;font-size:14px;"/>
+						</div>
+						<label value="@{wAtv.cus.nomcus}" style="font-weight:bold;font-size:14px;color:#FF6C00;"/>
+					</row>
+				</rows>
+			</grid>
+			<groupbox id="groupUso">
+				<div style="background:#A8A8A8;padding:5px">
+					<label value="Usos por Porte" style="color:white;font-weight:bold;font-size:14px;" />
+				</div>
+				<div align="center">
+					<grid width="840px">
+						<columns>
+							<column width="140px" align="left" />
+							<column width="140px" />
+							<column width="140px" align="left" />
+							<column width="140px" />
+							<column width="140px" align="left" />
+							<column width="140px" />
+						</columns>
+						<rows>
+							<row>
+								<vbox>
+									<label value="Menor Igual a 360m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true" value="@{wAtv.cus.menor_igual_360m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usoa}" label="@{usoa.coduso}"
+											value="@{usoa.coduso}" style="text-transform:uppercase" tooltiptext="@{usoa.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="De 360m² a 1000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.d360a1000}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usob}" label="@{usob.coduso}"
+											value="@{usob.coduso}" style="text-transform:uppercase" tooltiptext="@{usob.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Menor Igual a 500m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.menor_igual_500m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usoc}" label="@{usoc.coduso}"
+											value="@{usoc.coduso}" style="text-transform:uppercase" tooltiptext="@{usoc.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="De 500m² a 1000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.d500a1000}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usod}" label="@{usod.coduso}"
+											value="@{usod.coduso}" style="text-transform:uppercase" tooltiptext="@{usod.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Menor Igual a 720m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.menor_igual_720m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usoe}" label="@{usoe.coduso}"
+											value="@{usoe.coduso}" style="text-transform:uppercase" tooltiptext="@{usoe.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Maior que 720m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.maior_720m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usof}" label="@{usof.coduso}"
+											value="@{usof.coduso}" style="text-transform:uppercase" tooltiptext="@{usof.desuso}" />
+									</combobox>
+								</vbox>
+							</row>
+							<row>
+								<vbox>
+									<label value="De 720m² a 2500m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.d720a2500}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usog}" label="@{usog.coduso}"
+											value="@{usog.coduso}" style="text-transform:uppercase" tooltiptext="@{usog.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Menor Igual a 1000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.menor_igual_1000m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usoh}" label="@{usoh.coduso}"
+											value="@{usoh.coduso}" style="text-transform:uppercase" tooltiptext="@{usoh.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Maior que 1000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.maior_1000m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usoi}" label="@{usoi.coduso}"
+											value="@{usoi.coduso}" style="text-transform:uppercase" tooltiptext="@{usoi.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="De 1000m² a 5000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.d1000a5000}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usoj}" label="@{usoj.coduso}"
+											value="@{usoj.coduso}" style="text-transform:uppercase" tooltiptext="@{usoj.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Menor Igual a 2500m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.menor_igual_2500m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usok}" label="@{usok.coduso}"
+											value="@{usok.coduso}" style="text-transform:uppercase" tooltiptext="@{usok.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="De 2500m² a 5000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.d2500a5000}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usol}" label="@{usol.coduso}"
+											value="@{usol.coduso}" style="text-transform:uppercase" tooltiptext="@{usol.desuso}" />
+									</combobox>
+								</vbox>
+							</row>
+							<row>
+								<vbox>
+									<label value="Menor Igual a 5000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.menor_igual_5000m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usom}" label="@{usom.coduso}"
+											value="@{usom.coduso}" style="text-transform:uppercase" tooltiptext="@{usom.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Maior que 5000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.maior_5000m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=uson}" label="@{uson.coduso}"
+											value="@{uson.coduso}" style="text-transform:uppercase" tooltiptext="@{uson.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="De 5000m² a 10000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.d5000a10000}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usoo}" label="@{usoo.coduso}"
+											value="@{usoo.coduso}" style="text-transform:uppercase" tooltiptext="@{usoo.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Maior que 10000m²" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.maior_10000m}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=uso}" label="@{uso.coduso}"
+											value="@{uso.coduso}" style="text-transform:uppercase" tooltiptext="@{uso.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Qualquer Porte" />
+									<combobox model="@{wAtv.listUsos}" readonly="true"
+										value="@{wAtv.cus.qq_porte}" style="text-transform:uppercase" width="60px">
+										<comboitem self="@{each=usoq}" label="@{usoq.coduso}"
+											value="@{usoq.coduso}" style="text-transform:uppercase" tooltiptext="@{usoq.desuso}" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="MEI" />
+									<combobox id="meiacf" width="60px" readonly="true" selectedItem="@{wAtv.cus.meicus}">
+										<comboitem value="S" label='SIM' />
+										<comboitem value="N" label='NÃO' />
+									</combobox>
+								</vbox>
+							</row>
+<!-- 							<row spans="1,5"> -->
+<!-- 								<label value="Última Alteração:" style="font-weight:bold;"/> -->
+<!-- 								<textbox value="@{wAtv.cus.usudatalt}" readonly="true" width="200px" style="font-weight:bold;text-align:center;"/> -->
+<!-- 							</row> -->
+						</rows>
+					</grid>
+				</div>
+			</groupbox>
+			<groupbox id="groupRisco">
+				<div style="background:#A8A8A8;padding:5px">
+					<label value="Riscos" style="color:white;font-weight:bold;font-size:14px;" />
+				</div>
+				<div align="center">
+					<grid width="840px">
+						<columns>
+							<column width="140px" />
+							<column width="140px" align="left" />
+							<column width="140px" />
+							<column width="140px" align="left" />
+							<column width="140px" />
+							
+						</columns>
+						<rows>
+							<row>
+								<label />
+								<vbox>
+									<label value="Meio Ambiente" />
+									<combobox id="ambccl" readonly="true" width="110px" selectedItem="@{wAtv.ccl.ambccl}" style="text-align:center;font-weight:bold;font-size: 16px;">
+										<comboitem value="B" label="BAIXO" />
+										<comboitem value="M" label="MÉDIO" />
+										<comboitem value="A" label="ALTO" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Vigilância Sanitária" />
+									<combobox id="vigccl" readonly="true" width="110px" selectedItem="@{wAtv.ccl.vigccl}" style="text-align:center;font-weight:bold;font-size: 16px;">
+										<comboitem value="B" label="BAIXO" />
+										<comboitem value="M" label="MÉDIO" />
+										<comboitem value="A" label="ALTO" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="Bombeiros" />
+									<combobox id="bomccl" readonly="true" width="110px" selectedItem="@{wAtv.ccl.bomccl}" style="text-align:center;font-weight:bold;font-size: 16px;">
+										<comboitem value="B" label="BAIXO" />
+										<comboitem value="M" label="MÉDIO" />
+										<comboitem value="A" label="ALTO" />
+									</combobox>
+								</vbox>
+								<vbox>
+									<label value="GURB" />
+									<combobox id="gurccl" readonly="true" width="110px" selectedItem="@{wAtv.ccl.gurccl}" style="text-align:center;font-weight:bold;font-size: 16px;">
+										<comboitem value="B" label="BAIXO" />
+										<comboitem value="M" label="MÉDIO" />
+										<comboitem value="A" label="ALTO" />
+									</combobox>
+								</vbox>
+							</row>
+<!-- 							<row spans="1,5"> -->
+<!-- 								<label value="Última Alteração:" style="font-weight:bold;"/> -->
+<!-- 								<textbox value="@{wAtv.cus.usudatalt}" readonly="true" width="200px" style="font-weight:bold;text-align:center;"/> -->
+<!-- 							</row> -->
+						</rows>
+					</grid>
+				</div>
+			</groupbox>
+			<div align="center">
+				<button label="Salvar Configuração" onClick="wAtv.salvar()" style="width: 200px;font-size: 16px;background-color: #00042A !important;color: white;font-weight: bold;height: 30px;border-radius: 7px !important;"/>
+			</div>
+		</vbox>
+	</hbox>
+</window>
+</zk>

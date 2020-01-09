@@ -1,0 +1,207 @@
+<?page title="Gerenciador FCN" cacheable="false" language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window use="pmcg.imti.view.Gerfcn" id="wFcn" title="Gerenciador FCN" width="1000px" height="640px" border="normal" shadow="false" position="center"
+		mode="overlapped" sizable="false" closable="true" onCreate="wFcn.initComponentes()"  contentStyle="overflow:auto;">
+		<style src="/ext/cimweb_ext.css"></style>
+		<div style="padding:10px">
+			<hbox>
+				<button class="button" label="Buscar Pendentes" onClick="wFcn.buscarViaEpdPendentes()" style="padding:5px"/>
+				<separator width="5px"/>
+				<button class="button" label="Processar Importação" onClick="wFcn.processarImportacao(1)" style="padding:5px"/>
+				<groupbox>
+					<hbox>
+						<checkbox checked="@{wFcn.grava_via}" label="Grava VIA"/>
+						<checkbox checked="@{wFcn.resp_via}" label="Responde VIA"/>
+						<checkbox checked="@{wFcn.grava_emp}" label="Grava EPD"/>
+						<checkbox checked="@{wFcn.resp_emp}" label="Responde EPD"/>
+						<button class="button" label="Processar" onClick="wFcn.processarImportacao(2)" style="padding:5px"/>
+					</hbox>
+				</groupbox>
+			</hbox>
+		</div>
+		<groupbox width="945px">
+			<hbox>
+				<label value="Viabilidades PENDENTES" style="color:#277EB7;font-weight:bold;font-size:16px;" />
+				<label value="@{wFcn.qtdViaPend}" style="color:rgb(197,29,29);font-weight:bold;font-size:16px;" />
+			</hbox>
+			<listbox model="@{wFcn.listViaPendente}" selectedItem="@{wFcn.viaPendenteSel}" style="border:1px solid #277EB7;">
+				<listhead>
+<!-- 					<listheader width="36px" label="" style="text-align:center;font-size:11px" /> -->
+					<listheader width="110px" label="Protocolo" style="text-align:center;font-size:11px" />
+					<listheader width="70px" label="Natureza" style="text-align:center;font-size:11px" />
+					<listheader width="110px" label="Enquadramento" style="text-align:center;font-size:11px" />
+					<listheader label="Requerente" style="text-align:left;font-size:11px" />
+				</listhead>
+				<listitem self="@{each=viap}" value="@{viap}">
+<!-- 					<listcell style="text-align:center"> -->
+<!-- 						<image onClick="wFcn.gravaVia()" src="/images/btnSalvar.png" width="15px" height="15px" tooltiptext="Gravar Viabilidade" style="align:center"/> -->
+<!-- 					</listcell> -->
+					<listcell label="@{viap.provia}" style="text-align:center;font-size:11px" />
+					<listcell label="@{viap.naturezaJuridica.codigo}" style="text-align:center;font-size:11px"/>
+					<listcell label="@{viap.teqvia}" style="text-align:center;font-size:11px"/>
+					<listcell label="@{viap.requerente.nomreq}" style="text-align:left;font-size:11px"/>
+				</listitem>
+			</listbox>
+			<separator height="5px"/>
+			<hbox>
+				<label value="Viabilidades GRAVADAS" style="color:#277EB7;font-weight:bold;font-size:16px;" />
+				<label value="@{wFcn.qtdViaGrav}" style="color:rgb(197,29,29);font-weight:bold;font-size:16px;" />
+			</hbox>
+			<paging id="pagViaG" pageSize="10" />
+			<listbox model="@{wFcn.listViaGravado}" selectedItem="@{wFcn.viaGravadoSel}" style="border:1px solid #277EB7;">
+				<listhead>
+					<listheader width="95px">
+						<vbox>
+							<label value="Protocolo" style="text-align:center;font-size:11px"/>
+							<textbox width="77px" value="@{wFcn.provia}" onOK="wFcn.buscaViaGravadas()" style="text-align:center;font-size:10px"/>
+						</vbox>
+					</listheader>
+					<listheader width="68px" label="Data" style="text-align:center;font-size:11px" />
+					<listheader width="68px" label="Conf. Rec." style="text-align:center;font-size:11px" />
+					<listheader width="120px">
+						<div align="center">
+							<label value="Análise Endereço" style="text-align:center;font-size:11px"/>
+							<div align="center">
+								<label value="I:"/>
+								<checkbox checked="@{wFcn.analisespendentes}" onCheck="wFcn.buscaViaGravadas()" tooltiptext="Análises Pendentes"/>
+							</div>
+						</div>
+					</listheader>
+					<listheader label="Requerente" style="text-align:left;font-size:11px" />
+				</listhead>
+				<listitem self="@{each=viag}" value="@{viag}">
+					<listcell label="@{viag.provia}" style="text-align:center;font-size:11px" />
+					<listcell label="@{viag.datvia}" style="text-align:center;font-size:11px"/>
+					<listcell style="text-align:center;font-size:11px">
+						<label value="@{viag.crevia}" style="@{viag.styleconfrec}"/>
+						<image src="/images/ok.png" width="12px" height="12px" tooltiptext="Confirmar Recebimento" visible="@{viag.visibleconfrec}" onClick="wFcn.confirmaRecVia()"/>
+					</listcell>
+					<listcell style="text-align:center">
+						<label value="@{viag.sitaen}" style="@{viag.style}"/>
+						<image src="/images/dadosImob.png" tooltiptext="Analisar Endereço" onClick="wFcn.analisaEnderecoVia()" visible="@{viag.visibleanalise}"/>
+					</listcell>
+					<listcell label="@{viag.nomreq}" style="text-align:left;font-size:11px"/>
+				</listitem>
+			</listbox>
+			<separator height="5px"/>
+			<hbox>
+				<label value="Empreendimentos PENDENTES" style="color:#277EB7;font-weight:bold;font-size:16px;" />
+				<label value="@{wFcn.qtdEpdPend}" style="color:rgb(197,29,29);font-weight:bold;font-size:16px;" />
+			</hbox>
+			<listbox model="@{wFcn.listEpdPendente}" selectedItem="@{wFcn.epdPendenteSel}" style="border:1px solid #277EB7;">
+				<listhead>
+<!-- 					<listheader width="36px" label="" style="text-align:center;font-size:11px" /> -->
+					<listheader width="110px" label="Nº Processo" style="text-align:center;font-size:11px" />
+					<listheader width="80px" label="NIRE" style="text-align:center;font-size:11px" />
+					<listheader width="100px" label="CNPJ" style="text-align:center;font-size:11px" />
+					<listheader label="Requerente" style="text-align:left;font-size:11px" />
+				</listhead>
+				<listitem self="@{each=epdp}" value="@{epdp}">
+<!-- 					<listcell style="text-align:center"> -->
+<!-- 						<image onClick="wFcn.gravaEpd()" src="/images/btnSalvar.png" width="15px" height="15px" tooltiptext="Gravar Empreendimento" style="align:center"/> -->
+<!-- 					</listcell> -->
+					<listcell label="@{epdp.nprepd}" style="text-align:center;font-size:11px" />
+					<listcell label="@{epdp.nirepd}" style="text-align:center;font-size:11px"/>
+					<listcell label="@{epdp.cnpepd}" style="text-align:center;font-size:11px"/>
+					<listcell label="@{epdp.processo.requerente.nomreq}" style="text-align:left;font-size:11px"/>
+				</listitem>
+			</listbox>
+			<separator height="5px"/>
+			<hbox>
+				<label value="Empreendimentos GRAVADOS" style="color:#277EB7;font-weight:bold;font-size:16px;" />
+				<label value="@{wFcn.qtdEpdGrav}" style="color:rgb(197,29,29);font-weight:bold;font-size:16px;" />
+			</hbox>
+			<paging id="pagEpdG" pageSize="10" />
+			<listbox model="@{wFcn.listEpdGravado}" selectedItem="@{wFcn.epdGravadoSel}" style="border:1px solid #277EB7;">
+				<listhead>
+					<listheader width="105px">
+						<vbox>
+							<label value="Nº Processo" style="text-align:center;font-size:11px"/>
+							<textbox width="88px" value="@{wFcn.nprepd}" onOK="wFcn.buscaEpdGravados(0)" style="text-align:center;font-size:10px"/>
+						</vbox>
+					</listheader>
+					<listheader width="120px" label="Ato" style="text-align:left;font-size:11px" />
+					<listheader width="80px" label="NIRE" style="text-align:center;font-size:11px" />
+					<listheader width="96px" label="CNPJ" style="text-align:center;font-size:11px" />
+					<listheader width="68px" label="Conf. Rec." style="text-align:center;font-size:11px" />
+					<listheader width="100px">
+						<div align="center">
+							<label value="Situação" style="text-align:center;font-size:11px"/>
+							<div align="center">
+								<label value="I:"/>
+								<checkbox checked="@{wFcn.inscricoespendentes}" onCheck="wFcn.buscaEpdGravados(1)" tooltiptext="Inscrições Pendentes"/>
+								<label value="A:"/>
+								<checkbox checked="@{wFcn.alteracoespendentes}" onCheck="wFcn.buscaEpdGravados(2)" tooltiptext="Alterações Pendentes"/>
+							</div>
+						</div>
+					</listheader>
+					<listheader label="Razão Social/Fantasia" style="text-align:left;font-size:11px" />
+				</listhead>
+				<listitem self="@{each=epdg}" value="@{epdg}">
+					<listcell>
+						<label value="@{epdg.nprepd}" style="text-align:center;font-size:11px" tooltiptext="@{epdg.pvimat}" onClick="wFcn.consultarEpd(self.parent.parent)"/>
+					</listcell>
+					<listcell label="@{epdg.atopro}" style="text-align:left;font-size:11px" tooltiptext="@{epdg.desevt}"/>
+					<listcell label="@{epdg.nirepd}" style="text-align:center;font-size:11px"/>
+					<listcell label="@{epdg.cnpepd}" style="text-align:center;font-size:11px"/>
+					<listcell style="text-align:center;font-size:11px">
+						<label value="@{epdg.creepd}" style="@{epdg.styleconfrec}"/>
+						<image src="/images/ok.png" width="12px" height="12px" tooltiptext="Confirmar Recebimento" visible="@{epdg.visibleconfrec}" onClick="wFcn.confirmaRecEpd()"/>
+					</listcell>
+					<listcell style="text-align:center">
+						<label value="@{epdg.sitcai}" style="@{epdg.style}"/>
+						<image src="/images/dadosImob.png" tooltiptext="Confirma Alvará Insc. Municipal" onClick="wFcn.confAlvInscMun()" visible="@{epdg.visibleanalise}"/>
+					</listcell>
+					<listcell label="@{epdg.rzsfan}" tooltiptext="@{epdg.requerente}" style="text-align:left;font-size:11px"/>
+				</listitem>
+			</listbox>
+			<separator height="5px"/>
+			<hbox>
+				<label value="BAEs" style="color:#277EB7;font-weight:bold;font-size:16px;" />
+				<label value="@{wFcn.qtdBae}" style="color:rgb(197,29,29);font-weight:bold;font-size:16px;" />
+			</hbox>
+			<paging id="pagBae" pageSize="10" />
+			<listbox model="@{wFcn.listBaes}" selectedItem="@{wFcn.baeSel}" style="border:1px solid #277EB7;">
+				<listhead>
+					<listheader width="105px">
+						<vbox>
+							<label value="Nº Processo" style="text-align:center;font-size:11px"/>
+							<textbox width="88px" value="@{wFcn.nprepd}" onOK="wFcn.buscaEpdGravados(0)" style="text-align:center;font-size:10px"/>
+						</vbox>
+					</listheader>
+					<listheader width="50px" label="Nat. Jur." style="text-align:left;font-size:11px" />
+					<listheader width="96px" label="CPF / CNPJ" style="text-align:center;font-size:11px" />
+					<listheader width="96px" label="Tipo Registro" style="text-align:center;font-size:11px" />
+					<listheader width="68px" label="Evento" style="text-align:center;font-size:11px" />
+					<listheader width="100px">
+						<div align="center">
+							<label value="Situação" style="text-align:center;font-size:11px"/>
+							<div align="center">
+								<label value="I:"/>
+								<checkbox checked="@{wFcn.inscricoesbaependentes}" onCheck="wFcn.buscaBaes()" tooltiptext="Inscrições Pendentes"/>
+							</div>
+						</div>
+					</listheader>
+					<listheader label="Razão Social/Fantasia" style="text-align:left;font-size:11px" />
+				</listhead>
+				<listitem self="@{each=baeg}" value="@{baeg}">
+					<listcell>
+						<label value="@{baeg.viabae}" style="text-align:center;font-size:11px" onClick="wFcn.consultarBae(self.parent.parent)"/>
+					</listcell>
+					<listcell label="@{baeg.njrvia}" style="text-align:left;font-size:11px" tooltiptext="@{baeg.desevt}"/>
+					<listcell label="@{baeg.cpfcnpj}" style="text-align:center;font-size:11px"/>
+					<listcell label="@{baeg.tipvia}" style="text-align:center;font-size:11px"/>
+					<listcell label="@{baeg.evento}" style="text-align:center;font-size:11px"/>
+					<listcell style="text-align:center">
+						<label value="@{baeg.sitcaidesc}" style="@{baeg.style}"/>
+						<image src="/images/dadosImob.png" tooltiptext="Confirma Alvará Insc. Municipal" onClick="wFcn.confAlvInscMunBae()" visible="@{baeg.visibleanalise}"/>
+					</listcell>
+					<listcell label="@{baeg.nomnfabae}" tooltiptext="@{baeg.requerente}" style="text-align:left;font-size:11px"/>
+				</listitem>
+			</listbox>
+		</groupbox>
+	</window>
+</zk>

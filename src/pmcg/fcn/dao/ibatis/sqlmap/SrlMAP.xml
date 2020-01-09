@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Srl">
+	<typeAlias alias="SrlVO" type="pmcg.fcn.domain.SrlVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="SrlVO">
+		<result property="iddsrl" column="iddsrl" />
+		<result property="sadsrl" column="sadsrl" />
+		<result property="repsrl" column="repsrl" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="SrlVO">
+		<result property="iddsrl" column="iddsrl" />
+		<result property="sadsrl" column="sadsrl" />
+		<result property="repsrl" column="repsrl" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnsrl WHERE iddsrl = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnsrl WHERE iddsrl = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="SrlVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnsrl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddsrl" prepend=" AND ">
+				iddsrl = #iddsrl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sadsrl" prepend=" AND ">
+				sadsrl = #sadsrl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="repsrl" prepend=" AND ">
+				repsrl = #repsrl:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="SrlVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnsrl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddsrl" prepend=" AND "> iddsrl =
+				#iddsrl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sadsrl" prepend=" AND "> sadsrl =
+				#sadsrl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="repsrl" prepend=" AND "> repsrl =
+				#repsrl:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnsrl
+	</select>
+
+	<insert id="insReg" parameterClass="SrlVO">
+		<selectKey keyProperty="iddsrl" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqsrl')
+		</selectKey>
+		INSERT INTO fcn.fcnsrl(iddsrl,sadsrl,repsrl) VALUES
+		(#iddsrl:NUMERIC#,#sadsrl:NUMERIC#,#repsrl:NUMERIC# )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="SrlVO">
+		UPDATE fcn.fcnsrl SET sadsrl= #sadsrl:NUMERIC#,repsrl= #repsrl:NUMERIC# WHERE
+		iddsrl = #iddsrl:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnsrl WHERE iddsrl = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnsrl WHERE iddsrl in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="SrlVO"
+		resultClass="Integer">
+		SELECT count(iddsrl) FROM fcn.fcnsrl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddsrl" prepend=" AND "> iddsrl =
+				#iddsrl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sadsrl" prepend=" AND "> sadsrl =
+				#sadsrl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="repsrl" prepend=" AND "> repsrl =
+				#repsrl:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap> 
+ 

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Aif">
+	<typeAlias alias="AifVO" type="pmcg.fcn.domain.AifVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="AifVO">
+		<result property="iddaif" column="iddaif" />
+		<result property="notaif" column="notaif" />
+		<result property="aifaif" column="aifaif" />
+		<result property="drnaif" column="drnaif" />
+		<result property="draaif" column="draaif" />
+		<result property="apdaif" column="apdaif" />
+		<result property="pfdaif" column="pfdaif" />
+		<result property="arraif" column="arraif" />
+		<result property="nomaif" column="nomaif" />
+		<result property="atvaif" column="atvaif" />
+		<result property="legaif" column="legaif" />
+		<result property="tpnaif" column="tpnaif" />
+		<result property="relaif" column="relaif" />
+		<result property="lauaif" column="lauaif" />
+		<result property="edraif" column="edraif" />
+		<result property="baiaif" column="baiaif" />
+		<result property="regaif" column="regaif" />
+		<result property="ageaif" column="ageaif" />
+		<result property="proaif" column="proaif" />
+		<result property="dtfaif" column="dtfaif" />
+		<result property="obsaif" column="obsaif" />
+		<result property="sitaif" column="sitaif" />
+		<result property="dtlaif" column="dtlaif" />
+		<result property="reiaif" column="reiaif" />
+		<result property="cdpaif" column="cdpaif" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="AifVO">
+		<result property="iddaif" column="iddaif" />
+		<result property="notaif" column="notaif" />
+		<result property="aifaif" column="aifaif" />
+		<result property="drnaif" column="drnaif" />
+		<result property="draaif" column="draaif" />
+		<result property="apdaif" column="apdaif" />
+		<result property="pfdaif" column="pfdaif" />
+		<result property="arraif" column="arraif" />
+		<result property="nomaif" column="nomaif" />
+		<result property="atvaif" column="atvaif" />
+		<result property="legaif" column="legaif" />
+		<result property="tpnaif" column="tpnaif" />
+		<result property="relaif" column="relaif" />
+		<result property="lauaif" column="lauaif" />
+		<result property="edraif" column="edraif" />
+		<result property="baiaif" column="baiaif" />
+		<result property="regaif" column="regaif" />
+		<result property="ageaif" column="ageaif" />
+		<result property="proaif" column="proaif" />
+		<result property="dtfaif" column="dtfaif" />
+		<result property="obsaif" column="obsaif" />
+		<result property="sitaif" column="sitaif" />
+		<result property="dtlaif" column="dtlaif" />
+		<result property="reiaif" column="reiaif" />
+		<result property="cdpaif" column="cdpaif" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licaif WHERE iddaif = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM lic.licaif WHERE iddaif = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="AifVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licaif
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddaif" prepend=" AND ">
+				iddaif = #iddaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="notaif" prepend=" AND ">
+				notaif = #notaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="aifaif" prepend=" AND ">
+				aifaif = #aifaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="drnaif" prepend=" AND "> to_char(drnaif,'dd/MM/yyyy') =
+				to_char(#drnaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="draaif" prepend=" AND "> to_char(draaif,'dd/MM/yyyy') =
+				to_char(#draaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="apdaif" prepend=" AND ">
+				apdaif ILIKE '%' || #apdaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pfdaif" prepend=" AND "> to_char(pfdaif,'dd/MM/yyyy') =
+				to_char(#pfdaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="arraif" prepend=" AND ">
+				arraif ILIKE '%' || #arraif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomaif" prepend=" AND ">
+				nomaif ILIKE '%' || #nomaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="atvaif" prepend=" AND ">
+				atvaif ILIKE '%' || #atvaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="legaif" prepend=" AND ">
+				legaif ILIKE '%' || #legaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tpnaif" prepend=" AND ">
+				tpnaif ILIKE '%' || #tpnaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="relaif" prepend=" AND ">
+				relaif ILIKE '%' || #relaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="lauaif" prepend=" AND ">
+				lauaif ILIKE '%' || #lauaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edraif" prepend=" AND ">
+				edraif ILIKE '%' || #edraif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="baiaif" prepend=" AND ">
+				baiaif ILIKE '%' || #baiaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="regaif" prepend=" AND ">
+				regaif ILIKE '%' || #regaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ageaif" prepend=" AND ">
+				ageaif ILIKE '%' || #ageaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="proaif" prepend=" AND ">
+				proaif ILIKE '%' || #proaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtfaif" prepend=" AND "> to_char(dtfaif,'dd/MM/yyyy') =
+				to_char(#dtfaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="obsaif" prepend=" AND ">
+				obsaif ILIKE '%' || #obsaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sitaif" prepend=" AND ">
+				sitaif ILIKE '%' || #sitaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtlaif" prepend=" AND "> to_char(dtlaif,'dd/MM/yyyy') =
+				to_char(#dtlaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="reiaif" prepend=" AND ">
+				reiaif ILIKE '%' || #reiaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cdpaif" prepend=" AND ">
+				cdpaif ILIKE '%' || #cdpaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="AifVO" resultMap="mapComplexQuery">
+		SELECT * FROM lic.licaif
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddaif" prepend=" AND "> iddaif = #iddaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="notaif" prepend=" AND "> notaif = #notaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="aifaif" prepend=" AND "> aifaif = #aifaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="drnaif" prepend=" AND "> to_char(drnaif,'dd/MM/yyyy') =
+				to_char(#drnaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="draaif" prepend=" AND "> to_char(draaif,'dd/MM/yyyy') =
+				to_char(#draaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="apdaif" prepend=" AND ">
+				apdaif ILIKE '%' || #apdaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pfdaif" prepend=" AND "> to_char(pfdaif,'dd/MM/yyyy') =
+				to_char(#pfdaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="arraif" prepend=" AND ">
+				arraif ILIKE '%' || #arraif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomaif" prepend=" AND ">
+				nomaif ILIKE '%' || #nomaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="atvaif" prepend=" AND ">
+				atvaif ILIKE '%' || #atvaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="legaif" prepend=" AND ">
+				legaif ILIKE '%' || #legaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tpnaif" prepend=" AND ">
+				tpnaif ILIKE '%' || #tpnaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="relaif" prepend=" AND ">
+				relaif ILIKE '%' || #relaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="lauaif" prepend=" AND ">
+				lauaif ILIKE '%' || #lauaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edraif" prepend=" AND ">
+				edraif ILIKE '%' || #edraif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="baiaif" prepend=" AND ">
+				baiaif ILIKE '%' || #baiaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="regaif" prepend=" AND ">
+				regaif ILIKE '%' || #regaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ageaif" prepend=" AND ">
+				ageaif ILIKE '%' || #ageaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="proaif" prepend=" AND ">
+				proaif ILIKE '%' || #proaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtfaif" prepend=" AND "> to_char(dtfaif,'dd/MM/yyyy') =
+				to_char(#dtfaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="obsaif" prepend=" AND ">
+				obsaif ILIKE '%' || #obsaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sitaif" prepend=" AND ">
+				sitaif ILIKE '%' || #sitaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtlaif" prepend=" AND "> to_char(dtlaif,'dd/MM/yyyy') =
+				to_char(#dtlaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="reiaif" prepend=" AND ">
+				reiaif ILIKE '%' || #reiaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cdpaif" prepend=" AND ">
+				cdpaif ILIKE '%' || #cdpaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licaif
+	</select>
+
+	<insert id="insReg" parameterClass="AifVO">
+		<selectKey keyProperty="iddaif" resultClass="Long">
+			SELECT NEXTVAL('lic.seqaif')
+		</selectKey>
+		INSERT INTO
+		lic.licaif(iddaif,notaif,aifaif,drnaif,draaif,apdaif,pfdaif,arraif,nomaif,atvaif,legaif,tpnaif,relaif,lauaif,edraif,baiaif,regaif,ageaif,proaif,dtfaif,obsaif,sitaif,dtlaif,reiaif,cdpaif,usualt,datalt)
+		VALUES (#iddaif:NUMERIC#,#notaif:NUMERIC#,#aifaif:NUMERIC#,#drnaif:TIMESTAMP#,#draaif:TIMESTAMP#,
+		UPPER(#apdaif:VARCHAR#),#pfdaif:TIMESTAMP#, UPPER(#arraif:VARCHAR#), UPPER(#nomaif:VARCHAR#), UPPER(#atvaif:VARCHAR#),
+		UPPER(#legaif:VARCHAR#), UPPER(#tpnaif:VARCHAR#), UPPER(#relaif:VARCHAR#), UPPER(#lauaif:VARCHAR#),
+		UPPER(#edraif:VARCHAR#), UPPER(#baiaif:VARCHAR#), UPPER(#regaif:VARCHAR#), UPPER(#ageaif:VARCHAR#),
+		UPPER(#proaif:VARCHAR#),#dtfaif:TIMESTAMP#, UPPER(#obsaif:VARCHAR#), UPPER(#sitaif:VARCHAR#),#dtlaif:TIMESTAMP#,
+		UPPER(#reiaif:VARCHAR#), UPPER(#cdpaif:VARCHAR#), UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="AifVO">
+		UPDATE lic.licaif SET notaif= #notaif:NUMERIC#,aifaif= #aifaif:NUMERIC#,drnaif= #drnaif:TIMESTAMP#,draaif=
+		#draaif:TIMESTAMP#,apdaif= UPPER(#apdaif:VARCHAR#),pfdaif= #pfdaif:TIMESTAMP#,arraif= UPPER(#arraif:VARCHAR#),nomaif=
+		UPPER(#nomaif:VARCHAR#),atvaif= UPPER(#atvaif:VARCHAR#),legaif= UPPER(#legaif:VARCHAR#),tpnaif=
+		UPPER(#tpnaif:VARCHAR#),relaif= UPPER(#relaif:VARCHAR#),lauaif= UPPER(#lauaif:VARCHAR#),edraif=
+		UPPER(#edraif:VARCHAR#),baiaif= UPPER(#baiaif:VARCHAR#),regaif= UPPER(#regaif:VARCHAR#),ageaif=
+		UPPER(#ageaif:VARCHAR#),proaif= UPPER(#proaif:VARCHAR#),dtfaif= #dtfaif:TIMESTAMP#,obsaif=
+		UPPER(#obsaif:VARCHAR#),sitaif= UPPER(#sitaif:VARCHAR#),dtlaif= #dtlaif:TIMESTAMP#,reiaif=
+		UPPER(#reiaif:VARCHAR#),cdpaif= UPPER(#cdpaif:VARCHAR#),usualt= UPPER(#usualt:VARCHAR#),datalt= now() WHERE iddaif =
+		#iddaif:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM lic.licaif WHERE iddaif = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM lic.licaif WHERE iddaif in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="AifVO" resultClass="Integer">
+		SELECT count(iddaif) FROM lic.licaif
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddaif" prepend=" AND "> iddaif = #iddaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="notaif" prepend=" AND "> notaif = #notaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="aifaif" prepend=" AND "> aifaif = #aifaif:NUMERIC#
+			</isNotNull>
+			<isNotNull property="drnaif" prepend=" AND "> to_char(drnaif,'dd/MM/yyyy') =
+				to_char(#drnaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="draaif" prepend=" AND "> to_char(draaif,'dd/MM/yyyy') =
+				to_char(#draaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="apdaif" prepend=" AND ">
+				apdaif ILIKE '%' || #apdaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pfdaif" prepend=" AND "> to_char(pfdaif,'dd/MM/yyyy') =
+				to_char(#pfdaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="arraif" prepend=" AND ">
+				arraif ILIKE '%' || #arraif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nomaif" prepend=" AND ">
+				nomaif ILIKE '%' || #nomaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="atvaif" prepend=" AND ">
+				atvaif ILIKE '%' || #atvaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="legaif" prepend=" AND ">
+				legaif ILIKE '%' || #legaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tpnaif" prepend=" AND ">
+				tpnaif ILIKE '%' || #tpnaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="relaif" prepend=" AND ">
+				relaif ILIKE '%' || #relaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="lauaif" prepend=" AND ">
+				lauaif ILIKE '%' || #lauaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="edraif" prepend=" AND ">
+				edraif ILIKE '%' || #edraif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="baiaif" prepend=" AND ">
+				baiaif ILIKE '%' || #baiaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="regaif" prepend=" AND ">
+				regaif ILIKE '%' || #regaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ageaif" prepend=" AND ">
+				ageaif ILIKE '%' || #ageaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="proaif" prepend=" AND ">
+				proaif ILIKE '%' || #proaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtfaif" prepend=" AND "> to_char(dtfaif,'dd/MM/yyyy') =
+				to_char(#dtfaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="obsaif" prepend=" AND ">
+				obsaif ILIKE '%' || #obsaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sitaif" prepend=" AND ">
+				sitaif ILIKE '%' || #sitaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dtlaif" prepend=" AND "> to_char(dtlaif,'dd/MM/yyyy') =
+				to_char(#dtlaif:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="reiaif" prepend=" AND ">
+				reiaif ILIKE '%' || #reiaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cdpaif" prepend=" AND ">
+				cdpaif ILIKE '%' || #cdpaif:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap> 
+ 

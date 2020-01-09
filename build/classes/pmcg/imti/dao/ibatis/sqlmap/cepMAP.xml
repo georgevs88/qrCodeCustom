@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Cep">
+	<typeAlias alias="CepVO" type="pmcg.imti.domain.CepVO" />
+
+	<select id="getRegByCep" parameterClass="String" resultClass="CepVO">
+		SELECT log.cep_logradouro as cep_logradouro, log.chave_logradouro_dne
+		as codlog, tp.chave_tp_log_dne as codtiplog,
+		UPPER(log.tipo_ofi_logradouro) AS tipo_ofi_logradouro,
+		UPPER(log.nome_ofi_logradouro) AS nome_ofi_logradouro,
+		UPPER(bai.nome_ofi_bai) AS nome_ofi_bai,
+		UPPER(cid.nome_ofi_localidade) AS nome_ofi_localidade,
+		UPPER(log.nome_completo_ofi) AS nome_completo_ofi,
+		UPPER(log.sigla_uf)
+		AS sigla_uf ,
+		bai.chave_bai_dne as codbai, cid.chave_loc_dne as codcid,
+		uf.chave_uf_dne as coduf
+		FROM dne.dne_gu_logradouros log
+		INNER JOIN dne.dne_gu_bairros bai
+		ON bai.chave_bai_dne = log.chave_bai_ini_dne
+		INNER JOIN dne.dne_gu_localidades cid
+		ON cid.chave_loc_dne = log.chave_loc_dne
+		INNER JOIN dne.dne_gu_unidades_federacao uf ON uf.sigla_uf = log.sigla_uf
+		INNER JOIN dne.dne_gu_tipos_logradouro tp on (log.tipo_ofi_logradouro
+		= tp.nome_ofi_tp_log)
+
+		WHERE log.cep_logradouro = #VALUE:VARCHAR# AND log.sigla_uf = 'MS'
+	</select>
+
+	<select id="getRegByCepVes" parameterClass="String" resultClass="CepVO">
+
+		SELECT log.nome_ofi_logradouro, log.nome_completo_ofi,
+		log.tipo_ofi_logradouro, log.sigla_uf,
+		bai.nome_ofi_bai,
+		loc.nome_ofi_localidade,log.cep_logradouro,
+		log.chave_logradouro_dne as codlog, tp.chave_tp_log_dne as codtiplog,
+		bai.chave_bai_dne as
+		codbai, loc.chave_loc_dne as codcid, uf.chave_uf_dne as
+		coduf,numini ||' ao '|| numfim as numero
+
+		FROM dne.dne_gu_logradouros log
+		INNER JOIN dne.dne_gu_bairros bai ON
+		(log.chave_bai_ini_dne =
+		bai.chave_bai_dne)
+		INNER JOIN
+		dne.dne_gu_localidades loc ON bai.chave_loc_dne =
+		loc.chave_loc_dne
+		INNER JOIN dne.dne_gu_unidades_federacao uf ON uf.sigla_uf =
+		log.sigla_uf
+		INNER JOIN dne.dne_gu_tipos_logradouro tp on
+		(log.tipo_ofi_logradouro = tp.nome_ofi_tp_log)
+
+		WHERE log.cep_logradouro = #value:VARCHAR# and loc.sigla_uf='MS'
+	</select>
+
+	<select id="getRegByCEPLoc" parameterClass="String" resultClass="CepVO">
+		SELECT loc.nome_ofi_localidade, loc.chave_loc_dne as codcid, loc.sigla_uf, 
+		uf.chave_uf_dne as coduf
+		FROM dne.dne_gu_localidades loc 
+		INNER JOIN dne.dne_gu_unidades_federacao uf ON (uf.sigla_uf = loc.sigla_uf)
+		where loc.cep_localidade = #value:VARCHAR# and loc.sigla_uf='MS'
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CepVO"
+		resultClass="CepVO">
+		SELECT log.cep_logradouro as cep_logradouro,
+		UPPER(log.tipo_ofi_logradouro) AS tipo_ofi_logradouro,
+		UPPER(log.nome_ofi_logradouro) AS nome_ofi_logradouro,
+		UPPER(bai.nome_ofi_bai) AS nome_ofi_bai,
+		UPPER(cid.nome_ofi_localidade) AS nome_ofi_localidade,
+		UPPER(log.nome_completo_ofi) AS nome_completo_ofi,
+		UPPER(log.sigla_uf)
+		AS sigla_uf,numini ||' ao '|| numfim as numero
+		FROM dne.dne_gu_logradouros log
+		INNER JOIN dne.dne_gu_bairros bai
+		ON bai.chave_bai_dne = log.chave_bai_ini_dne
+		INNER JOIN dne.dne_gu_localidades cid
+		ON cid.chave_loc_dne = log.chave_loc_dne
+		WHERE cid.sigla_uf='MS'
+		<isNotNull property="cep_logradouro" prepend=" AND ">
+			log.cep_logradouro = #cep_logradouro:VARCHAR#
+		</isNotNull>
+		<isNotNull property="tipo_ofi_logradouro" prepend=" AND ">
+			UPPER(log.tipo_ofi_logradouro) ILIKE '%' ||
+			UPPER(#tipo_ofi_logradouro:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="nome_ofi_logradouro" prepend=" AND ">
+			UPPER(log.nome_ofi_logradouro) ILIKE '%' ||
+			UPPER(#nome_ofi_logradouro:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="nome_ofi_bai" prepend=" AND ">
+			UPPER(bai.nome_ofi_bai) ILIKE '%' || UPPER(#nome_ofi_bai:VARCHAR#) ||
+			'%'
+		</isNotNull>
+		<isNotNull property="nome_ofi_localidade" prepend=" AND ">
+			UPPER(cid.nome_ofi_localidade) ILIKE '%' ||
+			UPPER(#nome_ofi_localidade:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="sigla_uf" prepend=" AND ">
+			UPPER(log.sigla_uf) = UPPER(#sigla_uf:VARCHAR#)
+		</isNotNull>
+		ORDER BY log.nome_ofi_logradouro
+	</select>
+
+	<select id="countRegByCriterio" parameterClass="CepVO"
+		resultClass="integer">
+		SELECT Count(*)
+		FROM dne.dne_gu_logradouros log
+		INNER JOIN dne.dne_gu_bairros bai
+		ON bai.chave_bai_dne = log.chave_bai_ini_dne
+		INNER JOIN dne.dne_gu_localidades cid
+		ON cid.chave_loc_dne = log.chave_loc_dne
+		WHERE  cid.sigla_uf='MS'
+		<isNotNull property="cep_logradouro" prepend=" AND ">
+			log.cep_logradouro = #cep_logradouro:VARCHAR#
+		</isNotNull>
+		<isNotNull property="tipo_ofi_logradouro" prepend=" AND ">
+			UPPER(log.tipo_ofi_logradouro) ILIKE '%' ||
+			UPPER(#tipo_ofi_logradouro:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="nome_ofi_logradouro" prepend=" AND ">
+			UPPER(log.nome_ofi_logradouro) ILIKE '%' ||
+			UPPER(#nome_ofi_logradouro:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="nome_ofi_bai" prepend=" AND ">
+			UPPER(bai.nome_ofi_bai) ILIKE '%' || UPPER(#nome_ofi_bai:VARCHAR#) ||
+			'%'
+		</isNotNull>
+		<isNotNull property="nome_ofi_localidade" prepend=" AND ">
+			UPPER(cid.nome_ofi_localidade) ILIKE '%' ||
+			UPPER(#nome_ofi_localidade:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="sigla_uf" prepend=" AND ">
+			UPPER(log.sigla_uf) = UPPER(#sigla_uf:VARCHAR#)
+		</isNotNull>
+	</select>
+
+</sqlMap>

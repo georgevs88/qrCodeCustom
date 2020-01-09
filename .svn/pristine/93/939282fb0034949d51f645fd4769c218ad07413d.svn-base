@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Mat">
+	<typeAlias alias="MatVO" type="pmcg.fcn.domain.MatVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="MatVO">
+		<result property="iddmat" column="iddmat" />
+		<result property="pvimat" column="pvimat" />
+		<result property="nirmat" column="nirmat" />
+		<result property="niamat" column="niamat" />
+		<result property="cnpmat" column="cnpmat" />
+		<result property="desmat" column="desmat" />
+		<result property="capmat" column="capmat" />
+		<result property="dinmat" column="dinmat" />
+		<result property="emamat" column="emamat" />
+		<result property="nommat" column="nommat" />
+		<result property="nfamat" column="nfamat" />
+		<result property="caimat" column="caimat" />
+		<result property="vrqmat" column="vrqmat" />
+		<result property="pormat" column="pormat" />
+		<result property="dddmat" column="dddmat" />
+		<result property="telmat" column="telmat" />
+		<result property="endmat" column="endmat" />
+		<result property="hommat" column="hommat" />
+		<result property="tsomat" column="tsomat" />
+		<result property="promat" column="promat" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="MatVO">
+		<result property="iddmat" column="iddmat" />
+		<result property="pvimat" column="pvimat" />
+		<result property="nirmat" column="nirmat" />
+		<result property="niamat" column="niamat" />
+		<result property="cnpmat" column="cnpmat" />
+		<result property="desmat" column="desmat" />
+		<result property="capmat" column="capmat" />
+		<result property="dinmat" column="dinmat" />
+		<result property="emamat" column="emamat" />
+		<result property="nommat" column="nommat" />
+		<result property="nfamat" column="nfamat" />
+		<result property="caimat" column="caimat" />
+		<result property="vrqmat" column="vrqmat" />
+		<result property="pormat" column="pormat" />
+		<result property="dddmat" column="dddmat" />
+		<result property="telmat" column="telmat" />
+		<result property="endmat" column="endmat" />
+		<result property="hommat" column="hommat" />
+		<result property="tsomat" column="tsomat" />
+		<result property="promat" column="promat" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnmat WHERE iddmat = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnmat WHERE iddmat = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="MatVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnmat
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddmat" prepend=" AND ">
+				iddmat = #iddmat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="pvimat" prepend=" AND ">
+				pvimat ILIKE '%' || #pvimat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nirmat" prepend=" AND ">
+				nirmat ILIKE '%' || #nirmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="niamat" prepend=" AND ">
+				niamat ILIKE '%' || #niamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cnpmat" prepend=" AND ">
+				cnpmat ILIKE '%' || #cnpmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="desmat" prepend=" AND ">
+				desmat ILIKE '%' || #desmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="capmat" prepend=" AND ">
+				capmat ILIKE '%' || #capmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dinmat" prepend=" AND ">
+				to_char(dinmat,'dd/MM/yyyy') =
+				to_char(#dinmat:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="emamat" prepend=" AND ">
+				emamat ILIKE '%' || #emamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nommat" prepend=" AND ">
+				nommat ILIKE '%' || #nommat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nfamat" prepend=" AND ">
+				nfamat ILIKE '%' || #nfamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="caimat" prepend=" AND ">
+				caimat ILIKE '%' || #caimat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vrqmat" prepend=" AND ">
+				vrqmat ILIKE '%' || #vrqmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pormat" prepend=" AND ">
+				pormat ILIKE '%' || #pormat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dddmat" prepend=" AND ">
+				dddmat ILIKE '%' || #dddmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telmat" prepend=" AND ">
+				telmat ILIKE '%' || #telmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="endmat" prepend=" AND ">
+				endmat = #endmat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="hommat" prepend=" AND ">
+				hommat ILIKE '%' || #hommat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tsomat" prepend=" AND ">
+				to_char(tsomat,'dd/MM/yyyy') =
+				to_char(#tsomat:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="promat" prepend=" AND ">
+				promat = #promat:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="MatVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnmat
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddmat" prepend=" AND "> iddmat =
+				#iddmat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="pvimat" prepend=" AND ">
+				pvimat ILIKE '%' || #pvimat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nirmat" prepend=" AND ">
+				nirmat ILIKE '%' || #nirmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="niamat" prepend=" AND ">
+				niamat ILIKE '%' || #niamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cnpmat" prepend=" AND ">
+				cnpmat ILIKE '%' || #cnpmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="desmat" prepend=" AND ">
+				desmat ILIKE '%' || #desmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="capmat" prepend=" AND ">
+				capmat ILIKE '%' || #capmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dinmat" prepend=" AND ">
+				to_char(dinmat,'dd/MM/yyyy') =
+				to_char(#dinmat:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="emamat" prepend=" AND ">
+				emamat ILIKE '%' || #emamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nommat" prepend=" AND ">
+				nommat ILIKE '%' || #nommat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nfamat" prepend=" AND ">
+				nfamat ILIKE '%' || #nfamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="caimat" prepend=" AND ">
+				caimat ILIKE '%' || #caimat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vrqmat" prepend=" AND ">
+				vrqmat ILIKE '%' || #vrqmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pormat" prepend=" AND ">
+				pormat ILIKE '%' || #pormat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dddmat" prepend=" AND ">
+				dddmat ILIKE '%' || #dddmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telmat" prepend=" AND ">
+				telmat ILIKE '%' || #telmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="endmat" prepend=" AND "> endmat =
+				#endmat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="hommat" prepend=" AND ">
+				hommat ILIKE '%' || #hommat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tsomat" prepend=" AND ">
+				to_char(tsomat,'dd/MM/yyyy') =
+				to_char(#tsomat:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnmat
+	</select>
+
+	<insert id="insReg" parameterClass="MatVO">
+		<selectKey keyProperty="iddmat" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqmat')
+		</selectKey>
+		INSERT INTO
+		fcn.fcnmat(iddmat,pvimat,nirmat,niamat,cnpmat,desmat,capmat,dinmat,emamat,nommat,nfamat,caimat,vrqmat,pormat,dddmat,telmat,endmat,hommat,tsomat,promat)
+		VALUES (#iddmat:NUMERIC#, UPPER(#pvimat:VARCHAR#),
+		UPPER(#nirmat:VARCHAR#), UPPER(#niamat:VARCHAR#),
+		UPPER(#cnpmat:VARCHAR#), UPPER(#desmat:VARCHAR#),
+		UPPER(#capmat:VARCHAR#),#dinmat:TIMESTAMP#, #emamat:VARCHAR#,
+		UPPER(#nommat:VARCHAR#), UPPER(#nfamat:VARCHAR#),
+		UPPER(#caimat:VARCHAR#), UPPER(#vrqmat:VARCHAR#),
+		UPPER(#pormat:VARCHAR#), UPPER(#dddmat:VARCHAR#),
+		UPPER(#telmat:VARCHAR#),#endmat:NUMERIC#,
+		UPPER(#hommat:VARCHAR#),#tsomat:TIMESTAMP#,#promat:NUMERIC# )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="MatVO">
+		UPDATE fcn.fcnmat SET pvimat= UPPER(#pvimat:VARCHAR#),nirmat=
+		UPPER(#nirmat:VARCHAR#),niamat= UPPER(#niamat:VARCHAR#),cnpmat=
+		UPPER(#cnpmat:VARCHAR#),desmat= UPPER(#desmat:VARCHAR#),capmat=
+		UPPER(#capmat:VARCHAR#),dinmat= #dinmat:TIMESTAMP#,emamat=
+		#emamat:VARCHAR#,nommat= UPPER(#nommat:VARCHAR#),nfamat=
+		UPPER(#nfamat:VARCHAR#),caimat= UPPER(#caimat:VARCHAR#),vrqmat=
+		UPPER(#vrqmat:VARCHAR#),pormat= UPPER(#pormat:VARCHAR#),dddmat=
+		UPPER(#dddmat:VARCHAR#),telmat= UPPER(#telmat:VARCHAR#),endmat=
+		#endmat:NUMERIC#,hommat= UPPER(#hommat:VARCHAR#),tsomat=
+		#tsomat:TIMESTAMP#,promat = #promat:NUMERIC# WHERE iddmat = #iddmat:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnmat WHERE iddmat = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnmat WHERE iddmat in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="MatVO"
+		resultClass="Integer">
+		SELECT count(iddmat) FROM fcn.fcnmat
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddmat" prepend=" AND "> iddmat =
+				#iddmat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="pvimat" prepend=" AND ">
+				pvimat ILIKE '%' || #pvimat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nirmat" prepend=" AND ">
+				nirmat ILIKE '%' || #nirmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="niamat" prepend=" AND ">
+				niamat ILIKE '%' || #niamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cnpmat" prepend=" AND ">
+				cnpmat ILIKE '%' || #cnpmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="desmat" prepend=" AND ">
+				desmat ILIKE '%' || #desmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="capmat" prepend=" AND ">
+				capmat ILIKE '%' || #capmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dinmat" prepend=" AND ">
+				to_char(dinmat,'dd/MM/yyyy') =
+				to_char(#dinmat:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="emamat" prepend=" AND ">
+				emamat ILIKE '%' || #emamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nommat" prepend=" AND ">
+				nommat ILIKE '%' || #nommat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nfamat" prepend=" AND ">
+				nfamat ILIKE '%' || #nfamat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="caimat" prepend=" AND ">
+				caimat ILIKE '%' || #caimat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vrqmat" prepend=" AND ">
+				vrqmat ILIKE '%' || #vrqmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="pormat" prepend=" AND ">
+				pormat ILIKE '%' || #pormat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dddmat" prepend=" AND ">
+				dddmat ILIKE '%' || #dddmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="telmat" prepend=" AND ">
+				telmat ILIKE '%' || #telmat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="endmat" prepend=" AND "> endmat =
+				#endmat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="hommat" prepend=" AND ">
+				hommat ILIKE '%' || #hommat:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tsomat" prepend=" AND ">
+				to_char(tsomat,'dd/MM/yyyy') =
+				to_char(#tsomat:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByProcesso" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnmat WHERE promat = #value:NUMERIC#
+	</select>
+	
+	<select id="getMatrizByProcesso" parameterClass="Long" resultClass="hashmap">
+		SELECT 
+			iddmat, pvimat, nirmat, niamat, fcn.formatacpfcnpj(cnpmat) as cnpmat, desmat,
+			fcn.formatavalorjunta(capmat) as capmat,to_char(dinmat, 'dd/MM/yyyy') as dinmat,emamat,
+			nommat,nfamat, fcn.formatavalorjunta(caimat) as caimat,
+			fcn.formatavalorjunta(vrqmat) as vrqmat, pormat, '(' || dddmat || ') ' || telmat as telmat, 
+			fcn.getEndereco(endmat) as endmat,hommat, to_char(tsomat, 'dd/MM/yyyy') as tsomat
+		FROM 
+			fcn.fcnmat 
+		WHERE 
+			promat = #value:NUMERIC#
+	</select>
+</sqlMap> 
+ 

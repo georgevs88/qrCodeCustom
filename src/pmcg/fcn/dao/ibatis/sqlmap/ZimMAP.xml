@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Zim">
+	<typeAlias alias="ZimVO" type="pmcg.fcn.domain.ZimVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="ZimVO">
+		<result property="iddzim" column="iddzim" />
+		<result property="zonzim" column="zonzim" />
+		<result property="imozim" column="imozim" />
+		<result property="munzim" column="munzim" />
+		<result property="altzim" column="altzim" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="ZimVO">
+		<result property="iddzim" column="iddzim" />
+		<result property="zonzim" column="zonzim" />
+		<result property="imozim" column="imozim" />
+		<result property="munzim" column="munzim" />
+		<result property="altzim" column="altzim" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnzim WHERE iddzim = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnzim WHERE iddzim = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="ZimVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnzim
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddzim" prepend=" AND ">
+				iddzim = #iddzim:NUMERIC#
+			</isNotNull>
+			<isNotNull property="zonzim" prepend=" AND ">
+				zonzim ILIKE '%' || #zonzim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="imozim" prepend=" AND ">
+				imozim ILIKE '%' || #imozim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="munzim" prepend=" AND ">
+				munzim = #munzim:NUMERIC#
+			</isNotNull>
+			<isNotNull property="altzim" prepend=" AND ">
+				altzim ILIKE '%' || #altzim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="ZimVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnzim
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddzim" prepend=" AND "> iddzim = #iddzim:NUMERIC#
+			</isNotNull>
+			<isNotNull property="zonzim" prepend=" AND ">
+				zonzim ILIKE '%' || #zonzim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="imozim" prepend=" AND ">
+				imozim ILIKE '%' || #imozim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="munzim" prepend=" AND "> munzim = #munzim:NUMERIC#
+			</isNotNull>
+			<isNotNull property="altzim" prepend=" AND ">
+				altzim ILIKE '%' || #altzim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnzim
+	</select>
+
+	<insert id="insReg" parameterClass="ZimVO">
+		<selectKey keyProperty="iddzim" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqzim')
+		</selectKey>
+		INSERT INTO fcn.fcnzim(iddzim,zonzim,imozim,munzim,altzim,usualt,datalt) VALUES (#iddzim:NUMERIC#,
+		UPPER(#zonzim:VARCHAR#), UPPER(#imozim:VARCHAR#),#munzim:NUMERIC#, UPPER(#altzim:VARCHAR#),
+		UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="ZimVO">
+		UPDATE fcn.fcnzim SET zonzim= UPPER(#zonzim:VARCHAR#),imozim= UPPER(#imozim:VARCHAR#),munzim= #munzim:NUMERIC#,altzim=
+		UPPER(#altzim:VARCHAR#),usualt= UPPER(#usualt:VARCHAR#),datalt= now() WHERE iddzim = #iddzim:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnzim WHERE iddzim = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnzim WHERE iddzim in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="ZimVO" resultClass="Integer">
+		SELECT count(iddzim) FROM fcn.fcnzim
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddzim" prepend=" AND "> iddzim = #iddzim:NUMERIC#
+			</isNotNull>
+			<isNotNull property="zonzim" prepend=" AND ">
+				zonzim ILIKE '%' || #zonzim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="imozim" prepend=" AND ">
+				imozim ILIKE '%' || #imozim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="munzim" prepend=" AND "> munzim = #munzim:NUMERIC#
+			</isNotNull>
+			<isNotNull property="altzim" prepend=" AND ">
+				altzim ILIKE '%' || #altzim:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegByInsc" parameterClass="String" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnzim 
+		WHERE imozim = #value:VARCHAR#
+		order by LENGTH(zonzim), zonzim
+	</select>
+	
+	<delete id="delZona" parameterClass="ZimVO">
+		DELETE FROM fcn.fcnzim 
+		WHERE zonzim = #zonzim:VARCHAR#
+		and imozim = #imozim:VARCHAR#
+		and munzim = #munzim:NUMERIC#
+	</delete>
+	
+</sqlMap> 
+ 

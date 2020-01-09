@@ -1,0 +1,58 @@
+<?page cacheable="false" language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window use="pmcg.imti.view.Aengra" id="wGra" title="Gráfico Análise Viabilidade Por Usuário" width="338px" height="280px" border="normal" shadow="false" position="center"
+		mode="overlapped" sizable="false" closable="true" onCreate="wGra.initComponentes()" contentStyle="overflow:auto;">
+		<grid style="margin: 30px 10px 10px;">
+	    	<columns>
+	    		<column align="right" width="120px"/>
+	    		<column />
+	    	</columns>
+	    	<rows>
+	    		<row style="padding:1px;" spans="1,5">
+	    			<label value="Tipo Gráfico:" style="font-size:16px;"/>
+					<combobox class="cmbzk" readonly="true" width="110px" value="@{wGra.tipoGrafico}">
+						<comboitem value="PIZZA" label="PIZZA" />
+						<comboitem value="DONUT" label="DONUT" />
+					</combobox>
+				</row>
+				<row style="padding:1px;" spans="1,5">
+	    			<label value="Mês:" style="font-size:16px;"/>
+	    			<combobox id="mes" class="cmbzk" readonly="true" width="80px" value="@{wGra.mes}">
+						<comboitem value="1" label="1" />
+						<comboitem value="2" label="2" />
+						<comboitem value="3" label="3" />
+						<comboitem value="4" label="4" />
+						<comboitem value="5" label="5" />
+						<comboitem value="6" label="6" />
+						<comboitem value="7" label="7" />
+						<comboitem value="8" label="8" />
+						<comboitem value="9" label="9" />
+						<comboitem value="10" label="10" />
+						<comboitem value="11" label="11" />
+						<comboitem value="12" label="12" />
+					</combobox>
+				</row>
+				<row style="padding:1px;" spans="1,5">
+	    			<label value="Ano:" style="font-size:16px;"/>
+					<intbox id="ano" value="@{wGra.ano}" style="text-align:center;"/>
+				</row>
+			</rows>
+		</grid>
+		<div align="center">
+			<a onClick="wGra.imprimir()">
+				<h:button class="btn btn-lg btn-default">
+					<span class="glyphicon glyphicon-print"></span>
+					Imprimir
+				</h:button>
+			</a>
+		</div>
+		<style src="/ext/integrarweb_ext.css"></style>
+		<style src="/css/bootstrap.min.css"></style>
+		<style src="/css/componentes.css"></style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    	<script src="/js/bootstrap.min.js"></script>
+	</window>
+</zk>

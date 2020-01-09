@@ -1,0 +1,40 @@
+<?page id="testZul" title="seleção de Unidade" cacheable="false" 
+	language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window use="pmcg.imti.view.Unilis" id="WinLis" title="Busca de Setores" border="normal" onCreate="WinLis.pesquisar()"
+		width="600px" height="450px" position="center" closable="true">
+		<borderlayout height="90%">
+			<north height="45px">
+				<vbox>
+					<separator/>
+					<hbox height="45px" width="100%">
+						<separator/>
+						<label value="Pesquisar Unidade: " />
+						<textbox id="nome" value="@{WinLis.nome}" width="300px" height="21px" focus="true" />
+						<button label="Pesquisar" onClick="WinLis.pesquisar()" 
+							image="/images/imgBuscar.png" tooltiptext="Pesquisar Setores" />
+					</hbox>
+				</vbox>
+			</north>
+			<center>
+				<listbox id="lbox" height="320px" width="99%" onSelect="WinLis.selecionar()" model="@{WinLis.listmodel}" selectedItem="@{WinLis.item}">
+					<listhead>
+						<listheader label="Código" width="20%" />
+						<listheader label="Descrição" width="80%" />
+					</listhead>
+					<listitem self="@{each=vo}">
+						<listcell>
+							<checkbox label="@{vo.coduni}" onCheck="WinLis.check(self.label)"/>
+						</listcell>
+						<listcell label="@{vo.desuni}" />
+					</listitem>				
+				</listbox>
+			</center>
+			<south></south>
+		</borderlayout>
+	</window>
+</zk>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Qfc">
+	<typeAlias alias="QfcVO" type="pmcg.imti.domain.QfcVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="QfcVO">
+		<result property="iddqfc" column="iddqfc" />
+		<result property="qlfqfc" column="qlfqfc" />
+		<result property="carqfc" column="carqfc" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="QfcVO">
+		<result property="iddqfc" column="iddqfc" />
+		<result property="qlfqfc" column="qlfqfc" />
+		<result property="carqfc" column="carqfc" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT
+		* FROM public.fcnqfc WHERE iddqfc = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM public.fcnqfc WHERE iddqfc = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="QfcVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.fcnqfc
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddqfc" prepend=" AND ">
+				iddqfc =
+				#iddqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="qlfqfc" prepend=" AND ">
+				qlfqfc =
+				#qlfqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="carqfc" prepend=" AND ">
+				carqfc =
+				#carqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' ||
+				#usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="QfcVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM public.fcnqfc
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddqfc" prepend=" AND "> iddqfc =
+				#iddqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="qlfqfc" prepend=" AND "> qlfqfc =
+				#qlfqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="carqfc" prepend=" AND "> carqfc =
+				#carqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' ||
+				#usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.fcnqfc
+	</select>
+
+	<insert id="insReg" parameterClass="QfcVO">
+		<selectKey keyProperty="iddqfc" resultClass="Long">
+			SELECT
+			NEXTVAL('public.seqqfc')
+		</selectKey>
+		INSERT INTO public.fcnqfc(iddqfc,qlfqfc,carqfc,usualt,datalt) VALUES
+		(#iddqfc:NUMERIC#,#qlfqfc:NUMERIC#,#carqfc:NUMERIC#,
+		UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="QfcVO">
+		UPDATE public.fcnqfc SET
+		qlfqfc= #qlfqfc:NUMERIC#,carqfc= #carqfc:NUMERIC#,usualt=
+		UPPER(#usualt:VARCHAR#),datalt= now() WHERE
+		iddqfc = #iddqfc:NUMERIC#
+	</update>
+
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM public.fcnqfc
+		WHERE iddqfc = #value:NUMERIC#
+	</delete>
+
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM
+		public.fcnqfc WHERE iddqfc in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="QfcVO"
+		resultClass="Integer">
+		SELECT count(iddqfc) FROM public.fcnqfc
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddqfc" prepend=" AND "> iddqfc =
+				#iddqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="qlfqfc" prepend=" AND "> qlfqfc =
+				#qlfqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="carqfc" prepend=" AND "> carqfc =
+				#carqfc:NUMERIC#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' ||
+				#usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getCargoByQualificacao" parameterClass="Integer"
+		resultClass="Integer">
+		SELECT carqfc FROM public.fcnqfc
+		WHERE qlfqfc = #VALUE:NUMERIC#
+	</select>
+</sqlMap> 
+ 

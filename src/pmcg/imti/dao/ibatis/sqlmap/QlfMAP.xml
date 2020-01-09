@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Qlf">
+	<typeAlias alias="QlfVO" type="pmcg.imti.domain.QlfVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="QlfVO">
+		<result property="codqlf" column="codqlf" />
+		<result property="desqlf" column="desqlf" />
+		<result property="datfim" column="datfim" />
+		<result property="datalt" column="datalt" />
+		<result property="codusualt" column="codusualt" />
+		<result property="numver" column="numver" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="QlfVO">
+		<result property="codqlf" column="codqlf" />
+		<result property="desqlf" column="desqlf" />
+		<result property="datfim" column="datfim" />
+		<result property="datalt" column="datalt" />
+		<result property="codusualt" column="codusualt" />
+		<result property="numver" column="numver" />
+		
+		<result property="socadm" column="socadm" />
+		<result property="resleg" column="resleg" />
+		<result property="tempar" column="tempar" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM siatcgr.tblqlf WHERE codqlf = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * 
+		FROM SIATCGR.TBLQLF q
+			join SIATCGR.TBLNJRQLF n on (n.codqlf = q.codqlf)
+		WHERE codqlf = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="QlfVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM siatcgr.tblqlf
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codqlf" prepend=" AND ">
+				codqlf = #codqlf:NUMERIC#
+			</isNotNull>
+			<isNotNull property="desqlf" prepend=" AND ">
+				UPPER(desqlf) LIKE '%' || UPPER(#desqlf:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datfim" prepend=" AND "> to_char(datfim,'dd/MM/yyyy') =
+				to_char(#datfim:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND ">
+				numver = #numver:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="QlfVO" resultMap="mapComplexQuery">
+		SELECT * FROM SIATCGR.TBLQLF q
+			join SIATCGR.TBLNJRQLF n on (n.codqlf = q.codqlf)
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codqlf" prepend=" AND "> codqlf = #codqlf:NUMERIC#
+			</isNotNull>
+			<isNotNull property="desqlf" prepend=" AND ">
+				UPPER(desqlf) LIKE '%' || UPPER(#desqlf:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datfim" prepend=" AND "> to_char(datfim,'dd/MM/yyyy') =
+				to_char(#datfim:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND "> numver = #numver:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM siatcgr.tblqlf
+	</select>
+
+	<insert id="insReg" parameterClass="QlfVO">
+		<selectKey keyProperty="codqlf" resultClass="Long">
+			SELECT siatcgr.seqqlf.nextval from dual
+		</selectKey>
+		INSERT INTO siatcgr.tblqlf(codqlf,desqlf,datfim,datalt,codusualt,numver) VALUES (#codqlf:NUMERIC#,
+		UPPER(#desqlf:VARCHAR#),#datfim:TIMESTAMP#,sysdate, UPPER(#codusualt:VARCHAR#),#numver:NUMERIC# )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="QlfVO">
+		UPDATE siatcgr.tblqlf SET desqlf= UPPER(#desqlf:VARCHAR#),datfim= #datfim:TIMESTAMP#,datalt= sysdate,codusualt=
+		UPPER(#codusualt:VARCHAR#),numver= #numver:NUMERIC# WHERE codqlf = #codqlf:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM siatcgr.tblqlf WHERE codqlf = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM siatcgr.tblqlf WHERE codqlf in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="QlfVO" resultClass="Integer">
+		SELECT count(codqlf) FROM siatcgr.tblqlf
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codqlf" prepend=" AND "> codqlf = #codqlf:NUMERIC#
+			</isNotNull>
+			<isNotNull property="desqlf" prepend=" AND ">
+				UPPER(desqlf) LIKE '%' || UPPER(#desqlf:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datfim" prepend=" AND "> to_char(datfim,'dd/MM/yyyy') =
+				to_char(#datfim:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND "> numver = #numver:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getQlfByNjr" parameterClass="Long" resultMap="mapComplexQuery">
+		select 
+			 q.*, nq.socadm, nq.resleg, nq.tempar
+		from 
+			SIATCGR.TBLQLF q
+			join SIATCGR.TBLNJRQLF nq on (nq.codqlf = q.codqlf)
+            join SIATCGR.TBLNJR n on (n.codnjr = nq.codnjr)
+		where 
+			n.numnjr = #value:NUMERIC#
+	</select>
+	
+	<select id="getQlfRepresentanteByRepresentado" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		select 
+			Q.* 
+		from 
+			TBLQLFRPL R
+			join TBLQLF Q on Q.CODQLF = R.CODQLFREPTAN
+		where 
+			r.codqlfreptad = #value:NUMERIC#
+	</select>
+	
+</sqlMap> 
+ 

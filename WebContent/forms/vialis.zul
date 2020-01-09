@@ -1,0 +1,58 @@
+<?page title="Busca de Viabilidade"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-infabnce"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window use="pmcg.imti.view.Epdlis" id="wLepd" title="Busca de Viabilidade" border="normal" shadow="false" width="990px"
+		height="580px" position="center" mode="overlapped" sizable="false" closable="true" onCreate="wLepd.initComponentes()">
+		<paging id="paging" pageSize="15" />
+		<listbox model="@{wLepd.lista}" width="975px" height="465px" selectedItem="@{wLepd.item}" onSelect="wLepd.selecionar()">
+			<listhead>
+				<listheader width="120px">
+					<vbox align="center">
+						<label value="Nº Processo" style="text-align:center;font-size:11px"/>
+						<textbox value="@{wLepd.paramProc}" onOK="wLepd.pesquisar()" width="100px" style="text-align:center;text-transform:uppercase;font-size:11px"/>
+					</vbox>
+				</listheader>
+				<listheader width="110px">
+					<vbox>
+						<label value="CNPJ" style="text-align:center;font-size:11px"/>
+						<textbox value="@{wLepd.paramCnpj}" onOK="wLepd.pesquisar()" width="97px" style="text-align:center;text-transform:uppercase;font-size:11px"/>
+					</vbox>
+				</listheader>
+				<listheader width="90px">
+					<vbox>
+						<label value="NIRE" style="text-align:center;font-size:11px;font-size:11px"/>
+						<textbox value="@{wLepd.paramNire}" onOK="wLepd.pesquisar()" width="78px" style="text-align:center;text-transform:uppercase;font-size:11px"/>
+					</vbox>
+				</listheader>
+				<listheader width="95px">
+					<vbox>
+						<label value="Viabilidade" style="text-align:center;font-size:11px;font-size:11px"/>
+						<textbox value="@{wLepd.paramVia}" onOK="wLepd.pesquisar()" width="78px" style="text-align:center;text-transform:uppercase;font-size:11px"/>
+					</vbox>
+				</listheader>
+				<listheader width="95px">
+					<vbox>
+						<label value="Inscrição Imob." style="text-align:center;font-size:11px;font-size:11px"/>
+						<textbox value="@{wLepd.paramImo}" onOK="wLepd.pesquisar()" width="78px" style="text-align:center;text-transform:uppercase;font-size:11px"/>
+					</vbox>
+				</listheader>
+				<listheader width="440px">
+					<vbox>
+						<label value="Nome (Nome Fantasia)" style="text-align:center;font-size:11px"/>
+						<textbox value="@{wLepd.paramNome}" onOK="wLepd.pesquisar()" style="text-transform:uppercase;font-size:11px" width="335px"/>
+					</vbox>
+				</listheader>
+			</listhead>
+			<listitem self="@{each=le}" value="@{le}">
+				<listcell label="@{le.nprepd}" style="text-align:center;font-size:11px" />
+				<listcell label="@{le.cnpj}" style="text-align:center;font-size:11px"/>
+				<listcell label="@{le.nire}" style="text-align:center;font-size:11px"/>
+				<listcell label="@{le.pvimat}" style="text-align:center;font-size:11px"/>
+				<listcell label="@{le.iptcen}" style="text-align:center;font-size:11px"/>
+				<listcell label="@{le.nome}" style="text-align:left;font-size:11px"/>
+			</listitem>
+		</listbox>
+	</window>
+</zk>

@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Soslic">
+	<typeAlias alias="LicVO" type="pmcg.imti.domain.LicVO" />
+
+	<resultMap id="mapComplexQuery" class="LicVO">
+		<result property="codlic" column="codlic" />
+		<result property="codves" column="codves" />
+		<result property="datvallic" column="datvallic" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="obslic" column="obslic" />
+		<result property="prolic" column="prolic" />
+		<result property="arqlic" column="arqlic" />
+		<result property="codvlv" column="codvlv" />
+		<result property="sttlic" column="sttlic" />
+		<result property="codtpd" column="codtpd" />
+		<result property="codvtd" column="codvtd" />
+		<result property="liclic" column="liclic" />
+		<result property="tiplic" column="tiplic" />
+		<result property="vesVO" select="Ves.getRegByCod" column="codves" />
+<!-- 		<result property="vlvVO" select="Vlv.getRegByCod" column="codvlv" /> -->
+<!-- 		<result property="tpdVO" select="Sostpd.getRegByCod" column="codtpd" /> -->
+<!-- 		<result property="vtdVO" select="Vtd.getRegByCod" column="codvtd" /> -->
+	</resultMap>
+
+
+	<select id="getRegByCod" parameterClass="Integer" resultClass="LicVO">
+		SELECT *
+		FROM sos.soslic
+		WHERE codlic = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Integer"
+		resultMap="mapComplexQuery">
+		SELECT *
+		FROM sos.soslic
+		WHERE codlic = #value:NUMERIC#
+	</select>
+
+	<select id="getTodos" resultClass="LicVO">
+		SELECT *
+		FROM sos.soslic ORDER BY codlic
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="LicVO"
+		resultClass="LicVO">
+		SELECT *, false as datvisible , true as datauxvisible
+		FROM sos.soslic
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codlic" prepend=" AND ">
+				codlic =
+				#codlic:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codves" prepend=" AND ">
+				codves =
+				#codves:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvlv" prepend=" AND ">
+				codvlv =
+				#codvlv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="datvallic" prepend=" AND ">
+				datvallic =
+				#datvallic:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				UPPER(usualt) LIKE '%'
+				|| UPPER(#usualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				datalt =
+				#datalt:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="obslic" prepend=" AND ">
+				UPPER(obslic) LIKE '%'
+				|| UPPER(#obslic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="prolic" prepend=" AND ">
+				UPPER(prolic) LIKE '%'
+				|| UPPER(#prolic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="arqlic" prepend=" AND ">
+				UPPER(arqlic) LIKE '%'
+				|| UPPER(#arqlic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="sttlic" prepend=" AND ">
+				sttlic =
+				#sttlic:VARCHAR#
+			</isNotNull>
+			<isNotNull property="codtpd" prepend=" AND ">
+				codtpd =
+				#codtpd:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvtd" prepend=" AND ">
+				codvtd =
+				#codvtd:NUMERIC#
+			</isNotNull>
+		</dynamic>
+		ORDER BY codlic
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="LicVO"
+		resultMap="mapComplexQuery">
+		SELECT *
+		FROM sos.soslic
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codlic" prepend=" AND ">
+				codlic =
+				#codlic:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codves" prepend=" AND ">
+				codves =
+				#codves:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvlv" prepend=" AND ">
+				codvlv =
+				#codvlv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="datvallic" prepend=" AND ">
+				datvallic =
+				#datvallic:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				UPPER(usualt) LIKE '%'
+				|| UPPER(#usualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				datalt =
+				#datalt:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="obslic" prepend=" AND ">
+				UPPER(obslic) LIKE '%'
+				|| UPPER(#obslic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="prolic" prepend=" AND ">
+				UPPER(prolic) LIKE '%'
+				|| UPPER(#prolic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="arqlic" prepend=" AND ">
+				UPPER(arqlic) LIKE '%'
+				|| UPPER(#arqlic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="sttlic" prepend=" AND ">
+				sttlic =
+				#sttlic:VARCHAR#
+			</isNotNull>
+			<isNotNull property="codtpd" prepend=" AND ">
+				codtpd =
+				#codtpd:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvtd" prepend=" AND ">
+				codvtd =
+				#codvtd:NUMERIC#
+			</isNotNull>
+		</dynamic>
+		ORDER BY codlic
+	</select>
+
+	<insert id="insReg" parameterClass="LicVO">
+		<selectKey keyProperty="codlic" resultClass="Integer">
+			select
+			nextval('sos.soslic_codlic_seq') as codlic
+		</selectKey>
+		INSERT INTO sos.soslic (codlic, codves, datvallic, usualt, datalt,
+		obslic,prolic,arqlic,codvlv,sttlic,codtpd,codvtd,liclic,tiplic)
+		VALUES
+		(#codlic:NUMERIC#, #codves:NUMERIC#, #datvallic:TIMESTAMP#,
+		#usualt:VARCHAR#, now(),
+		#obslic:VARCHAR#,#prolic:VARCHAR#,#arqlic:VARCHAR#,#codvlv:NUMERIC#,#sttlic:VARCHAR#,
+		#codtpd:NUMERIC#,#codvtd:NUMERIC#,#liclic:NUMERIC#,#tiplic:VARCHAR#)
+	</insert>
+
+	<update id="updRegByCod" parameterClass="LicVO">
+		UPDATE sos.soslic
+		SET codves = #codves:NUMERIC#,
+		datvallic = #datvallic:TIMESTAMP#,
+		usualt = #usualt:VARCHAR#,
+		datalt = #datalt:TIMESTAMP#,
+		obslic = #obslic:VARCHAR#,
+		prolic = #prolic:VARCHAR#,
+		arqlic = #arqlic:VARCHAR#,
+		codvlv = #codvlv:NUMERIC#,
+		sttlic = #sttlic:VARCHAR#,
+		codtpd = #codtpd:NUMERIC#,
+		codvtd = #codvtd:NUMERIC#,
+		liclic=#liclic:NUMERIC#,
+		tiplic=#tiplic:VARCHAR#
+		WHERE codlic = #codlic:NUMERIC#
+	</update>
+
+	<delete id="delByCod" parameterClass="Integer">
+		DELETE FROM sos.soslic
+		WHERE codlic = #value:NUMERIC#
+	</delete>
+
+	<select id="countRegByCriterio" parameterClass="LicVO"
+		resultClass="Integer">
+		SELECT count(*)
+		FROM sos.soslic
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codlic" prepend=" AND ">
+				codlic =
+				#codlic:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codves" prepend=" AND ">
+				codves =
+				#codves:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvlv" prepend=" AND ">
+				codvlv =
+				#codvlv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="datvallic" prepend=" AND ">
+				datvallic =
+				#datvallic:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				UPPER(usualt) LIKE '%'
+				|| UPPER(#usualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				datalt =
+				#datalt:TIMESTAMP#
+			</isNotNull>
+			<isNotNull property="obslic" prepend=" AND ">
+				UPPER(obslic) LIKE '%'
+				|| UPPER(#obslic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="prolic" prepend=" AND ">
+				UPPER(prolic) LIKE '%'
+				|| UPPER(#prolic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="arqlic" prepend=" AND ">
+				UPPER(arqlic) LIKE '%'
+				|| UPPER(#arqlic:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="sttlic" prepend=" AND ">
+				sttlic =
+				#sttlic:VARCHAR#
+			</isNotNull>
+			<isNotNull property="codtpd" prepend=" AND ">
+				codtpd =
+				#codtpd:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvtd" prepend=" AND ">
+				codvtd =
+				#codvtd:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getVerificaDuplicidade" parameterClass="LicVO"
+		resultClass="Integer">
+		SELECT count(*) FROM sos.soslic
+		where datvallic=#datvallic:TIMESTAMP#
+		and codtpd = #codtpd:NUMERIC# and prolic = #prolic:VARCHAR# and sttlic
+		not in ('C','V')
+		<isNotNull property="codlic" prepend=" AND ">
+			codlic !=
+			#codlic:NUMERIC#
+		</isNotNull>
+	</select>
+
+	<select id="getVerificaDuplicidadeEst" parameterClass="LicVO"
+		resultClass="Integer">
+		SELECT count(*) FROM sos.soslic
+		where datvallic=#datvallic:TIMESTAMP#
+		and codtpd = #codtpd:NUMERIC# and sttlic != 'C'
+		and codves =
+		#codves:NUMERIC#
+		<isNotNull property="codvlv" prepend=" AND ">
+			codvlv =
+			#codvlv:NUMERIC#
+		</isNotNull>
+		<isNotNull property="codlic" prepend=" AND ">
+			codlic !=
+			#codlic:NUMERIC#
+		</isNotNull>
+	</select>
+
+
+	<select id="getLicencaSanitariaAtual" parameterClass="LicVO"
+		resultClass="LicVO">
+		Select *
+		from sos.soslic lic
+		where lic.sttlic != 'C' AND lic.sttlic !=
+		'V'   
+		 <![CDATA[ and lic.codves = #codves:NUMERIC# and lic.datvallic >= current_date ]]>
+		<isNotNull property="codvlv" prepend=" AND ">
+			lic.codvlv = #codvlv:NUMERIC#
+		</isNotNull>
+		<isNotNull property="codtpd" prepend=" AND ">
+			lic.codtpd = #codtpd:NUMERIC#
+		</isNotNull>
+
+
+	</select>
+
+	<select id="getAnoAtual" resultClass="Integer">
+		select cast( EXTRACT(year from current_date) as integer) as ano
+	</select>
+
+	<select id="getCountByCriterioLis" parameterClass="hashmap"
+		resultClass="Integer">
+		SELECT count(lic.codlic)
+		FROM sos.soslic lic
+		inner join sos.sosves ves
+		on (lic.codves = ves.codves)
+		inner join sos.sostpd tpd on (lic.codtpd =
+		tpd.codtpd)
+		left join sos.sosvlv vlv on (lic.codvlv = vlv.codvlv)
+		WHERE
+		lic.sttlic = 'A'
+		<isNotNull property="codlic" prepend=" AND ">
+			codlic = #codlic:NUMERIC#
+		</isNotNull>
+		<isNotNull property="codves" prepend=" AND ">
+			codves = #codves:NUMERIC#
+		</isNotNull>
+		<isNotNull property="coddis" prepend=" AND ">
+			ves.coddis = #coddis:NUMERIC#
+		</isNotNull>
+		<isNotNull property="prolic" prepend=" AND ">
+			prolic = #prolic:VARCHAR#
+		</isNotNull>
+		<isNotNull property="cnpves" prepend="AND">
+			UPPER(cnpves) LIKE '%' || UPPER(#cnpves:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="cpfves" prepend="AND">
+			UPPER(cpfves) LIKE '%' || UPPER(#cpfves:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="destpd" prepend="AND">
+			UPPER(destpd) LIKE '%' || UPPER(#destpd:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="razves" prepend=" AND ">
+			ves.razves ILIKE '%' || #razves:VARCHAR# || '%'
+		</isNotNull>
+	</select>
+
+	<select id="getRegByCriterioLis" parameterClass="hashmap"
+		resultMap="mapComplexQuery">
+		SELECT *
+		FROM sos.soslic lic
+		inner join sos.sosves ves on (lic.codves =
+		ves.codves)
+		inner join sos.sostpd tpd on (lic.codtpd = tpd.codtpd)
+		left
+		join sos.sosvlv vlv on (lic.codvlv = vlv.codvlv)
+		WHERE lic.sttlic = 'A'
+		<isNotNull property="codlic" prepend=" AND ">
+			lic.codlic = #codlic:NUMERIC#
+		</isNotNull>
+		<isNotNull property="codves" prepend=" AND ">
+			lic.codves = #codves:NUMERIC#
+		</isNotNull>
+		<isNotNull property="coddis" prepend=" AND ">
+			ves.coddis = #coddis:NUMERIC#
+		</isNotNull>
+		<isNotNull property="prolic" prepend=" AND ">
+			lic.prolic = #prolic:VARCHAR#
+		</isNotNull>
+		<isNotNull property="cnpves" prepend="AND">
+			UPPER(ves.cnpves) LIKE '%' || UPPER(#cnpves:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="cpfves" prepend="AND">
+			UPPER(ves.cpfves) LIKE '%' || UPPER(#cpfves:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="destpd" prepend="AND">
+			UPPER(tpd.destpd) LIKE '%' || UPPER(#destpd:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="razves" prepend=" AND ">
+			ves.razves ILIKE '%' || #razves:VARCHAR# || '%'
+		</isNotNull>
+	</select>
+
+	<select id="getRegByEst" parameterClass="Integer" resultClass="Date">
+		SELECT MAX(datvallic) as datvallic FROM sos.soslic
+		WHERE codves =
+		#value:NUMERIC# AND codtpd = 3 AND sttlic = 'A'
+	</select>
+
+	<select id="getLicencaSanitariaAtualSemDatvallic"
+		parameterClass="LicVO" resultClass="LicVO">
+		Select *
+		from sos.soslic lic
+		where lic.codtpd = #codtpd:NUMERIC# and
+		lic.sttlic NOT IN ('C','V')       
+		 <![CDATA[ and lic.codves = #codves:NUMERIC# ]]>
+		<isNotNull property="codvlv" prepend=" AND ">
+			lic.codvlv = #codvlv:NUMERIC#
+		</isNotNull>
+		<isNotNull property="sttlic" prepend=" AND ">
+			lic.codvlv = #codvlv:NUMERIC#
+		</isNotNull>
+	</select>
+
+
+	<select id="getBuscaVeiculo" parameterClass="Integer"
+		resultClass="LicVO">
+		SELECT * FROM sos.soslic
+		WHERE codves = #value:NUMERIC# AND
+		sttlic = 'A' and codvlv is not null
+		order by datvallic asc
+		limit 1
+	</select>
+
+	<select id="getBuscaLincenca" parameterClass="Integer"
+		resultClass="LicVO">
+		SELECT * FROM sos.soslic
+		WHERE codves = #value:NUMERIC# AND
+		sttlic = 'A' and codvlv is null
+		order by datvallic asc
+		limit 1
+	</select>
+
+	<select id="getLincencaGeral" parameterClass="Integer"
+		resultClass="LicVO">
+		SELECT * FROM sos.soslic
+		WHERE codves = #value:NUMERIC# AND
+		sttlic != 'A'
+		order by datvallic asc
+		limit 1
+	</select>
+
+
+	<select id="getTemLincencaAtiva" parameterClass="Integer"
+		resultClass="Integer">
+		SELECT count(*) FROM sos.soslic
+		WHERE codves =
+		#value:NUMERIC# AND sttlic = 'A'
+	</select>
+
+	<select id="getBuscarPorVes" parameterClass="Integer"
+		resultClass="LicVO">
+		SELECT * FROM sos.soslic
+		WHERE codves = #codves:NUMERIC#
+	</select>
+</sqlMap>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Est">
+	<typeAlias alias="EstVO" type="pmcg.imti.domain.EstVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="EstVO">
+		<result property="codest" column="codest" />
+		<result property="nomcom" column="nomcom" />
+		<result property="nomres" column="nomres" />
+		<result property="unifed" column="unifed" />
+		<result property="datalt" column="datalt" />
+		<result property="codusualt" column="codusualt" />
+		<result property="numver" column="numver" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="EstVO">
+		<result property="codest" column="codest" />
+		<result property="nomcom" column="nomcom" />
+		<result property="nomres" column="nomres" />
+		<result property="unifed" column="unifed" />
+		<result property="datalt" column="datalt" />
+		<result property="codusualt" column="codusualt" />
+		<result property="numver" column="numver" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Integer" resultMap="mapComplexQuerySimple">
+		SELECT * FROM SIATCGR.TBLEST WHERE codest = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Integer"
+		resultMap="mapComplexQuery">
+		SELECT * FROM SIATCGR.TBLEST WHERE codest = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="EstVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM SIATCGR.TBLEST
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codest" prepend=" AND ">
+				codest = #codest:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomcom" prepend=" AND ">
+				UPPER(nomcom) LIKE '%' || UPPER(#nomcom:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomres" prepend=" AND ">
+				UPPER(nomres) LIKE '%' || UPPER(#nomres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="unifed" prepend=" AND ">
+				UPPER(unifed) LIKE '%' || UPPER(#unifed:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND ">
+				numver = #numver:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="EstVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM SIATCGR.TBLEST
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codest" prepend=" AND "> codest =
+				#codest:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomcom" prepend=" AND ">
+				UPPER(nomcom) LIKE '%' || UPPER(#nomcom:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomres" prepend=" AND ">
+				UPPER(nomres) LIKE '%' || UPPER(#nomres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="unifed" prepend=" AND ">
+				UPPER(unifed) LIKE '%' || UPPER(#unifed:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND "> numver =
+				#numver:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM SIATCGR.TBLEST
+		order by unifed
+	</select>
+
+	<insert id="insReg" parameterClass="EstVO">
+		INSERT INTO
+		SIATCGR.TBLEST(codest,nomcom,nomres,unifed,datalt,codusualt,numver)
+		VALUES (#codest:NUMERIC#, UPPER(#nomcom:VARCHAR#),
+		UPPER(#nomres:VARCHAR#), UPPER(#unifed:VARCHAR#),sysdate,
+		UPPER(#codusualt:VARCHAR#),#numver:NUMERIC# )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="EstVO">
+		UPDATE SIATCGR.TBLEST SET nomcom= UPPER(#nomcom:VARCHAR#),nomres=
+		UPPER(#nomres:VARCHAR#),unifed= UPPER(#unifed:VARCHAR#),datalt=
+		sysdate,codusualt= UPPER(#codusualt:VARCHAR#),numver= #numver:NUMERIC#
+		WHERE codest = #codest:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Integer">
+		DELETE FROM SIATCGR.TBLEST WHERE codest = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM SIATCGR.TBLEST WHERE codest in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="EstVO"
+		resultClass="Integer">
+		SELECT count(codest) FROM SIATCGR.TBLEST
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codest" prepend=" AND "> codest =
+				#codest:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomcom" prepend=" AND ">
+				UPPER(nomcom) LIKE '%' || UPPER(#nomcom:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="nomres" prepend=" AND ">
+				UPPER(nomres) LIKE '%' || UPPER(#nomres:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="unifed" prepend=" AND ">
+				UPPER(unifed) LIKE '%' || UPPER(#unifed:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND ">
+				to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="codusualt" prepend=" AND ">
+				UPPER(codusualt) LIKE '%' || UPPER(#codusualt:VARCHAR#) || '%'
+			</isNotNull>
+			<isNotNull property="numver" prepend=" AND "> 
+				numver = #numver:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getEstByUF" parameterClass="String" resultMap="mapComplexQuerySimple">
+		SELECT * FROM SIATCGR.TBLEST WHERE unifed like #value:VARCHAR#
+	</select>
+</sqlMap> 
+ 

@@ -1,0 +1,119 @@
+<?page title="PMCG - CIM"?>
+<?link rel="shortcut icon" type="image/png" href="images/externo/brasaoPref01.png"?>
+<?link href="/css/bootstrap.min.css" rel="stylesheet"?>
+<?meta name="keywords" content="cim" ?>
+<?meta http-equiv="X-UA-Compatible" content="IE=9" ?>
+<zk xmlns:h="native">
+<window border="none" width="100%" id="mainPage" use="pmcg.imti.view.ext.Enviodoc" onCreate="mainPage.initComponentes(4);mainPage.initEnv()">
+	<style src="/css/componentes.css"></style>
+	<h:main>
+		<include id="headerPart" src="/layout-parts/header.zul"></include>
+		<h:section>
+			<h:div class="container">
+				<h:div class="masthead">
+					<include id="menuPart" src="/layout-parts/menu.zul"></include>
+					<h:h2>Viabilidade</h:h2>
+					<h:div class="row">
+						<h:div class="col-md-2">
+							Nº Protocolo
+						</h:div>
+						<h:div class="col-md-2">
+							<textbox id="protocolo" value="@{mainPage.protocolo}" width="100%" style="text-align:center;"/>
+						</h:div>
+					</h:div>
+					<h:div class="row">
+						<h:div class="col-md-2">
+							CPF do Requerente
+						</h:div>
+						<h:div class="col-md-2">
+							<textbox id="cpfReq" value="@{mainPage.cpfReq}" width="100%" style="text-align:center;"/>
+						</h:div>
+					</h:div>
+					<h:div class="row">
+						<h:div class="col-md-2">
+							E-mail do Requerente
+						</h:div>
+						<h:div class="col-md-4">
+							<textbox id="emailReq" value="@{mainPage.emailReq}" width="100%" style="text-transform:lowercase;"/>
+						</h:div>
+					</h:div>
+					<h:div class="row">
+				        <h:div class="col-md-12">
+				       		<hbox pack="center" width="100%">
+								<button class="btn btn-info" label="Pesquisar" onClick="mainPage.pesquisar()" />
+							</hbox>
+						</h:div>
+					</h:div>
+					<div visible="@{mainPage.viaEncontrada}">
+						<separator height="20px"/>
+						<h:div class="row">
+							<h:div class="col-md-2">
+								Data
+							</h:div>
+							<h:div class="col-md-2">
+								<textbox value="@{mainPage.via.datavia}" width="100%" disabled="true" style="text-align:center;font-weight:bold;font-size:16px;"/>
+							</h:div>
+							<h:div class="col-md-3">
+								Situação Análise de Endereço
+							</h:div>
+							<h:div class="col-md-2">
+								<textbox id="sitaen" value="@{mainPage.via.sitaen}" width="100%" disabled="true" style="text-align:center;font-weight:bold;font-size:16px;"/>
+							</h:div>
+						</h:div>
+						<h:h2>Anexos</h:h2>
+						<div visible="@{mainPage.via.permitidoanexar}">
+							<h:div class="row">
+								<h:div class="col-md-1">
+									Arquivo
+								</h:div>
+								<h:div class="col-md-9">
+									<textbox value="@{mainPage.up.nomeArquivo}" width="100%" disabled="true"/>
+								</h:div>
+								<h:div class="col-md-2">
+									<button id="selArq" label="Selecionar Arquivo" upload="true" onUpload="mainPage.upload(event)" />
+								</h:div>
+							</h:div>
+							<h:div class="row">
+								<h:div class="col-md-1">
+									Descrição
+								</h:div>
+								<h:div class="col-md-11">
+									<textbox id="desarq" width="100%" value="@{mainPage.descricaoArquivo}"/>
+								</h:div>
+							</h:div>	
+							<h:div class="row">
+						        <h:div class="col-md-12">
+						       		<hbox pack="center" width="100%">
+										<button class="btn btn-info" label="Adicionar" onClick="mainPage.anexar()" />
+										<button class="btn btn-default" label="Cancelar" onClick="mainPage.cancelarAnexo()" />
+									</hbox>
+								</h:div>
+							</h:div>
+						</div>
+						<h:div class="row">
+					        <h:div class="col-md-12">		
+								<listbox id="listAnx" width="100%" model="@{mainPage.listAnx}" emptyMessage="Nenhum anexo encontrado.">
+									<listhead>
+										<listheader label="Descrição" />
+										<listheader label="Arquivo" />
+	<!-- 									<listheader width="30px" align="center" /> -->
+									</listhead>
+									<listitem self="@{each=anex}" value="@{anex}">
+										<listcell label="@{anex.desanx}" />
+										<listcell label="@{anex.nomanx}" />
+	<!-- 									<listcell image="/images/down.png" onClick="mainPage.download(self.parent.value)" tooltiptext="Download"/> -->
+									</listitem>
+								</listbox>
+							</h:div>
+						</h:div>
+					</div>
+				</h:div>
+				<separator height="20px"/>
+			</h:div>
+		</h:section>
+		<include id="footerPart" src="layout-parts/footer.zul"></include>
+	</h:main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</window>
+</zk>

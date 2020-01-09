@@ -1,0 +1,165 @@
+<?page title="Configurações Meio Ambiente" cacheable="false" language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window use="pmcg.imti.view.Cmacad" id="wCma" title="Configurações Meio Ambiente" width="600px" height="510px" border="normal" shadow="false" position="center"
+		mode="modal" sizable="false" closable="true" onCreate="wCma.initComponentes()" contentStyle="overflow:auto;">
+		<vbox>
+			<separator height="25px"/>
+			<groupbox>
+				<caption>
+					<label value="Órgão" style="color:#001262;font-weight:bold;font-size:14px;" />				
+				</caption>
+				<grid>
+			    	<columns>
+			    		<column align="right" width="100px"/>
+			    		<column align="left" />
+			    	</columns>
+			    	<rows>
+			    		<row>
+							<label value="Nome:"/>
+							<textbox value="@{wCma.nomeOrgao}" width="450px"/>
+						</row>
+						<row>
+							<label value="Sigla:"/>
+							<textbox value="@{wCma.siglaOrgao}" width="100px"/>
+						</row>
+						<row>
+							<label value="Divisão:"/>
+							<textbox value="@{wCma.nomeDivisao}" width="450px"/>
+						</row>
+						<row>
+							<label value="Sigla:"/>
+							<textbox value="@{wCma.siglaDivisao}" width="100px"/>
+						</row>
+						<row>
+							<label value="Siglas Divisão:"/>
+							<textbox value="@{wCma.siglasDivisao}" width="200px"/>
+						</row>
+					</rows>
+			    </grid>
+		    </groupbox>
+		    <groupbox>
+				<caption>
+					<label value="Geração de Relatórios" style="color:#001262;font-weight:bold;font-size:14px;" />				
+				</caption>
+				<grid>
+			    	<columns>
+			    		<column align="right" width="100px"/>
+			    		<column align="left" />
+			    	</columns>
+			    	<rows>
+			    		<row>
+							<label value="Responsável:"/>
+							<combobox id="ususel" model="@{wCma.listUsu}" selectedItem="@{wCma.usuSelRel}" readonly="true" width="455px" style="text-transform:uppercase;">
+								<comboitem self="@{each=usu}" style="text-transform:uppercase" label="@{usu.nomusu}" value="@{usu}" />
+							</combobox>
+						</row>
+						<row>
+							<label value="Cargo:"/>
+							<combobox model="@{wCma.listCargo}" selectedItem="@{wCma.cargoRel}" readonly="true" width="455px">
+								<comboitem self="@{each=cr}" label="@{cr.destab}" value="@{cr}" />
+							</combobox>
+						</row>
+					</rows>
+			    </grid>
+		   </groupbox>
+		    <groupbox>
+				<caption>
+					<label value="Assinatura de Licenças" style="color:#001262;font-weight:bold;font-size:14px;" />				
+				</caption>
+			  	<grid>
+			    	<columns>
+			    		<column align="right" width="100px"/>
+			    		<column align="left" />
+			    	</columns>
+			    	<rows>
+			    		<row>
+							<label value="Responsável:"/>
+							<combobox id="ususelL" model="@{wCma.listUsu}" selectedItem="@{wCma.usuSelLic}" readonly="true" width="455px" style="text-transform:uppercase;">
+								<comboitem self="@{each=usuL}" style="text-transform:uppercase" label="@{usuL.nomusu}" value="@{usuL}" />
+							</combobox>
+						</row>
+						<row>
+							<label value="Cargo:"/>
+							<combobox model="@{wCma.listCargo}" selectedItem="@{wCma.cargoLic}" readonly="true" width="455px">
+								<comboitem self="@{each=cl}" label="@{cl.destab}" value="@{cl}" />
+							</combobox>
+						</row>
+					</rows>
+			    </grid>
+			</groupbox>
+			<groupbox>
+				<caption>
+					<label value="Usuários" style="color:#001262;font-weight:bold;font-size:14px;" />				
+				</caption>
+			  	<grid>
+			    	<columns>
+			    		<column align="right" width="100px"/>
+			    		<column align="left" />
+			    	</columns>
+			    	<rows>
+			    		<row>
+			    			<textbox value="@{wCma.webusu.logusu}" readonly="true" style=""/>
+			    			<hbox>
+			    				<textbox value="@{wCma.webusu.nomusu}" readonly="true" width="400px"/>
+			    				<image src="/images/imgBuscar.png" onClick="wCma.buscarUsuariosSistema()"/>
+			    			</hbox>
+			    		</row>
+			    		<row spans="2">
+			    			<button label="Incluir Usuário" onClick="wCma.incluirUsuarios()" visible="@{wCma.incluirUsuario}" width="120px"/>
+			    		</row>
+			    		<row spans="2">			    			
+			    			<listbox model="@{wCma.listUsu}" width="99%" mold="paging" pageSize="5" style="text-align:left;">
+			    				<listhead>	
+			    					<listheader width="8%" />
+			    					<listheader />
+			    				</listhead>
+			    				<listitem self="@{each=objetoUsuario}" value="@{objetoUsuario}">
+			    					<listcell style="text-align:center;" >
+			    						<image src="/images/delete.png" onClick="wCma.removerUsuario(self.parent.parent.value)"/>
+			    					</listcell>
+									<listcell label="@{objetoUsuario.nomusu}" />
+			    				</listitem>
+			    			</listbox>
+			    		</row>
+			    	</rows>
+			    </grid>
+			</groupbox>
+			<groupbox>
+				<caption>
+					<label value="Cargos" style="color:#001262;font-weight:bold;font-size:14px;" />				
+				</caption>
+				<grid>
+					<columns>
+				    	<column align="right" width="100px"/>
+				    	<column align="left" />
+				    </columns>
+				    <rows>
+				    	<row spans="2">			    			
+			    			<listbox model="@{wCma.listCargo}" width="99%" mold="paging" pageSize="5" style="text-align:left;">
+			    				<listhead>	
+			    					<listheader width="8%" />
+			    					<listheader />
+			    				</listhead>
+			    				<listitem self="@{each=objetoCargo}" value="@{objetoCargo}">
+			    					<listcell style="text-align:center;" >
+			    						<image src="/images/delete.png" onClick="wCma.removerCargo(self.parent.parent.value)"/>
+			    					</listcell>
+									<listcell label="@{objetoCargo.inftab}" />
+			    				</listitem>
+			    			</listbox>
+			    		</row>
+			    		<row spans="2">
+			    			<textbox value="@{wCma.descricaoCargo}" width="99%"/>
+			    		</row>
+			    		<row spans="2">
+			    			<button label="Incluir Cargo" onClick="wCma.incluirCargos()" width="120px"/>
+			    		</row>
+				    </rows>
+				</grid>
+			</groupbox>
+		</vbox>
+	</window>
+</zk>

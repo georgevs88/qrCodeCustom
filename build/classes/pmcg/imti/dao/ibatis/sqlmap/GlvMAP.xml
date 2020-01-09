@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Glv">
+	<typeAlias alias="GlvVO" type="pmcg.imti.domain.GlvVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="GlvVO">
+		<result property="iddglv" column="iddglv" />
+		<result property="guiglv" column="guiglv" />
+		<result property="proglv" column="proglv" />
+		<result property="tipglv" column="tipglv" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="GlvVO">
+		<result property="iddglv" column="iddglv" />
+		<result property="guiglv" column="guiglv" />
+		<result property="proglv" column="proglv" />
+		<result property="tipglv" column="tipglv" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licglv WHERE iddglv = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM lic.licglv WHERE iddglv = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="GlvVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licglv
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddglv" prepend=" AND ">
+				iddglv = #iddglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="guiglv" prepend=" AND ">
+				guiglv = #guiglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="proglv" prepend=" AND ">
+				proglv = #proglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipglv" prepend=" AND ">
+				tipglv ILIKE '%' || #tipglv:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="GlvVO" resultMap="mapComplexQuery">
+		SELECT * FROM lic.licglv
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddglv" prepend=" AND "> iddglv = #iddglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="guiglv" prepend=" AND "> guiglv = #guiglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="proglv" prepend=" AND "> proglv = #proglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipglv" prepend=" AND ">
+				tipglv ILIKE '%' || #tipglv:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM lic.licglv
+	</select>
+
+	<insert id="insReg" parameterClass="GlvVO">
+		<selectKey keyProperty="iddglv" resultClass="Long">
+			SELECT NEXTVAL('lic.seqglv')
+		</selectKey>
+		INSERT INTO lic.licglv(iddglv,guiglv,proglv,tipglv,usualt,datalt) VALUES
+		(#iddglv:NUMERIC#,#guiglv:NUMERIC#,#proglv:NUMERIC#, UPPER(#tipglv:VARCHAR#), UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="GlvVO">
+		UPDATE lic.licglv SET guiglv= #guiglv:NUMERIC#,proglv= #proglv:NUMERIC#,tipglv= UPPER(#tipglv:VARCHAR#),usualt=
+		UPPER(#usualt:VARCHAR#),datalt= now() WHERE iddglv = #iddglv:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM lic.licglv WHERE iddglv = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM lic.licglv WHERE iddglv in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="GlvVO" resultClass="Integer">
+		SELECT count(iddglv) FROM lic.licglv
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddglv" prepend=" AND "> iddglv = #iddglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="guiglv" prepend=" AND "> guiglv = #guiglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="proglv" prepend=" AND "> proglv = #proglv:NUMERIC#
+			</isNotNull>
+			<isNotNull property="tipglv" prepend=" AND ">
+				tipglv ILIKE '%' || #tipglv:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getGuiasByEpd" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		select * from lic.licglv where proglv = #value:NUMERIC#
+	</select>
+</sqlMap> 
+ 

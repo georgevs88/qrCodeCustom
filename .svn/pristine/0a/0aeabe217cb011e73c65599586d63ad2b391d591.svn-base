@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Via">
+	<typeAlias alias="ViaVO" type="pmcg.fcn.domain.ViaVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="ViaVO">
+		<result property="iddvia" column="iddvia" />
+		<result property="provia" column="provia" />
+		<result property="munvia" column="munvia" />
+		<result property="njrvia" column="njrvia" />
+		<result property="teqvia" column="teqvia" />
+		<result property="rclvia" column="rclvia" />
+		<result property="orevia" column="orevia" />
+		<result property="reqvia" column="reqvia" />
+		<result property="colvia" column="colvia" />
+		<result property="aenvia" column="aenvia" />
+		<result property="datvia" column="datvia" />
+		<result property="crevia" column="crevia" />
+		<result property="tipvia" column="tipvia" />
+		<result property="sauvia" column="sauvia" />
+		<result property="einvia" column="einvia" />
+		<result property="evevia" column="evevia" />
+		<result property="cprvia" column="cprvia" />
+		<result property="norvia" column="norvia" />
+		<result property="ddtvia" column="ddtvia" />
+		<result property="telvia" column="telvia" />
+		<result property="emavia" column="emavia" />
+		<result property="baevia" column="baevia" />
+		<result property="estvia" column="estvia" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="ViaVO">
+		<result property="iddvia" column="iddvia" />
+		<result property="provia" column="provia" />
+		<result property="munvia" column="munvia" />
+		<result property="njrvia" column="njrvia" />
+		<result property="teqvia" column="teqvia" />
+		<result property="rclvia" column="rclvia" />
+		<result property="orevia" column="orevia" />
+		<result property="reqvia" column="reqvia" />
+		<result property="colvia" column="colvia" />
+		<result property="aenvia" column="aenvia" />
+		<result property="datvia" column="datvia" />
+		<result property="crevia" column="crevia" />
+		<result property="tipvia" column="tipvia" />
+		<result property="sauvia" column="sauvia" />
+		<result property="einvia" column="einvia" />
+		<result property="evevia" column="evevia" />
+		<result property="cprvia" column="cprvia" />
+		<result property="norvia" column="norvia" />
+		<result property="ddtvia" column="ddtvia" />
+		<result property="telvia" column="telvia" />
+		<result property="emavia" column="emavia" />
+		<result property="baevia" column="baevia" />
+		<result property="estvia" column="estvia" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnvia WHERE iddvia = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnvia WHERE iddvia = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="ViaVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnvia
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddvia" prepend=" AND ">
+				iddvia = #iddvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="provia" prepend=" AND ">
+				provia ILIKE '%' || #provia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="munvia" prepend=" AND ">
+				munvia ILIKE '%' || #munvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="njrvia" prepend=" AND ">
+				njrvia ILIKE '%' || #njrvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="teqvia" prepend=" AND ">
+				teqvia ILIKE '%' || #teqvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="rclvia" prepend=" AND ">
+				rclvia = #rclvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="orevia" prepend=" AND ">
+				orevia = #orevia:VARCHAR#
+			</isNotNull>
+			<isNotNull property="reqvia" prepend=" AND ">
+				reqvia = #reqvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colvia" prepend=" AND ">
+				colvia = #colvia:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="ViaVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnvia
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddvia" prepend=" AND "> iddvia =
+				#iddvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="provia" prepend=" AND ">
+				provia ILIKE '%' || #provia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="munvia" prepend=" AND ">
+				munvia ILIKE '%' || #munvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="njrvia" prepend=" AND ">
+				njrvia ILIKE '%' || #njrvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="teqvia" prepend=" AND ">
+				teqvia ILIKE '%' || #teqvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="rclvia" prepend=" AND "> rclvia =
+				#rclvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="orevia" prepend=" AND "> orevia =
+				#orevia:VARCHAR#
+			</isNotNull>
+			<isNotNull property="reqvia" prepend=" AND "> reqvia =
+				#reqvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colvia" prepend=" AND "> colvia =
+				#colvia:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnvia
+	</select>
+
+	<insert id="insReg" parameterClass="ViaVO">
+		<selectKey keyProperty="iddvia" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqvia')
+		</selectKey>
+		INSERT INTO
+		fcn.fcnvia(iddvia,provia,munvia,njrvia,teqvia,rclvia,orevia,reqvia,colvia,aenvia,datvia,crevia,tipvia,sauvia,einvia,evevia,cprvia,norvia,ddtvia,telvia,emavia,estvia)
+		VALUES (#iddvia:NUMERIC#, UPPER(#provia:VARCHAR#),
+		UPPER(#munvia:VARCHAR#), UPPER(#njrvia:VARCHAR#),
+		UPPER(#teqvia:VARCHAR#),
+		#rclvia:NUMERIC#,#orevia:VARCHAR#,#reqvia:NUMERIC#,#colvia:NUMERIC#,#aenvia:NUMERIC#,now(),#crevia:VARCHAR#,
+		#tipvia:VARCHAR#,#sauvia:VARCHAR#,#einvia:VARCHAR#,#evevia:VARCHAR#,#cprvia:VARCHAR#,UPPER(#norvia:VARCHAR#),#ddtvia:VARCHAR#,#telvia:VARCHAR#,#emavia:VARCHAR#,#estvia:BOOLEAN#)
+	</insert>
+
+	<update id="updRegByCod" parameterClass="ViaVO">
+		UPDATE 
+			fcn.fcnvia 
+		SET 
+			provia = UPPER(#provia:VARCHAR#),
+			munvia = UPPER(#munvia:VARCHAR#),
+			njrvia = UPPER(#njrvia:VARCHAR#),
+			teqvia = UPPER(#teqvia:VARCHAR#),
+			rclvia = #rclvia:NUMERIC#,
+			orevia = #orevia:VARCHAR#,
+			reqvia = #reqvia:NUMERIC#,
+			colvia = #colvia:NUMERIC#, 
+			aenvia = #aenvia:NUMERIC#,
+			crevia = #crevia:VARCHAR#,
+			tipvia = #tipvia:VARCHAR#,
+			sauvia = #sauvia:VARCHAR#,
+			einvia = #einvia:VARCHAR#,
+			evevia = #evevia:VARCHAR#,
+			cprvia = #cprvia:VARCHAR#,
+			norvia = UPPER(#norvia:VARCHAR#),
+			ddtvia = #ddtvia:VARCHAR#,
+			telvia = #telvia:VARCHAR#,
+			emavia = #emavia:VARCHAR#,
+			estvia = #estvia:BOOLEAN#
+		WHERE 
+			iddvia = #iddvia:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnvia WHERE iddvia = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnvia WHERE iddvia in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="ViaVO"
+		resultClass="Integer">
+		SELECT count(iddvia) FROM fcn.fcnvia
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddvia" prepend=" AND "> iddvia =
+				#iddvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="provia" prepend=" AND ">
+				provia ILIKE '%' || #provia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="munvia" prepend=" AND ">
+				munvia ILIKE '%' || #munvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="njrvia" prepend=" AND ">
+				njrvia ILIKE '%' || #njrvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="teqvia" prepend=" AND ">
+				teqvia ILIKE '%' || #teqvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="rclvia" prepend=" AND "> rclvia =
+				#rclvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="orevia" prepend=" AND "> orevia =
+				#orevia:VARCHAR#
+			</isNotNull>
+			<isNotNull property="reqvia" prepend=" AND "> reqvia =
+				#reqvia:NUMERIC#
+			</isNotNull>
+			<isNotNull property="colvia" prepend=" AND "> colvia =
+				#colvia:NUMERIC#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getInscricaoByProtocolo" parameterClass="String" resultClass="String">
+		select cen.iptcen from fcn.fcnvia via
+		join fcn.fcncol col on via.colvia = col.iddcol
+		join fcn.fcncen cen on col.cencol = cen.iddcen
+		where provia = #value:VARCHAR#
+	</select>
+	
+	<select id="getDadosByProtocolo" parameterClass="String" resultClass="hashmap">
+		select 
+			via.provia, via.tipvia, via.sauvia, via.colvia,
+			col.ctucol, cen.iptcen, (select case when count(0) > 0 then true else false end from fcn.fcncol coleta 
+									join fcn.fcncfa cfat on cfat.colcfa = coleta.iddcol
+									where coleta.ctucol = 'AUXILIAR'
+									and cfat.codcfa = '02'
+									and coleta.iddcol = col.iddcol) as escritorio,
+									(select case when count(0) > 0 then true else false end from fcn.fcncol coletae 
+									join fcn.fcncna cna on cna.colcna = coletae.iddcol
+									where cna.execna = true
+									and coletae.iddcol = col.iddcol) as possuiexercidanolocal,
+									via.estvia as possuiestabelecimentofixo
+		from 
+			fcn.fcnvia via
+			join fcn.fcncol col on via.colvia = col.iddcol
+			join fcn.fcncen cen on col.cencol = cen.iddcen
+		where 
+			provia = #value:VARCHAR#
+	</select>
+	
+	<select id="getTipoUnidadeByProtocolo" parameterClass="String" resultClass="String">
+		select col.ctucol from fcn.fcnvia via
+		join fcn.fcncol col on col.iddcol = via.colvia
+		where via.provia = #value:VARCHAR#
+	</select>
+	
+	<select id="getRiscoByProtocolo" parameterClass="String" resultClass="String">
+		select aen.risaen from fcn.fcnvia via
+		join fcn.fcnaen aen on aen.iddaen = via.aenvia
+		where via.provia = #value:VARCHAR#
+	</select>
+	
+	<select id="getViaByAnaliseEnderecoPendente" resultClass="ViaVO">
+		SELECT 
+			* 
+		FROM 
+			fcn.fcnvia f 
+		WHERE 
+			f.aenvia is null
+			and f.crevia = 'S'
+	</select>
+	
+	<select id="getViaByConfRecPendente" resultClass="ViaVO">
+		SELECT 
+			* 
+		FROM 
+			fcn.fcnvia f 
+		WHERE 
+			f.crevia = 'N'
+	</select>
+	
+	<update id="updConfRecebimentoByProtocolo" parameterClass="String">
+		update fcn.fcnvia set crevia = 'S' where provia like #value:VARCHAR#
+	</update>
+	
+	<update id="updAnaliseEnderecoByIdd" parameterClass="ViaVO">
+		update fcn.fcnvia set aenvia = #aenvia:NUMERIC# 
+		where iddvia = #iddvia:NUMERIC#
+	</update>
+	
+	<update id="updBaeByIdd" parameterClass="ViaVO">
+		update 
+			fcn.fcnvia 
+		set 
+			baevia = #baevia:NUMERIC# 
+		where 
+			iddvia = #iddvia:NUMERIC#
+	</update>
+	
+	<select id="countViaByProtocolo" parameterClass="String" resultClass="Integer">
+		select count(iddvia) from fcn.fcnvia via where via.provia like #value:VARCHAR#
+	</select>
+	
+	<select id="getViaGravadas" parameterClass="hashmap" resultClass="hashmap">
+		select 
+			via.iddvia, via.provia, to_char(via.datvia, 'dd/MM/yyyy') as datvia, case when via.crevia like 'S' then 'SIM' else 'NAO' end as crevia,
+			case when via.crevia like 'S' then 'font-weight:bold;color:rgb(31,181,47);' else 'font-weight:bold;color:rgb(197,29,29);' end as styleconfrec,
+			case when via.crevia like 'S' then false else true end as visibleconfrec,
+			case when aen.sitaen is null then 
+			   '-' 
+			else
+			   case when aen.sitaen like 'Deferida' then 
+			      'DEFERIDA' 
+			   else 
+			      case when aen.sitaen like 'Indeferida' then 
+			         'INDEFERIDA' 
+			      else 
+			         'ANALISE'
+			      end 
+			   end
+			end as sitaen, 
+			case when (aen.sitaen is not null and aen.sitaen like 'Deferida') then 
+			   'font-weight:bold;color:rgb(31,181,47);' 
+			else 
+			   case when (aen.sitaen is not null and aen.sitaen like 'Indeferida') then 
+			      'font-weight:bold;color:rgb(197,29,29);' 
+			   else 
+			      'font-weight:bold;color:rgb(198,215,3);' 
+			   end
+			end as style, 
+			case when ((aen.sitaen is null and via.crevia like 'N') or (aen.sitaen is not null AND aen.sitaen in ('Deferida'))) then false else true end as visibleanalise,
+			case when length(req.nomreq) > 35 then substr(req.nomreq,0,35) || '...' else req.nomreq end as nomreq
+		from 
+			fcn.fcnvia via
+			left join fcn.fcnreq req on via.reqvia = req.iddreq
+			left join fcn.fcnaen aen on via.aenvia = aen.iddaen
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="provia" prepend=" AND ">
+				provia ILIKE '%' || #provia:VARCHAR# || '%'
+			</isNotNull>
+			<isEqual property="analisespendentes" compareValue="true" prepend="AND">
+				aenvia is null
+			</isEqual>
+		</dynamic>
+		order 
+			by via.datvia desc
+	</select>
+	
+	<select id="countViaGravadas" parameterClass="hashmap" resultClass="Integer">
+		select 
+			count(0)
+		from 
+			fcn.fcnvia via
+			left join fcn.fcnreq req on via.reqvia = req.iddreq
+			left join fcn.fcnaen aen on via.aenvia = aen.iddaen
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="provia" prepend=" AND ">
+				provia ILIKE '%' || #provia:VARCHAR# || '%'
+			</isNotNull>
+			<isEqual property="analisespendentes" compareValue="true" prepend="AND">
+				aenvia is null
+			</isEqual>
+		</dynamic>
+	</select>
+	
+	<select id="getDadosAnalise" parameterClass="String" resultClass="hashmap">
+		select 
+			via.iddvia, cen.iptcen, substr(edr.cepedr,1,2)||'.'||substr(edr.cepedr,3,3)||'-'||substr(edr.cepedr,6,3) as cep,loc.nome_ofi_localidade || '/' || log.sigla_uf as cidade, 
+			col.coscol as objetosocial, via.aenvia, req.logreq, req.nomreq, '(' || req.dddreq || ')' || req.telreq as telreq, '(' || req.ddcreq || ')' || req.celreq as celreq, req.emareq,
+			case when tloedr is not null then tloedr || ' ' else '' end || nloedr || case when numedr is not null then ', ' || numedr else '' end || '. ' as endereco, 
+			baiedr, comedr, atecen, autcen, refcen, via.colvia, via.tipvia
+		FROM 
+			fcn.fcnvia via
+			JOIN fcn.fcnreq req on req.iddreq = via.reqvia
+			JOIN fcn.fcncol col on col.iddcol = colvia
+			JOIN fcn.fcncen cen on cen.iddcen = col.cencol
+			JOIN fcn.fcnedr edr on edr.iddedr = cen.edrcen
+			LEFT JOIN dne.dne_gu_logradouros log ON log.cep_logradouro = edr.cepedr
+			LEFT JOIN dne.dne_gu_bairros bai ON log.chave_bai_ini_dne = bai.chave_bai_dne
+			LEFT JOIN dne.dne_gu_localidades loc ON bai.chave_loc_dne = loc.chave_loc_dne
+		where 
+			via.provia = #value:VARCHAR#
+		limit 1
+	</select>
+	
+	<select id="getProtocolosAnalise" resultClass="hashmap" parameterClass="hashmap">
+		select 
+			via.iddvia, via.provia, to_char(via.datvia, 'dd/MM/yyyy') as datvia, case when length(req.nomreq) > 40 then substr(req.nomreq,1,40)||'...' else req.nomreq end as nomreq,
+			formatInterval(now()-datvia) as qtddias,
+			case when via.evevia = 'I' then 'Inscrição' else 'Alteração' end as evento,
+			case when via.tipvia = 'A' then 'Autônomo' when via.tipvia = 'M' then 'MEI' when via.tipvia = 'C' then 'Cartório/OAB' end as tipvia,
+			case when via.tipvia = 'A' AND via.sauvia = 'E' then 'Estabelecido' when via.tipvia = 'A' AND via.sauvia = 'N' then 'Não Estabelecido' else case when via.tipvia = 'M' then case when via.einvia = 'DO' then 'Domicílio' when via.einvia = 'SP' then 'Sede Permanente' when via.einvia = 'CL' then 'No Cliente' when via.einvia = 'CP' then 'Vias Públicas, com ponto fixo' when via.einvia = 'SP' then 'Vias Públicas, sem ponto fixo' end end end as saueinvia
+		from 
+			fcn.fcnvia via
+			join fcn.fcnaen aen on (aen.iddaen = via.aenvia)
+			join fcn.fcnreq req on req.iddreq = via.reqvia
+		where 
+			aen.sitaen not in('Deferida','Indeferida')
+			and via.datvia > current_date - integer '90'
+			<isNotNull property="provia" prepend=" AND ">
+				via.provia ilike '%' || #provia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datvia" prepend=" AND ">
+				to_char(via.datvia, 'dd/MM/yyyy') like #datvia:VARCHAR#
+			</isNotNull>
+			<isNotNull property="reqvia" prepend=" AND ">
+				req.nomreq ilike '%' || #reqvia:VARCHAR# || '%'
+			</isNotNull>
+		order by 
+			via.datvia asc
+	</select>
+	
+	<select id="countProtocolosAnalise" resultClass="Integer" parameterClass="hashmap">
+		select count(0)
+		from fcn.fcnvia via
+		join fcn.fcnaen aen on (aen.iddaen = via.aenvia)
+		join fcn.fcnreq req on req.iddreq = via.reqvia
+		where aen.sitaen not in('Deferida','Indeferida')
+		and via.datvia > current_date - integer '90'
+		<isNotNull property="provia" prepend=" AND ">
+			via.provia ilike '%' || #provia:VARCHAR# || '%'
+		</isNotNull>
+		<isNotNull property="datvia" prepend=" AND ">
+			to_char(via.datvia, 'dd/MM/yyyy') like #datvia:VARCHAR#
+		</isNotNull>
+		<isNotNull property="reqvia" prepend=" AND ">
+			req.nomreq ilike '%' || #reqvia:VARCHAR# || '%'
+		</isNotNull>
+	</select>
+	
+	<select id="getProtocoloViabilidade" resultClass="String">
+		select 'CGR' || fcn.gera_provia()
+	</select>
+	
+	<select id="getProgressoViabilidade" resultClass="Integer" parameterClass="String">
+		select
+			case when crevia = 'N' then 
+				1 
+			else 
+				case when via.aenvia is not null then 
+					case when epdfil.iddepd is not null then 
+						case when epdfil.creepd = 'N' then 
+							4 
+						else
+							case when epdfil.caiepd is not null then 
+								6
+							else
+								5
+							end
+						end
+					else 
+						case when epdmat.iddepd is not null then 
+							case when epdmat.creepd = 'N' then 
+								4 
+							else
+								case when epdmat.caiepd is not null then
+									6
+								else
+									5
+								end
+							end
+						else
+							3
+						end
+					end
+				else 
+					2 
+				end 
+			end::integer as progresso
+		from 
+			fcn.fcnvia via
+		
+			left join fcn.fcnmat mat on (mat.pvimat = via.provia)
+			left join fcn.fcnpro promat on (promat.iddpro = mat.promat)
+			left join fcn.fcnepd epdmat on (epdmat.proepd = promat.iddpro)
+		
+			left join fcn.fcnfil fil on (fil.pvifil = via.provia)
+			left join fcn.fcnmat matfil on (matfil.iddmat = fil.matfil)
+			left join fcn.fcnpro profil on (profil.iddpro = matfil.promat)
+			left join fcn.fcnepd epdfil on (epdfil.proepd = profil.iddpro)
+		where 
+			via.provia = #value:VARCHAR#
+		limit 1	
+	</select>
+	
+	<select id="getProtocolos" parameterClass="hashmap" resultClass="hashmap">
+		select 
+			via.iddvia, via.provia, via.reqvia, to_char(via.datvia, 'dd/MM/yyyy') as datvia, to_char(via.datvia, 'dd/MM/yyyy HH24:MI:SS') as datahora,
+			case when via.evevia = 'I' then 'Inscrição' else 'Alteração' end as evento,
+			case when via.tipvia = 'A' then 'Autônomo' when via.tipvia = 'M' then 'MEI' when via.tipvia = 'C' then 'Cartório/OAB' end as tipvia,
+			case when via.tipvia = 'A' AND via.sauvia = 'E' then 'Estabelecido' when via.tipvia = 'A' AND via.sauvia = 'N' then 'Não Estabelecido' else case when via.tipvia = 'M' then case when via.einvia = 'DO' then 'Domicílio' when via.einvia = 'SP' then 'Sede Permanente' when via.einvia = 'CL' then 'No Cliente' when via.einvia = 'CP' then 'Vias Públicas, com ponto fixo' when via.einvia = 'SP' then 'Vias Públicas, sem ponto fixo' end end end as saueinvia,
+			case when length(req.nomreq) > 40 then substr(req.nomreq,1,40)||'...' else req.nomreq end as nomreq,
+			case when aen.sitaen is null then 'Em Estudo' else aen.sitaen || case when aen.sitaen = 'Deferida' OR aen.sitaen = 'Indeferida' then ' - ' ||to_char(dataen, 'dd/MM/yyyy HH24:MI:SS') else '' end end as analise,
+			case when via.estvia and (aen.sitaen = 'Deferida' OR aen.sitaen = 'Indeferida') then true else false end as permguia,
+			case when via.provia like 'CGR%' AND (VIA.evevia = 'A' OR VIA.tipvia = 'M') THEN FALSE ELSE case when aen.sitaen = 'Deferida' AND via.baevia is null then true else false end END as permbae,
+			case when via.baevia is not null then true else false end as tembae,
+			case when via.provia like 'CGR%' AND (VIA.evevia = 'A' OR VIA.tipvia = 'M') THEN true ELSE case when aen.sitaen = 'Indeferida' then true else false end END as naopermbae,
+			case when aen.sitaen = 'Deferida' AND via.baevia is not null and cai.sitcai in ('D','P') then true else false end as baecompleto, via.baevia,
+			case when aen.sitaen = 'Deferida' AND via.baevia is not null then case when cai.sitcai is null OR cai.sitcai = 'E' then true else false end else false end as permeditarbae,
+			case when bae.caibae is not null then true else false end as analisebaecompleta,
+			case when (via.provia like 'CGR%' AND (VIA.evevia = 'A' OR VIA.tipvia = 'M')) OR (aen.sitaen NOT IN ('Deferida')) THEN '-' ELSE case when via.baevia is null then '-' when cai.sitcai is null then 'Em Estudo' else case when cai.sitcai = 'D' or cai.sitcai = 'P' then 'Deferido - ' when cai.sitcai = 'I' then 'Indeferido - ' else 'Em Estudo - ' end || to_char(datcai, 'dd/MM/yyyy HH24:MI:SS') end END as analisebae,
+			case when cai.sitcai is not null AND (cai.sitcai = 'D' or cai.sitcai = 'P') and cai.imucai is null then 'Em Processamento' else cai.imucai end as imucai, cai.motcai
+		from 
+			fcn.fcnvia via
+			join fcn.fcnreq req on req.iddreq = via.reqvia
+			left join fcn.fcnaen aen on aen.iddaen = via.aenvia
+			left join fcn.fcnbae bae on bae.iddbae = via.baevia
+			left join fcn.fcncai cai on cai.iddcai = bae.caibae
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="provia" prepend=" AND ">
+				via.provia ilike '%' || #provia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datvia" prepend=" AND ">
+				to_char(via.datvia, 'dd/MM/yyyy') like #datvia:VARCHAR#
+			</isNotNull>
+			<isNotNull property="reqvia" prepend=" AND ">
+				req.nomreq ilike '%' || #reqvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cpfreq" prepend=" AND ">
+				req.cpfreq = #cpfreq:VARCHAR#
+				AND via.orevia = '5'
+			</isNotNull>
+		</dynamic>
+		order by via.datvia desc
+	</select>
+	
+	<select id="countProtocolos" parameterClass="hashmap" resultClass="Integer">
+		select 
+			count(0)
+		from 
+			fcn.fcnvia via
+			join fcn.fcnreq req on req.iddreq = via.reqvia
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="provia" prepend=" AND ">
+				via.provia ilike '%' || #provia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datvia" prepend=" AND ">
+				to_char(via.datvia, 'dd/MM/yyyy') like #datvia:VARCHAR#
+			</isNotNull>
+			<isNotNull property="reqvia" prepend=" AND ">
+				req.nomreq ilike '%' || #reqvia:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cpfreq" prepend=" AND ">
+				req.cpfreq = #reqvia:VARCHAR#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getEventos" parameterClass="Long" resultClass="hashmap">
+		select 
+			evt.codevt, evt.desevt
+		from 
+			fcn.fcnvia via
+			join fcn.fcnvev vev on vev.viavev = via.iddvia
+			join fcn.fcnevt evt on evt.codevt = vev.evevev
+		where 
+			iddvia = #value:NUMERIC#
+	</select>
+	
+	<select id="getSocios" parameterClass="Long" resultClass="hashmap">
+		select 
+			cso.cpfcso, cso.nomcso
+		from 
+			fcn.fcnvia via
+			join fcn.fcncol col on col.iddcol = via.colvia
+			join fcn.fcncso cso on cso.colcso = col.iddcol
+		where 
+			iddvia = #value:NUMERIC#
+	</select>
+	
+	<select id="getFormaAtuacao" parameterClass="String" resultClass="hashmap">
+		select 
+			fat.tipfat, fat.desfat 
+		from 
+			fcn.fcnvia via
+			join fcn.fcncol col on via.colvia = col.iddcol
+			join fcn.fcncfa cfa on cfa.colcfa = col.iddcol
+			join fcn.fcnfat fat on (col.ctucol = fat.tipfat and cfa.codcfa = fat.codfat)
+		where 
+			via.provia = #value:VARCHAR#
+	</select>
+	
+	<select id="getRegByCpfReq" parameterClass="String" resultClass="ViaVO">
+		select 
+			*
+		from 
+			fcn.fcnvia via
+			join fcn.fcnreq req on req.iddreq = via.reqvia
+		where 
+			req.cpfreq = #value:VARCHAR#
+	</select>
+	
+	<select id="getRegByProvia" parameterClass="String" resultClass="ViaVO">
+		select 
+			*
+		from 
+			fcn.fcnvia via
+		where 
+			via.provia = #value:VARCHAR#
+	</select>
+	
+	<select id="getRegEnvDoc" parameterClass="hashmap" resultClass="hashmap">
+		select 
+			via.*, to_char(via.datvia, 'dd/MM/yyyy') as datavia, aen.sitaen, case when aen.sitaen = 'Em Estudo' then true else false end as permitidoanexar
+		from 
+			fcn.fcnvia via 
+			join fcn.fcnreq req on req.iddreq = via.reqvia
+			join fcn.fcnaen aen on aen.iddaen = via.aenvia
+		where 
+			via.provia = #provia:VARCHAR#
+			and req.logreq = #logreq:VARCHAR#
+			and req.emareq = #emareq:VARCHAR#
+	</select>
+	
+	<select id="countProprietario" parameterClass="String" resultClass="Integer">
+		SELECT COUNT(0) FROM fcn.fcnpes WHERE NOMPES ILIKE '%' || #value:VARCHAR# || '%'
+	</select>
+	
+	<select id="getEstatisticas" resultClass="hashmap">
+		select 
+			(select count(0) from fcn.fcnvia v where to_char(v.datvia,'dd/MM/yyyy') = to_char(now(),'dd/MM/yyyy')) as qtd_via_dia,
+			(select count(0) as qtd_epd from fcn.fcnepd e where to_char(e.datepd,'dd/MM/yyyy') = to_char(now(),'dd/MM/yyyy')) as qtd_epd_dia,
+			(select count(0) from fcn.fcnvia v where to_char(v.datvia,'MM/yyyy') = to_char(now(),'MM/yyyy')) as qtd_via_mes,
+			(select count(0) as qtd_epd from fcn.fcnepd e where to_char(e.datepd,'MM/yyyy') = to_char(now(),'MM/yyyy')) as qtd_epd_mes,
+			(select count(0) from fcn.fcnvia v where to_char(v.datvia,'yyyy') = to_char(now(),'yyyy')) as qtd_via_ano,
+			(select count(0) as qtd_epd from fcn.fcnepd e where to_char(e.datepd,'yyyy') = to_char(now(),'yyyy')) as qtd_epd_ano,
+			'Qtd Dia (' || to_char(now(),'dd/MM/yyyy') || ')' as dia, 
+			'Qtd Mês (' || to_char(now(),'MM/yyyy') || ')' as mes,
+			'Qtd Ano (' || to_char(now(),'yyyy') || ')' as ano
+	</select>
+	
+</sqlMap> 
+ 

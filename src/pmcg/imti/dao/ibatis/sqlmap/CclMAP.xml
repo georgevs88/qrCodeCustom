@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CclO">
+	<typeAlias alias="CclOVO" type="pmcg.imti.domain.CclVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="CclOVO">
+		<result property="iddccl" column="iddccl" />
+		<result property="uniccl" column="uniccl" />
+		<result property="cnaccl" column="cnaccl" />
+		<result property="rioccl" column="rioccl" />
+		<result property="rinccl" column="rinccl" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="CclOVO">
+		<result property="iddccl" column="iddccl" />
+		<result property="uniccl" column="uniccl" />
+		<result property="cnaccl" column="cnaccl" />
+		<result property="rioccl" column="rioccl" />
+		<result property="rinccl" column="rinccl" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Double" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.fcnccl WHERE iddccl = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Double" resultMap="mapComplexQuery">
+		SELECT * FROM public.fcnccl WHERE iddccl = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CclOVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.fcnccl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddccl" prepend=" AND ">
+				iddccl = #iddccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="uniccl" prepend=" AND ">
+				uniccl = #uniccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cnaccl" prepend=" AND ">
+				cnaccl = #cnaccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="rioccl" prepend=" AND ">
+				rioccl ILIKE '%' || #rioccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="rinccl" prepend=" AND ">
+				rinccl ILIKE '%' || #rinccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="CclOVO" resultMap="mapComplexQuery">
+		SELECT * FROM public.fcnccl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddccl" prepend=" AND "> iddccl = #iddccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="uniccl" prepend=" AND "> uniccl = #uniccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cnaccl" prepend=" AND "> cnaccl = #cnaccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="rioccl" prepend=" AND ">
+				rioccl ILIKE '%' || #rioccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="rinccl" prepend=" AND ">
+				rinccl ILIKE '%' || #rinccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.fcnccl
+	</select>
+
+	<insert id="insReg" parameterClass="CclOVO">
+		<selectKey keyProperty="iddccl" resultClass="Double">
+			SELECT NEXTVAL('public.cnae_classe_cnae_id_seq')
+		</selectKey>
+		INSERT INTO public.fcnccl(iddccl,uniccl,cnaccl,rioccl,rinccl,usualt,datalt) VALUES
+		(#iddccl:NUMERIC#,#uniccl:NUMERIC#,#cnaccl:NUMERIC#, UPPER(#rioccl:VARCHAR#), UPPER(#rinccl:VARCHAR#),
+		UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="CclOVO">
+		UPDATE public.fcnccl SET uniccl= #uniccl:NUMERIC#,cnaccl= #cnaccl:NUMERIC#,rioccl= UPPER(#rioccl:VARCHAR#),rinccl=
+		UPPER(#rinccl:VARCHAR#),usualt= UPPER(#usualt:VARCHAR#),datalt= now() WHERE iddccl = #iddccl:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Double">
+		DELETE FROM public.fcnccl WHERE iddccl = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM public.fcnccl WHERE iddccl in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="CclOVO" resultClass="Integer">
+		SELECT count(iddccl) FROM public.fcnccl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddccl" prepend=" AND "> iddccl = #iddccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="uniccl" prepend=" AND "> uniccl = #uniccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="cnaccl" prepend=" AND "> cnaccl = #cnaccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="rioccl" prepend=" AND ">
+				rioccl ILIKE '%' || #rioccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="rinccl" prepend=" AND ">
+				rinccl ILIKE '%' || #rinccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getRegNA" parameterClass="hashmap" resultClass="hashmap">
+		SELECT cast(CCL.iddccl as integer) as iddccl, CNA.CNAECDCNA, CNA.CNAENMCNA,
+		case when LENGTH(CNA.CNAENMCNA) > 65 then substr(CNA.CNAENMCNA,1,65) || '...' else CNA.CNAENMCNA end as DESCRES, 
+		CCL.rinccl,case when CCL.rinccl like 'A' then 
+      'ALTO' 
+		else
+		  case when CCL.rinccl like 'M' then 
+		    'MEDIO'
+		  else
+		    case when CCL.rinccl like 'B' then 
+		         'BAIXO'
+		    else
+		         null
+		    end
+		  end
+		end as DESCRISCO,
+		case when CCL.rinccl like 'A' then 
+		  'background-color:##ffd4d4' 
+		else
+		  case when CCL.rinccl like 'M' then 
+		    'background-color:##fffdd4'
+		  else
+		    case when CCL.rinccl like 'B' then 
+		         'background-color:##d5ffd4'
+		    else
+		         null
+		    end
+		  end
+		end as style, false as checkbox 
+		FROM public.fcnccl CCL
+		JOIN public.CNAECNA CNA ON CCL.cnaccl = CNA.CNAEIDCNA
+		WHERE CCL.datalt is null
+		and CNA.cnacbocna like 'N'
+		<isNotNull property="cnaecdcna" prepend=" AND ">
+			replace(replace(CNA.CNAECDCNA,'-',''),'/','') LIKE replace(replace(#cnaecdcna:VARCHAR#,'-',''),'/','') || '%'
+		</isNotNull>
+		<isNotNull property="cnaenmcna" prepend=" AND ">
+			UPPER(CNA.CNAENMCNA) LIKE '%' || UPPER(#cnaenmcna:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="uniccl" prepend=" AND ">
+			uniccl = #uniccl:NUMERIC#
+		</isNotNull>
+		ORDER BY CNA.CNAECDCNA
+	</select>
+	
+	<select id="getRegA" parameterClass="hashmap" resultClass="hashmap">
+		SELECT cast(CCL.iddccl as integer) as iddccl, CNA.CNAECDCNA, CNA.CNAENMCNA,
+		case when LENGTH(CNA.CNAENMCNA) > 65 then substr(CNA.CNAENMCNA,1,65) || '...' else CNA.CNAENMCNA end as DESCRES, 
+		CCL.rinccl, case when CCL.rinccl like 'A' then 
+      'ALTO' 
+		else
+		  case when CCL.rinccl like 'M' then 
+		    'MEDIO'
+		  else
+		    case when CCL.rinccl like 'B' then 
+		         'BAIXO'
+		    else
+		         null
+		    end
+		  end
+		end as DESCRISCO,
+		case when CCL.rinccl like 'A' then 
+		  'background-color:##ffd4d4' 
+		else
+		  case when CCL.rinccl like 'M' then 
+		    'background-color:##fffdd4'
+		  else
+		    case when CCL.rinccl like 'B' then 
+		         'background-color:##d5ffd4'
+		    else
+		         null
+		    end
+		  end
+		end as style, false as checkbox
+		FROM public.fcnccl CCL
+		JOIN public.CNAECNA CNA ON CCL.cnaccl = CNA.CNAEIDCNA
+		WHERE CCL.datalt is not null
+		and CNA.cnacbocna like 'N'
+		<isNotNull property="cnaecdcna" prepend=" AND ">
+			replace(replace(CNA.CNAECDCNA,'-',''),'/','') LIKE replace(replace(#cnaecdcna:VARCHAR#,'-',''),'/','') || '%'
+		</isNotNull>
+		<isNotNull property="cnaenmcna" prepend=" AND ">
+			UPPER(CNA.CNAENMCNA) LIKE '%' || UPPER(#cnaenmcna:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="uniccl" prepend=" AND ">
+			uniccl = #uniccl:NUMERIC#
+		</isNotNull>
+		ORDER BY CNA.CNAECDCNA
+	</select>
+	
+	<select id="countRegNA" parameterClass="hashmap" resultClass="Integer">
+		SELECT count(CNA.CNAEIDCNA) FROM public.fcnccl CCL
+		JOIN public.CNAECNA CNA ON CCL.cnaccl = CNA.CNAEIDCNA
+		WHERE CCL.datalt is null
+		and CNA.cnacbocna like 'N'
+		<isNotNull property="cnaecdcna" prepend=" AND ">
+			replace(replace(CNA.CNAECDCNA,'-',''),'/','') LIKE replace(replace(#cnaecdcna:VARCHAR#,'-',''),'/','') || '%'
+		</isNotNull>
+		<isNotNull property="cnaenmcna" prepend=" AND ">
+			UPPER(CNA.CNAENMCNA) LIKE '%' || UPPER(#cnaenmcna:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="uniccl" prepend=" AND ">
+			uniccl = #uniccl:NUMERIC#
+		</isNotNull>
+	</select>
+	
+	<select id="countRegA" parameterClass="hashmap" resultClass="Integer">
+		SELECT count(CNA.CNAEIDCNA) FROM public.fcnccl CCL
+		JOIN public.CNAECNA CNA ON CCL.cnaccl = CNA.CNAEIDCNA
+		WHERE CCL.datalt is not null
+		and CNA.cnacbocna like 'N'
+		<isNotNull property="cnaecdcna" prepend=" AND ">
+			replace(replace(CNA.CNAECDCNA,'-',''),'/','') LIKE replace(replace(#cnaecdcna:VARCHAR#,'-',''),'/','') || '%'
+		</isNotNull>
+		<isNotNull property="cnaenmcna" prepend=" AND ">
+			UPPER(CNA.CNAENMCNA) LIKE '%' || UPPER(#cnaenmcna:VARCHAR#) || '%'
+		</isNotNull>
+		<isNotNull property="uniccl" prepend=" AND ">
+			uniccl = #uniccl:NUMERIC#
+		</isNotNull>
+	</select>
+	
+	<update id="updClasse" parameterClass="hashmap">
+		UPDATE public.fcnccl
+		SET rinccl = UPPER(#rinccl:VARCHAR#),
+		USUALT = UPPER(#usualt:VARCHAR#),
+		DATALT = now()
+		WHERE iddccl = #iddccl#
+	</update>
+	
+	<select id="getCclByCnae" parameterClass="String" resultMap="mapComplexQuerySimple">
+		select * from public.fcnccl t
+		where t.cnaccl in (select cnaeidcna from cnaecna CNA 
+                      where CNA.cnaecdcna like #value:VARCHAR#)
+	</select>
+</sqlMap> 
+ 

@@ -1,0 +1,449 @@
+<?page title="PMCG - CIM"?>
+<?link rel="shortcut icon" type="image/png" href="images/externo/brasaoPref01.png"?>
+<?link href="/css/bootstrap.min.css" rel="stylesheet"?>
+<?meta name="keywords" content="cim" ?>
+<?meta http-equiv="X-UA-Compatible" content="IE=9" ?>
+<zk xmlns:h="native">
+<window border="none" width="100%" id="mainPage" use="pmcg.imti.view.ext.Viabilidade" onCreate="mainPage.initComponentes(3);mainPage.initVia(2)">
+	<style src="/css/componentes.css"></style>
+	<style>
+        .main {
+            margin: 0;
+            width: 100%;  
+        }
+        .main .tag {
+            list-style: none outside none;
+            position: relative;
+            float: left;
+            line-height: 25px;
+        }   
+        .main .tag .texto {
+        	padding: 5px;
+        	font-size: 13px; 
+        	font-weight: bold; 
+        	background: #257BAC;
+        	round: 3px;
+        	border-radius:5px;
+        	color: white;
+        }
+    </style>
+	<h:main>
+		<include id="headerPart" src="/layout-parts/header.zul"></include>
+		<h:section>
+			<h:div class="container">
+				<include id="menuPart" src="/layout-parts/menu.zul"></include>
+				<h:h2>Consulta de Viabilidade</h:h2>
+				<div visible="@{mainPage.visibleDivCad}">
+					<div visible="@{mainPage.naoAutenticado}">
+						<h:div class="alert alert-info" role="alert">
+							ATENÇÃO! Para Salvar a Vialibidade deve existir um usuário logado. Para fazer login 
+							<h:a href="/cimweb/acesso.zul" class="alert-link">clique aqui</h:a>.
+						</h:div>
+					</div>
+					<h:h3>Evento</h:h3>
+					<h:div class="row"> 
+					    <h:div class="col-md-4"> 
+					    	<radiogroup id="evento" orient="vertical" selectedItem="@{mainPage.viabilidade.evevia}">
+								<radio value="I" label="Inscrição (Abertura)"/>
+								<radio value="A" label="Alteração (Endereço, Atividades, Natureza Jurídica)"/>
+								<radio value="R" label="Reativação"/>
+							</radiogroup>
+					    </h:div>
+					</h:div>  
+					<h:h3>Tipo Registro</h:h3>
+					<h:div class="row"> 
+					    <h:div class="col-md-4"> 
+					    	<radiogroup id="tipo" orient="vertical" selectedItem="@{mainPage.viabilidade.tipvia}" onCheck="mainPage.atualizaNatureza();mainPage.atualizaAtividades()">
+								<radio value="E" label="Empresarial (Apenas Simulador ou Evento 'Reativação')"/>
+								<radio value="A" label="Autônomo"/>
+								<radio value="M" label="MEI"/>
+								<radio value="C" label="Registro em Cartório / OAB"/>
+							</radiogroup>
+					    </h:div>
+					    <h:div class="col-md-2">
+					    	<label value="Situação do Autônomo" visible="@{mainPage.visibleSitAut}"/>
+					    	<label value="Empreendedor Individual" visible="@{mainPage.visibleEmpInd}"/>
+					    </h:div>
+					    <h:div class="col-md-6">
+					    	<radiogroup id="sitaut" orient="vertical" selectedItem="@{mainPage.viabilidade.sauvia}" visible="@{mainPage.visibleSitAut}" onCheck="mainPage.vincular()">
+								<radio value="E" label="Estabelecido"/>
+								<radio value="N" label="Não Estabelecido"/>
+							</radiogroup>
+							<radiogroup id="empind" orient="vertical" selectedItem="@{mainPage.viabilidade.einvia}" visible="@{mainPage.visibleEmpInd}">
+								<radio value="DO" label="Domicílio"/>
+								<radio value="SP" label="Sede Permanente"/>
+								<radio value="CL" label="No Cliente"/>
+								<radio value="CP" label="Vias Públicas, com ponto fixo"/>
+								<radio value="SP" label="Vias Públicas, sem ponto fixo"/>
+							</radiogroup>
+					    </h:div>
+					</h:div>    
+					<h:h3>Natureza Jurídica</h:h3>
+					<combobox class="cmbzk" id="cbNatu" model="@{mainPage.listNat}" readonly="true" width="100%"
+						style="text-transform:uppercase;" selectedItem="@{mainPage.njrVO}">
+						<comboitem self="@{each=nat}" style="text-transform:uppercase" label="@{nat.codDescNjr}" value="@{nat}" />
+					</combobox>
+					<div visible="@{mainPage.naoAutonomo}">
+						<h:h3>Enquadramento</h:h3>
+						<radiogroup id="enquadramento" orient="vertical" selectedItem="@{mainPage.viabilidade.teqvia}">
+							<radio value="MICRO_EMPRESA" label="Micro Empresa"/>
+							<radio value="EMPRESA_PEQUENO_PORTE" label="Empresa Pequeno Porte"/>
+							<radio value="MEDIO" label="Médio Porte"/>
+							<radio value="GRANDE" label="Grande Porte"/>
+						</radiogroup>
+					</div>
+					<h:h3>Endereço de Localização</h:h3>
+					<h:div class="row"> 
+					    <h:div class="col-md-2"> 
+					    	Inscrição Imobiliária
+					    </h:div>
+					    <h:div class="col-md-3"> 
+					    	<textbox id="inscricao" value="@{mainPage.inscricao}" maxlength="11" width="124px" onOK="mainPage.pesquisarInscricao()" style="text-align:center;"/>
+							<a onClick="mainPage.pesquisarInscricao()">
+								<h:button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></h:button>
+							</a>
+						</h:div>
+					    <h:div class="col-md-7"> 
+					    	<a onClick="mainPage.buscaInscricao()">
+								<h:button class="btn btn-info">Busca por Endereço</h:button>
+							</a>
+					    </h:div>
+					</h:div>
+					<h:div class="row"> 
+					    <h:div class="col-md-2"> 
+					    	<label value="CEP"/>
+				    	</h:div>
+					    <h:div class="col-md-4"> 
+					    	<textbox id="cep" maxlength="8" value="@{mainPage.dadosImovel.IMO_CEP}" style="text-align:center;"/>
+				    	</h:div>
+					    <h:div class="col-md-2"> 
+					    	<label value="Cidade"/>
+				    	</h:div>
+					    <h:div class="col-md-4"> 
+					    	<textbox value="@{mainPage.dadosImovel.IMO_CIDADE}" readonly="true" width="100%"/>
+					    </h:div>
+					</h:div>
+					<h:div class="row"> 
+					    <h:div class="col-md-2"> 
+					    	Endereço
+					    </h:div>
+					    <h:div class="col-md-10"> 
+					    	<textbox width="100%" value="@{mainPage.dadosImovel.endereco}" readonly="true"/>
+						</h:div>
+					</h:div>
+					<h:div class="row"> 
+					    <h:div class="col-md-2"> 
+					    	Complemento
+					    </h:div>
+					    <h:div class="col-md-10"> 
+					    	<textbox width="100%" value="@{mainPage.dadosImovel.IMO_COMPLE}" readonly="true"/>
+						</h:div>
+					</h:div>
+					<h:div class="row"> 
+						<h:div class="col-md-2"> 
+					    	Bairro
+					    </h:div>
+					    <h:div class="col-md-3"> 
+					    	<textbox value="@{mainPage.dadosImovel.IMO_NOMBAI}" readonly="true" width="100%"/>
+						</h:div>
+						<h:div class="col-md-1"> 
+					    	Quadra
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox value="@{mainPage.dadosImovel.IMO_QUADRA}" readonly="true"/>
+					    </h:div>
+					    <h:div class="col-md-1"> 
+					    	Lote
+					    </h:div>
+					    <h:div class="col-md-3"> 
+					    	<textbox value="@{mainPage.dadosImovel.IMO_LOTE}" readonly="true"/>
+					    </h:div>
+					</h:div> 
+					<div visible="@{mainPage.naoAutonomo}">
+						<h:h3>Tipo de Unidade do Empreendimento</h:h3>
+						<h:div class="row"> 
+						    <h:div class="col-md-2"> 
+						    	<radiogroup id="tipounidade" orient="vertical" selectedItem="@{mainPage.viabilidade.coleta.ctucol}" onCheck="mainPage.atualizaAtividades()">
+									<radio value="PRODUTIVA" label="Produtiva"/>
+									<radio value="AUXILIAR" label="Auxiliar"/>
+								</radiogroup>
+						    </h:div>
+						    <h:div class="col-md-10"> 
+						    	<vlayout id="produtiva" visible="@{mainPage.visibleProdutiva}">
+							    	<checkbox label="01 - Estabelecimento fixo" checked="@{mainPage.viabilidade.coleta.p1}" onClick="mainPage.vincular()"/>
+							    	<checkbox label="02 - Internet" checked="@{mainPage.viabilidade.coleta.p2}"/>
+							    	<checkbox label="03 - Em local fixo fora de loja" checked="@{mainPage.viabilidade.coleta.p3}"/>
+							    	<checkbox label="04 - Correio" checked="@{mainPage.viabilidade.coleta.p4}"/>
+							    	<checkbox label="05 - Porta a Porta, Postos Móveis ou por Ambulantes" checked="@{mainPage.viabilidade.coleta.p5}"/>
+							    	<checkbox label="06 - Televendas" checked="@{mainPage.viabilidade.coleta.p6}"/>
+							    	<checkbox label="07 - Máquinas Automáticas" checked="@{mainPage.viabilidade.coleta.p7}"/>
+						    	</vlayout> 	
+								<radiogroup id="auxiliar" orient="vertical" selectedItem="@{mainPage.viabilidade.coleta.formaAtuacaoAuxiliar}" visible="@{mainPage.visibleAuxiliar}">
+						    		<radio value="01" label="01 - Sede"/>
+									<radio value="02" label="02 - Escritório Administrativo"/>
+									<radio value="03" label="03 - Depósito Fechado"/>
+									<radio value="04" label="04 - Almoxarifado"/>
+									<radio value="05" label="05 - Oficina de Reparação"/>
+									<radio value="06" label="06 - Garagem"/>
+									<radio value="07" label="07 - Unidade de Abastecimento de Combustíveis"/>
+									<radio value="08" label="08 - Ponto de Exposição"/>
+									<radio value="09" label="09 - Centro de Treinamento"/>
+									<radio value="10" label="10 - Centro de Processamento de Dados"/>
+									<radio value="11" label="11 - Posto de Coleta"/>
+								</radiogroup>
+							</h:div>
+						</h:div>	
+					</div>	
+					<h:h3>Dados do Imóvel</h:h3>
+					<h:div class="row"> 
+						<h:div class="col-md-2"> 
+					    	Insc. Imobiliária
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox value="@{mainPage.inscricao}" readonly="true"/>
+						</h:div>
+						<h:div class="col-md-2"> 
+					    	Tipo imóvel
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox value="@{mainPage.dadosImovel.IMO_TIPO}" readonly="true"/>
+					    </h:div>
+					</h:div>
+					<h:div class="row"> 
+						<h:div class="col-md-2"> 
+					    	Área do Terreno
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox value="@{mainPage.dadosImovel.areaterreno}" readonly="true"/>
+						</h:div>
+						<h:div class="col-md-2"> 
+					    	Área Unitária
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox value="@{mainPage.dadosImovel.areaunitaria}" readonly="true"/>
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	Área Construída
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox value="@{mainPage.dadosImovel.areaconstruida}" readonly="true"/>
+					    </h:div>
+					</h:div>
+					<h:div class="row"> 
+						<h:div class="col-md-2"> 
+					    	Fração Ideal
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox value="@{mainPage.dadosImovel.IMO_FRACAO}" readonly="true"/>
+						</h:div>
+						<h:div class="col-md-2"> 
+					    	Testada Principal
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox value="@{mainPage.dadosImovel.TESPRI}" readonly="true"/>
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	Zona(s)
+					    </h:div>
+					    <h:div class="col-md-2"> 
+					    	<textbox id="zona" value="@{mainPage.dadosZonaUsos.zonas}" disabled="true" style="text-transform:uppercase;text-align:center"/>
+					    </h:div>
+					</h:div>
+					<h:div class="row"> 
+						<h:div class="col-md-2"> 
+							Usos Permitidos
+						</h:div>
+						<h:div class="col-md-10"> 
+							<listbox class="main" model="@{mainPage.listUsosZona}" style="border:none;">
+								<listitem class="tag" self="@{each=ccc}" value="@{ccc}">
+									<listcell>
+										<label class="texto" value="@{ccc.coduso}" tooltiptext="@{ccc.decuso}"/>
+									</listcell>
+								</listitem>
+							</listbox>
+						</h:div>
+					</h:div>
+					<h:div class="row"> 
+						
+					</h:div>
+					<div visible="@{mainPage.visibleAtv}">
+						<h:h3>Adicione as Atividades Pretendidas!</h:h3>
+						<h:div class="row"> 
+							<h:div class="col-md-2"> 
+								<label value="Código"/>
+						    </h:div>
+						    <h:div class="col-md-2"> 
+						    	<textbox id="numatv" value="@{mainPage.atvFiltro.codccl}" onOK="mainPage.pesquisaAtv();" width="100%"/>
+						    </h:div>
+						    <h:div class="col-md-2"> 
+						    	<label value="Descrição"/>
+						    </h:div>
+						    <h:div class="col-md-4"> 
+						    	<textbox id="descna" style="text-transform:uppercase;" value="@{mainPage.atvFiltro.nomccl}" onOK="mainPage.pesquisaAtv();" width="100%"/>
+						    </h:div>
+						    <h:div class="col-md-2"> 
+						    	<a onClick="mainPage.pesquisaAtv()">
+									<h:button class="btn btn-default">
+										<span class="glyphicon glyphicon-filter"></span>
+										Filtrar
+									</h:button>
+								</a>
+							</h:div>
+						</h:div>
+						<h:div class="row"> 
+							<h:div class="col-md-12"> 
+								<paging id="pagAtv" pageSize="10" />
+								<listbox id="listAtv" model="@{mainPage.listAtv}" width="100%" selectedItem="@{mainPage.atvSel}" style="border-radius: 5px;"> 
+									 <listhead>
+									 	<listheader width="80px" align="center"/>
+									 	<listheader label="CNAE/CBO" width="120px" align="center" style="text-align:center"/>
+										<listheader label="Descrição" align="left"/>
+									</listhead>
+									<listitem self="@{each=c}" value="@{c}">
+										<listcell>
+											<a onClick="mainPage.selecionaAtv(self.parent.parent)">
+												<h:button class="btn btn-lg btn-success btn-xs">
+													Adicionar
+												</h:button>
+											</a>
+										</listcell>
+										<listcell label="@{c.codccl}"/>
+										<listcell label="@{c.nomccl}" />
+									</listitem>
+								</listbox>
+							</h:div>
+						</h:div>
+					</div>
+					<div visible="@{mainPage.visibleAtvSel}">
+						<h:div class="row"> 
+							<h:div class="col-md-12"> 
+								<h:h3>Atividades Selecionadas</h:h3>
+								<listbox id="atvSel" model="@{mainPage.listAtvSel}" width="100%" selectedItem="@{mainPage.cnaSel}" visible="@{mainPage.visibleAtv}" style="border-radius: 5px;">
+									 <listhead>
+										<listheader width="40px" align="center" label=""/>
+										<listheader width="60px" align="center" label="Principal" style="font-size:11px"/>
+										<listheader width="85px" align="center" label="Código" style="font-size:11px;text-align:center"/>
+										<listheader width="308px" align="left"  label="Descrição" style="font-size:11px"/>
+										<listheader width="104px" align="center" label="Exercida no Local" style="font-size:11px"/>
+										<listheader width="100px" align="center" label="USO CONFORME" style="font-size:11px;text-align:center;"/>
+										<listheader width="75px" align="center" label="Meio Amb." style="font-size:11px;text-align:center;"/>
+										<listheader width="75px" align="center" label="Bombeiro" style="font-size:11px;text-align:center;"/>
+										<listheader width="80px" align="center" label="Vigil. San." style="font-size:11px;text-align:center;"/>
+										<listheader width="75px" align="center" label="Posturas" style="font-size:11px;text-align:center;"/>
+										<listheader width="75px" align="center" label="Trânsito" style="font-size:11px;text-align:center;"/>
+										<listheader width="60px" align="center" label="SIA" style="font-size:11px;text-align:center;"/>
+									</listhead>
+									<listitem self="@{each=a}" value="@{a}">
+										<listcell>
+											<image src="/images/externo/No_16x16.png" onClick="mainPage.removeAtv(self.parent.parent)"/>
+										</listcell>
+										<listcell>
+											<checkbox checked="@{a.principal}" onCheck="mainPage.selecionaPrincipal(self.parent.parent)"/>
+										</listcell>
+										<listcell label="@{a.cnaeFormatado}" style="font-size:10px"/>
+										<listcell label="@{a.dcoatv}" style="font-size:10px"/>
+										<listcell>
+											<checkbox checked="@{a.execna}" onCheck="mainPage.reanalizaAtv(self.parent.parent)"/>
+										</listcell>
+										<listcell>
+											<image src="@{a.imgStatus}"/>
+											<label value="@{a.descStatus}" style="font-size:10px"/>
+										</listcell>
+										<listcell>
+											<image src="@{a.imgRiscoAmbi}" tooltiptext="@{a.descRiscoAmbi}" width="16px" height="16px"/>
+										</listcell>
+										<listcell>
+											<image src="@{a.imgRiscoBomb}" tooltiptext="@{a.descRiscoBomb}" width="16px" height="16px"/>
+										</listcell>
+										<listcell>
+											<image src="@{a.imgRiscoVigi}" tooltiptext="@{a.descRiscoVigi}" width="16px" height="16px"/>
+										</listcell>
+										<listcell>
+											<image src="@{a.imgRiscoPost}" tooltiptext="@{a.descRiscoPost}" width="16px" height="16px"/>
+										</listcell>
+										<listcell>
+											<image src="@{a.imgRiscoTran}" tooltiptext="@{a.descRiscoTran}" width="16px" height="16px"/>
+										</listcell>
+										<listcell>
+											<image src="@{a.imgRiscoSIA}" tooltiptext="@{a.descRiscoSIA}" width="16px" height="16px"/>
+										</listcell>
+									</listitem>
+								</listbox>
+							</h:div>
+						</h:div>
+					</div>
+					<div> <!--  visible="@{mainPage.visibleQuest}" -->
+						<include id="questionario" src="forms/questionario.zul"></include>
+					</div>
+					<div visible="@{mainPage.usuarioRespCont}">
+						<h:h3>Responsável pela Guia de Consulta</h:h3>
+						<h:div class="row">
+							<h:div class="col-md-2">
+					        	CPF/CNPJ
+					        </h:div>
+					        <h:div class="col-md-2">
+					        	<textbox id="cprvia" value="@{mainPage.viabilidade.cprvia}" width="100%" maxlength="19" style="text-align:center;"/>
+					        </h:div>
+				            <h:div class="col-md-2">
+					        	Nome/Razão Social
+					        </h:div>
+					        <h:div class="col-md-6">
+					        	<textbox id="norvia" value="@{mainPage.viabilidade.norvia}" width="100%"/>
+					        </h:div>
+				        </h:div>
+				        <h:div class="row">
+				       		<h:div class="col-md-2">
+				        		Telefone
+				        	</h:div>
+					        <h:div class="col-md-2">
+				        		<hbox>
+									<textbox id="ddtvia" width="27px" value="@{mainPage.viabilidade.ddtvia}" maxlength="2" style="text-align: center;"/>
+									<textbox id="telvia" value="@{mainPage.viabilidade.telvia}" maxlength="9" width="70px"/>
+								</hbox>
+				        	</h:div>
+				        	<h:div class="col-md-2">
+					        	E-mail
+					        </h:div>
+					        <h:div class="col-md-6">
+					        	<textbox id="emavia" value="@{mainPage.viabilidade.emavia}" width="100%" style="text-transform:lowercase;"/>
+					        </h:div>
+				        </h:div>
+				    </div>
+					<h:div class="row">
+						<h:div class="col-md-12">
+							<checkbox id="chkAceite" checked="@{mainPage.aceite}" label="O usuário é responsável pela veracidade dos seus dados, comprometendo-se a não introduzir dados falsos. Confirmo a veracidade dos dados informamos neste documento de constituição."/>
+						</h:div>
+					</h:div>
+					<div align="center" style="padding:10px;">
+						<a onClick="mainPage.salvar()">
+							<h:button class="btn btn-lg btn-success">
+								Salvar Viabilidade
+							</h:button>
+						</a>
+					</div>
+				</div>
+				<div visible="@{mainPage.visibleDivRel}" align="center">
+					<h:div class="row"> 
+						<h:div class="col-md-12"> 
+							<h:div class="alert alert-success" role="alert">Sua Viabilidade foi salva com sucesso!</h:div>
+							<h:h2>
+								Protocolo de Viabilidade Nº:
+								<label value="@{mainPage.protocolo}" style="font-weight:bold;font-size:30px;color:#ff141d"/>
+							</h:h2>
+							<!--O Profissional Autonomo que finalizou seu cadastro deverá comparecer a Central de Atendimento ao Cidadão munido de seus documentos pessoais (copia e originais), e comprovação de habilitação para o exercicio da atividade que efetuou o cadastro. Alertamos que é obrigatório a presença do profissional na Central.  -->
+							<separator height="10px"/>
+							<h:div class="alert alert-info" role="alert">
+								Você pode acompanhar a situação do procotolo acessando o menu 'Acompanhamento' ou 
+								<h:a href="/cimweb/acompanhamento.zul" class="alert-link">clicando aqui</h:a>.
+							</h:div>
+						</h:div>
+					</h:div>
+				</div>
+			</h:div>
+		</h:section>
+		<include id="footerPart" src="layout-parts/footer.zul"></include>
+	</h:main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</window>
+</zk>

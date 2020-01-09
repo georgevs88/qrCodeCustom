@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Pro">
+	<typeAlias alias="ProVO" type="pmcg.fcn.domain.ProVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="ProVO">
+		<result property="iddpro" column="iddpro" />
+		<result property="reqpro" column="reqpro" />
+		<result property="atopro" column="atopro" />
+		<result property="njrpro" column="njrpro" />
+		<result property="daspro" column="daspro" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="ProVO">
+		<result property="iddpro" column="iddpro" />
+		<result property="reqpro" column="reqpro" />
+		<result property="atopro" column="atopro" />
+		<result property="njrpro" column="njrpro" />
+		<result property="daspro" column="daspro" />
+		
+		<result property="descricaoAto" column="desato" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnpro WHERE iddpro = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT 
+			pro.*, atopro || ' - ' || tab.destab as desato
+		FROM 
+			fcn.fcnpro pro
+			join fcn.fcntab tab on (tab.tabtab = 'ATO' and tab.codtab = pro.atopro)
+		WHERE 
+			iddpro = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="ProVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnpro
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddpro" prepend=" AND ">
+				iddpro = #iddpro:NUMERIC#
+			</isNotNull>
+			<isNotNull property="reqpro" prepend=" AND ">
+				reqpro = #reqpro:NUMERIC#
+			</isNotNull>
+			<isNotNull property="atopro" prepend=" AND ">
+				atopro ILIKE '%' || #atopro:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="njrpro" prepend=" AND ">
+				njrpro ILIKE '%' || #njrpro:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="daspro" prepend=" AND ">
+				to_char(daspro,'dd/MM/yyyy') =
+				to_char(#daspro:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="ProVO" resultMap="mapComplexQuery">
+		SELECT 
+			pro.*, atopro || ' - ' || tab.destab as desato
+		FROM 
+			fcn.fcnpro pro
+			join fcn.fcntab tab on (tab.tabtab = 'ATO' and tab.codtab = pro.atopro)
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddpro" prepend=" AND "> iddpro =
+				#iddpro:NUMERIC#
+			</isNotNull>
+			<isNotNull property="reqpro" prepend=" AND "> reqpro =
+				#reqpro:NUMERIC#
+			</isNotNull>
+			<isNotNull property="atopro" prepend=" AND ">
+				atopro ILIKE '%' || #atopro:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="njrpro" prepend=" AND ">
+				njrpro ILIKE '%' || #njrpro:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="daspro" prepend=" AND ">
+				to_char(daspro,'dd/MM/yyyy') =
+				to_char(#daspro:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnpro
+	</select>
+
+	<insert id="insReg" parameterClass="ProVO">
+		<selectKey keyProperty="iddpro" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqpro')
+		</selectKey>
+		INSERT INTO fcn.fcnpro(iddpro,reqpro,atopro,njrpro,daspro) VALUES
+		(#iddpro:NUMERIC#,#reqpro:NUMERIC#, UPPER(#atopro:VARCHAR#),
+		UPPER(#njrpro:VARCHAR#),#daspro:TIMESTAMP# )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="ProVO">
+		UPDATE fcn.fcnpro SET reqpro= #reqpro:NUMERIC#,atopro=
+		UPPER(#atopro:VARCHAR#),njrpro= UPPER(#njrpro:VARCHAR#),daspro=
+		#daspro:TIMESTAMP# WHERE iddpro =
+		#iddpro:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnpro WHERE iddpro = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnpro WHERE iddpro in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="ProVO"
+		resultClass="Integer">
+		SELECT count(iddpro) FROM fcn.fcnpro
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddpro" prepend=" AND "> iddpro =
+				#iddpro:NUMERIC#
+			</isNotNull>
+			<isNotNull property="reqpro" prepend=" AND "> reqpro =
+				#reqpro:NUMERIC#
+			</isNotNull>
+			<isNotNull property="atopro" prepend=" AND ">
+				atopro ILIKE '%' || #atopro:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="njrpro" prepend=" AND ">
+				njrpro ILIKE '%' || #njrpro:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="daspro" prepend=" AND ">
+				to_char(daspro,'dd/MM/yyyy') =
+				to_char(#daspro:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap> 
+ 

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Ccl">
+	<typeAlias alias="CclVO" type="pmcg.fcn.domain.CclVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="CclVO">
+		<result property="iddccl" column="iddccl" />
+		<result property="nomccl" column="nomccl" />
+		<result property="codccl" column="codccl" />
+		<result property="cbeccl" column="cbeccl" />
+		<result property="staccl" column="staccl" />
+		<result property="cboccl" column="cboccl" />
+		<result property="gurccl" column="gurccl" />
+		<result property="vigccl" column="vigccl" />
+		<result property="ambccl" column="ambccl" />
+		<result property="bomccl" column="bomccl" />
+		<result property="catccl" column="catccl" />
+		<result property="traccl" column="traccl" />
+		<result property="meiccl" column="meiccl" />
+		<result property="nieccl" column="nieccl" />
+		<result property="secccl" column="secccl" />
+		<result property="dinccl" column="dinccl" />
+		<result property="dficcl" column="dficcl" />
+		<result property="demccl" column="demccl" />
+		<result property="sedccl" column="sedccl" />
+		<result property="divccl" column="divccl" />
+		<result property="grpccl" column="grpccl" />
+		<result property="claccl" column="claccl" />
+		<result property="sclccl" column="sclccl" />
+		<result property="urlccl" column="urlccl" />
+		<result property="altccl" column="altccl" />
+		<result property="alcccl" column="alcccl" />
+		<result property="alrccl" column="alrccl" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="CclVO">
+		<result property="iddccl" column="iddccl" />
+		<result property="nomccl" column="nomccl" />
+		<result property="codccl" column="codccl" />
+		<result property="cbeccl" column="cbeccl" />
+		<result property="staccl" column="staccl" />
+		<result property="cboccl" column="cboccl" />
+		<result property="gurccl" column="gurccl" />
+		<result property="vigccl" column="vigccl" />
+		<result property="ambccl" column="ambccl" />
+		<result property="bomccl" column="bomccl" />
+		<result property="catccl" column="catccl" />
+		<result property="traccl" column="traccl" />
+		<result property="meiccl" column="meiccl" />
+		<result property="nieccl" column="nieccl" />
+		<result property="secccl" column="secccl" />
+		<result property="dinccl" column="dinccl" />
+		<result property="dficcl" column="dficcl" />
+		<result property="demccl" column="demccl" />
+		<result property="sedccl" column="sedccl" />
+		<result property="divccl" column="divccl" />
+		<result property="grpccl" column="grpccl" />
+		<result property="claccl" column="claccl" />
+		<result property="sclccl" column="sclccl" />
+		<result property="urlccl" column="urlccl" />
+		<result property="altccl" column="altccl" />
+		<result property="alcccl" column="alcccl" />
+		<result property="alrccl" column="alrccl" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Integer" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnccl WHERE iddccl = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Integer" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnccl WHERE iddccl = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="CclVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnccl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddccl" prepend=" AND ">
+				iddccl = #iddccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomccl" prepend=" AND ">
+				nomccl ILIKE '%' || #nomccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codccl" prepend=" AND ">
+				codccl ILIKE '%' || #codccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cbeccl" prepend=" AND ">
+				cbeccl ILIKE '%' || #cbeccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="staccl" prepend=" AND ">
+				staccl ILIKE '%' || #staccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cboccl" prepend=" AND ">
+				cboccl ILIKE '%' || #cboccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="gurccl" prepend=" AND ">
+				gurccl ILIKE '%' || #gurccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vigccl" prepend=" AND ">
+				vigccl ILIKE '%' || #vigccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ambccl" prepend=" AND ">
+				ambccl ILIKE '%' || #ambccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="bomccl" prepend=" AND ">
+				bomccl ILIKE '%' || #bomccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="catccl" prepend=" AND ">
+				catccl ILIKE '%' || #catccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="traccl" prepend=" AND ">
+				traccl ILIKE '%' || #traccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="meiccl" prepend=" AND ">
+				meiccl ILIKE '%' || #meiccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nieccl" prepend=" AND ">
+				nieccl ILIKE '%' || #nieccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="secccl" prepend=" AND ">
+				secccl ILIKE '%' || #secccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dinccl" prepend=" AND "> to_char(dinccl,'dd/MM/yyyy') =
+				to_char(#dinccl:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dficcl" prepend=" AND "> to_char(dficcl,'dd/MM/yyyy') =
+				to_char(#dficcl:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="demccl" prepend=" AND ">
+				demccl = #demccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sedccl" prepend=" AND ">
+				sedccl ILIKE '%' || #sedccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="divccl" prepend=" AND ">
+				divccl ILIKE '%' || #divccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="grpccl" prepend=" AND ">
+				grpccl ILIKE '%' || #grpccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="claccl" prepend=" AND ">
+				claccl ILIKE '%' || #claccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sclccl" prepend=" AND ">
+				sclccl ILIKE '%' || #sclccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="urlccl" prepend=" AND ">
+				urlccl ILIKE '%' || #urlccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="altccl" prepend=" AND ">
+				altccl ILIKE '%' || #altccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alcccl" prepend=" AND ">
+				alcccl ILIKE '%' || #alcccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alrccl" prepend=" AND ">
+				alrccl ILIKE '%' || #alrccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="CclVO" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnccl
+		WHERE
+			substr(codccl,11,3) not in ('000')
+			<isNotNull property="iddccl" prepend=" AND "> iddccl = #iddccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomccl" prepend=" AND ">
+				nomccl ILIKE '%' || #nomccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codccl" prepend=" AND ">
+				codccl ILIKE '%' || #codccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cbeccl" prepend=" AND ">
+				cbeccl ILIKE '%' || #cbeccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="staccl" prepend=" AND ">
+				staccl ILIKE '%' || #staccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cboccl" prepend=" AND ">
+				cboccl ILIKE '%' || #cboccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="gurccl" prepend=" AND ">
+				gurccl ILIKE '%' || #gurccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vigccl" prepend=" AND ">
+				vigccl ILIKE '%' || #vigccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ambccl" prepend=" AND ">
+				ambccl ILIKE '%' || #ambccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="bomccl" prepend=" AND ">
+				bomccl ILIKE '%' || #bomccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="catccl" prepend=" AND ">
+				catccl ILIKE '%' || #catccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="traccl" prepend=" AND ">
+				traccl ILIKE '%' || #traccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="meiccl" prepend=" AND ">
+				meiccl ILIKE '%' || #meiccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nieccl" prepend=" AND ">
+				nieccl ILIKE '%' || #nieccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="secccl" prepend=" AND ">
+				secccl ILIKE '%' || #secccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dinccl" prepend=" AND "> to_char(dinccl,'dd/MM/yyyy') =
+				to_char(#dinccl:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dficcl" prepend=" AND "> to_char(dficcl,'dd/MM/yyyy') =
+				to_char(#dficcl:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="demccl" prepend=" AND "> demccl = #demccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sedccl" prepend=" AND ">
+				sedccl ILIKE '%' || #sedccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="divccl" prepend=" AND ">
+				divccl ILIKE '%' || #divccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="grpccl" prepend=" AND ">
+				grpccl ILIKE '%' || #grpccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="claccl" prepend=" AND ">
+				claccl ILIKE '%' || #claccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sclccl" prepend=" AND ">
+				sclccl ILIKE '%' || #sclccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="urlccl" prepend=" AND ">
+				urlccl ILIKE '%' || #urlccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="altccl" prepend=" AND ">
+				altccl ILIKE '%' || #altccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alcccl" prepend=" AND ">
+				alcccl ILIKE '%' || #alcccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alrccl" prepend=" AND ">
+				alrccl ILIKE '%' || #alrccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnccl
+	</select>
+
+	<insert id="insReg" parameterClass="CclVO">
+		<selectKey keyProperty="iddccl" resultClass="Integer">
+			SELECT NEXTVAL('fcn.seqccl')
+		</selectKey>
+		INSERT INTO
+		fcn.fcnccl(iddccl,nomccl,codccl,cbeccl,staccl,cboccl,gurccl,vigccl,ambccl,bomccl,catccl,traccl,meiccl,nieccl,secccl,dinccl,dficcl,demccl,sedccl,divccl,grpccl,claccl,sclccl,urlccl,altccl,alcccl,alrccl,usualt,datalt)
+		VALUES (#iddccl:NUMERIC#, UPPER(#nomccl:VARCHAR#), UPPER(#codccl:VARCHAR#), UPPER(#cbeccl:VARCHAR#),
+		UPPER(#staccl:VARCHAR#), UPPER(#cboccl:VARCHAR#), UPPER(#gurccl:VARCHAR#), UPPER(#vigccl:VARCHAR#),
+		UPPER(#ambccl:VARCHAR#), UPPER(#bomccl:VARCHAR#), UPPER(#catccl:VARCHAR#), UPPER(#traccl:VARCHAR#),
+		UPPER(#meiccl:VARCHAR#), UPPER(#nieccl:VARCHAR#),
+		UPPER(#secccl:VARCHAR#),#dinccl:TIMESTAMP#,#dficcl:TIMESTAMP#,#demccl:NUMERIC#, UPPER(#sedccl:VARCHAR#),
+		UPPER(#divccl:VARCHAR#), UPPER(#grpccl:VARCHAR#), UPPER(#claccl:VARCHAR#), UPPER(#sclccl:VARCHAR#),
+		UPPER(#urlccl:VARCHAR#), UPPER(#altccl:VARCHAR#), UPPER(#alcccl:VARCHAR#), UPPER(#alrccl:VARCHAR#),
+		UPPER(#usualt:VARCHAR#),now() )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="CclVO">
+		UPDATE fcn.fcnccl SET nomccl= UPPER(#nomccl:VARCHAR#),codccl= UPPER(#codccl:VARCHAR#),cbeccl= UPPER(#cbeccl:VARCHAR#),staccl=
+		UPPER(#staccl:VARCHAR#),cboccl= UPPER(#cboccl:VARCHAR#),gurccl= UPPER(#gurccl:VARCHAR#),vigccl=
+		UPPER(#vigccl:VARCHAR#),ambccl= UPPER(#ambccl:VARCHAR#),bomccl= UPPER(#bomccl:VARCHAR#),catccl=
+		UPPER(#catccl:VARCHAR#),traccl= UPPER(#traccl:VARCHAR#),meiccl= UPPER(#meiccl:VARCHAR#),nieccl=
+		UPPER(#nieccl:VARCHAR#),secccl= UPPER(#secccl:VARCHAR#),dinccl= #dinccl:TIMESTAMP#,dficcl= #dficcl:TIMESTAMP#,demccl=
+		#demccl:NUMERIC#,sedccl= UPPER(#sedccl:VARCHAR#),divccl= UPPER(#divccl:VARCHAR#),grpccl=
+		UPPER(#grpccl:VARCHAR#),claccl= UPPER(#claccl:VARCHAR#),sclccl= UPPER(#sclccl:VARCHAR#),urlccl=
+		UPPER(#urlccl:VARCHAR#),altccl= UPPER(#altccl:VARCHAR#),alcccl= UPPER(#alcccl:VARCHAR#),alrccl=
+		UPPER(#alrccl:VARCHAR#),usualt= UPPER(#usualt:VARCHAR#),datalt= now() WHERE iddccl = #iddccl:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Integer">
+		DELETE FROM fcn.fcnccl WHERE iddccl = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnccl WHERE iddccl in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="CclVO" resultClass="Integer">
+		SELECT count(iddccl) FROM fcn.fcnccl
+		WHERE
+			substr(codccl,11,3) not in ('000')
+			<isNotNull property="iddccl" prepend=" AND "> iddccl = #iddccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="nomccl" prepend=" AND ">
+				nomccl ILIKE '%' || #nomccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="codccl" prepend=" AND ">
+				codccl ILIKE '%' || #codccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cbeccl" prepend=" AND ">
+				cbeccl ILIKE '%' || #cbeccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="staccl" prepend=" AND ">
+				staccl ILIKE '%' || #staccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="cboccl" prepend=" AND ">
+				cboccl ILIKE '%' || #cboccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="gurccl" prepend=" AND ">
+				gurccl ILIKE '%' || #gurccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="vigccl" prepend=" AND ">
+				vigccl ILIKE '%' || #vigccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="ambccl" prepend=" AND ">
+				ambccl ILIKE '%' || #ambccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="bomccl" prepend=" AND ">
+				bomccl ILIKE '%' || #bomccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="catccl" prepend=" AND ">
+				catccl ILIKE '%' || #catccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="traccl" prepend=" AND ">
+				traccl ILIKE '%' || #traccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="meiccl" prepend=" AND ">
+				meiccl ILIKE '%' || #meiccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="nieccl" prepend=" AND ">
+				nieccl ILIKE '%' || #nieccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="secccl" prepend=" AND ">
+				secccl ILIKE '%' || #secccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="dinccl" prepend=" AND "> to_char(dinccl,'dd/MM/yyyy') =
+				to_char(#dinccl:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="dficcl" prepend=" AND "> to_char(dficcl,'dd/MM/yyyy') =
+				to_char(#dficcl:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="demccl" prepend=" AND "> demccl = #demccl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sedccl" prepend=" AND ">
+				sedccl ILIKE '%' || #sedccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="divccl" prepend=" AND ">
+				divccl ILIKE '%' || #divccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="grpccl" prepend=" AND ">
+				grpccl ILIKE '%' || #grpccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="claccl" prepend=" AND ">
+				claccl ILIKE '%' || #claccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="sclccl" prepend=" AND ">
+				sclccl ILIKE '%' || #sclccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="urlccl" prepend=" AND ">
+				urlccl ILIKE '%' || #urlccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="altccl" prepend=" AND ">
+				altccl ILIKE '%' || #altccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alcccl" prepend=" AND ">
+				alcccl ILIKE '%' || #alcccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="alrccl" prepend=" AND ">
+				alrccl ILIKE '%' || #alrccl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="usualt" prepend=" AND ">
+				usualt ILIKE '%' || #usualt:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="datalt" prepend=" AND "> to_char(datalt,'dd/MM/yyyy') =
+				to_char(#datalt:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+	</select>
+	
+	<select id="getRegByCNAE" parameterClass="CclVO" resultClass="CclVO">
+		select * from fcn.fcnccl 
+		where codccl = #codccl:VARCHAR#
+		<isNotNull property="meiccl" prepend=" AND ">
+			meiccl = #meiccl:VARCHAR#
+		</isNotNull>
+	</select>
+	
+	<select id="getNomeByCNAE" parameterClass="CclVO" resultClass="String">
+		select nomccl from fcn.fcnccl 
+		where codccl = #codccl:VARCHAR#
+		<isNotNull property="meiccl" prepend=" AND ">
+			meiccl = #meiccl:VARCHAR#
+		</isNotNull>
+	</select>
+	
+	<select id="getRegByCnae" parameterClass="String" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnccl 
+		WHERE codccl = #value:VARCHAR#
+		limit 1
+	</select>
+	
+	<update id="updRiscosByCod" parameterClass="CclVO">
+		UPDATE 
+			fcn.fcnccl
+		SET 
+			ambccl = #ambccl:VARCHAR#,
+			vigccl = #vigccl:VARCHAR#,
+			bomccl = #bomccl:VARCHAR#,
+			gurccl = #gurccl:VARCHAR#,
+			usualt = #usualt:VARCHAR#,
+			datalt = now()
+		WHERE 
+			iddccl = #iddccl:NUMERIC#
+	</update>
+</sqlMap> 
+ 

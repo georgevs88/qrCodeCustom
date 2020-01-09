@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Sosvea">
+    <typeAlias alias="VeaVO" type="pmcg.imti.domain.VeaVO"/>
+
+	  <resultMap id="mapComplexQuery" class="VeaVO">
+		<result property="codvea" column="codvea" />
+		<result property="codves" column="codves" />
+		<result property="codvat" column="codvat" />
+		<result property="principal" column="principal" />
+		<result property="usualt" column="usualt" />
+		<result property="datalt" column="datalt" />
+		<result property="vesVO" select="Ves.getRegByCod" column="codves" />
+<!-- 		<result property="vatVO" select="Vat.getRegByCodComplex" column="codvat" /> -->
+	</resultMap>
+
+
+    <select id="getRegByCod" parameterClass="Integer" resultClass="VeaVO">
+        SELECT *
+		  FROM sos.sosvea
+		 WHERE codvea = #value:NUMERIC#
+	</select>
+	
+	 <select id="getRegByCodComplex" parameterClass="Integer" resultMap="mapComplexQuery">
+        SELECT *
+		  FROM sos.sosvea
+		 WHERE codvea = #value:NUMERIC#
+	</select>
+
+    <select id="getTodos" resultClass="VeaVO">
+        SELECT *
+		  FROM sos.sosvea ORDER BY codvea
+	</select>
+
+    <select id="getRegByCriterio" parameterClass="VeaVO" resultClass="VeaVO">
+        SELECT *
+		  FROM sos.sosvea
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codvea" prepend=" AND ">
+				codvea = #codvea:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codves" prepend=" AND ">
+				codves = #codves:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvat" prepend=" AND ">
+				codvat = #codvat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="principal" prepend=" AND ">
+				principal = #principal:BOOLEAN#
+			</isNotNull>
+		</dynamic>
+	ORDER BY codvea
+	</select>
+	
+	  <select id="getRegByCriterioComplex" parameterClass="VeaVO"  resultMap="mapComplexQuery">
+        SELECT *
+		  FROM sos.sosvea
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codvea" prepend=" AND ">
+				codvea = #codvea:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codves" prepend=" AND ">
+				codves = #codves:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvat" prepend=" AND ">
+				codvat = #codvat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="principal" prepend=" AND ">
+				principal = #principal:BOOLEAN#
+			</isNotNull>
+		</dynamic>
+	ORDER BY codvea
+	</select>
+
+    <insert id="insReg" parameterClass="VeaVO">
+        <selectKey keyProperty="codvea" resultClass="Integer">
+			select nextval('sos.sosvea_codvea_seq') as codvea
+		</selectKey>
+
+		INSERT INTO sos.sosvea (codvea, codves, codvat, principal,usualt, datalt)
+				VALUES (#codvea:NUMERIC#, #codves:NUMERIC#, #codvat:NUMERIC#, #principal:BOOLEAN#, #usualt:VARCHAR#, now())
+	</insert>
+
+    <update id="updRegByCod" parameterClass="VeaVO">
+        UPDATE sos.sosvea
+		   SET codves = #codves:NUMERIC#,
+			 codvat = #codvat:NUMERIC#,
+			 principal = #principal:BOOLEAN#,
+			 usualt=#usualt:VARCHAR#,
+			 datalt=now()
+		 WHERE codvea = #codvea:NUMERIC#
+    </update>
+
+    <delete id="delByCod" parameterClass="Integer">
+        DELETE FROM sos.sosvea
+		 WHERE codvea = #value:NUMERIC#
+    </delete>
+    
+       <select id="countRegByCriterio" parameterClass="VeaVO" resultClass="Integer">
+        SELECT count(*)
+		  FROM sos.sosvea
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="codvea" prepend=" AND ">
+				codvea = #codvea:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codves" prepend=" AND ">
+				codves = #codves:NUMERIC#
+			</isNotNull>
+			<isNotNull property="codvat" prepend=" AND ">
+				codvat = #codvat:NUMERIC#
+			</isNotNull>
+			<isNotNull property="principal" prepend=" AND ">
+				principal = #principal:BOOLEAN#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+</sqlMap>

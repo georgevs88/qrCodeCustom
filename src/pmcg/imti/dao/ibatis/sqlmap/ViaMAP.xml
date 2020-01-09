@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Via">
+	<typeAlias alias="ViaVO" type="pmcg.imti.domain.ViaVO" />
+
+	<resultMap id="mapComplexQuerySimple" class="ViaVO">
+		<result property="con_id" column="con_id" />
+		<result property="sol_id" column="sol_id" />
+		<result property="tip_id" column="tip_id" />
+		<result property="con_datini" column="con_datini" />
+		<result property="con_datfim" column="con_datfim" />
+		<result property="con_status" column="con_status" />
+		<result property="con_impresso" column="con_impresso" />
+		<result property="con_risco" column="con_risco" />
+		<result property="con_licenciado" column="con_licenciado" />
+		<result property="con_autenticidade" column="con_autenticidade" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="ViaVO">
+		<result property="con_id" column="con_id" />
+		<result property="sol_id" column="sol_id" />
+		<result property="tip_id" column="tip_id" />
+		<result property="con_datini" column="con_datini" />
+		<result property="con_datfim" column="con_datfim" />
+		<result property="con_status" column="con_status" />
+		<result property="con_impresso" column="con_impresso" />
+		<result property="con_risco" column="con_risco" />
+		<result property="con_licenciado" column="con_licenciado" />
+		<result property="con_autenticidade" column="con_autenticidade" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.consulta WHERE con_id = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM public.consulta WHERE con_id = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="ViaVO" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.consulta
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="con_id" prepend=" AND ">
+				con_id = #con_id:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sol_id" prepend=" AND ">
+				sol_id ILIKE '%' || #sol_id:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tip_id" prepend=" AND ">
+				tip_id = #tip_id:NUMERIC#
+			</isNotNull>
+			<isNotNull property="con_datini" prepend=" AND "> to_char(con_datini,'dd/MM/yyyy') =
+				to_char(#con_datini:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="con_datfim" prepend=" AND "> to_char(con_datfim,'dd/MM/yyyy') =
+				to_char(#con_datfim:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="con_status" prepend=" AND ">
+				con_status ILIKE '%' || #con_status:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_impresso" prepend=" AND "> con_impresso = #con_impresso#
+			</isNotNull>
+			<isNotNull property="con_risco" prepend=" AND ">
+				con_risco ILIKE '%' || #con_risco:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_licenciado" prepend=" AND ">
+				con_licenciado ILIKE '%' || #con_licenciado:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_autenticidade" prepend=" AND ">
+				con_autenticidade ILIKE '%' || #con_autenticidade:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="ViaVO" resultMap="mapComplexQuery">
+		SELECT * FROM public.consulta
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="con_id" prepend=" AND "> con_id = #con_id:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sol_id" prepend=" AND ">
+				sol_id ILIKE '%' || #sol_id:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tip_id" prepend=" AND "> tip_id = #tip_id:NUMERIC#
+			</isNotNull>
+			<isNotNull property="con_datini" prepend=" AND "> to_char(con_datini,'dd/MM/yyyy') =
+				to_char(#con_datini:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="con_datfim" prepend=" AND "> to_char(con_datfim,'dd/MM/yyyy') =
+				to_char(#con_datfim:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="con_status" prepend=" AND ">
+				con_status ILIKE '%' || #con_status:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_impresso" prepend=" AND "> con_impresso = #con_impresso#
+			</isNotNull>
+			<isNotNull property="con_risco" prepend=" AND ">
+				con_risco ILIKE '%' || #con_risco:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_licenciado" prepend=" AND ">
+				con_licenciado ILIKE '%' || #con_licenciado:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_autenticidade" prepend=" AND ">
+				con_autenticidade ILIKE '%' || #con_autenticidade:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM public.consulta
+	</select>
+
+	<insert id="insReg" parameterClass="ViaVO">
+		<selectKey keyProperty="con_id" resultClass="Long">
+			SELECT NEXTVAL('public.seqvia')
+		</selectKey>
+		INSERT INTO
+		public.consulta(con_id,sol_id,tip_id,con_datini,con_datfim,con_status,con_impresso,con_risco,con_licenciado,con_autenticidade)
+		VALUES (#con_id:NUMERIC#, UPPER(#sol_id:VARCHAR#),#tip_id:NUMERIC#,#con_datini:TIMESTAMP#,#con_datfim:TIMESTAMP#,
+		UPPER(#con_status:VARCHAR#),#con_impresso#, UPPER(#con_risco:VARCHAR#), UPPER(#con_licenciado:VARCHAR#),
+		UPPER(#con_autenticidade:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="ViaVO">
+		UPDATE public.consulta SET sol_id= UPPER(#sol_id:VARCHAR#),tip_id= #tip_id:NUMERIC#,con_datini=
+		#con_datini:TIMESTAMP#,con_datfim= #con_datfim:TIMESTAMP#,con_status= UPPER(#con_status:VARCHAR#),con_impresso=
+		#con_impresso#,con_risco= UPPER(#con_risco:VARCHAR#),con_licenciado=
+		UPPER(#con_licenciado:VARCHAR#),con_autenticidade= UPPER(#con_autenticidade:VARCHAR#) WHERE con_id = #con_id:NUMERIC#
+	</update>
+	
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM public.consulta WHERE con_id = #value:NUMERIC#
+	</delete>
+	
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM public.consulta WHERE con_id in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="ViaVO" resultClass="Integer">
+		SELECT count(con_id) FROM public.consulta
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="con_id" prepend=" AND "> con_id = #con_id:NUMERIC#
+			</isNotNull>
+			<isNotNull property="sol_id" prepend=" AND ">
+				sol_id ILIKE '%' || #sol_id:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="tip_id" prepend=" AND "> tip_id = #tip_id:NUMERIC#
+			</isNotNull>
+			<isNotNull property="con_datini" prepend=" AND "> to_char(con_datini,'dd/MM/yyyy') =
+				to_char(#con_datini:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="con_datfim" prepend=" AND "> to_char(con_datfim,'dd/MM/yyyy') =
+				to_char(#con_datfim:TIMESTAMP#,'dd/MM/yyyy')
+			</isNotNull>
+			<isNotNull property="con_status" prepend=" AND ">
+				con_status ILIKE '%' || #con_status:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_impresso" prepend=" AND "> con_impresso = #con_impresso#
+			</isNotNull>
+			<isNotNull property="con_risco" prepend=" AND ">
+				con_risco ILIKE '%' || #con_risco:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_licenciado" prepend=" AND ">
+				con_licenciado ILIKE '%' || #con_licenciado:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="con_autenticidade" prepend=" AND ">
+				con_autenticidade ILIKE '%' || #con_autenticidade:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getParecerByProtocolo" parameterClass="Long" resultClass="hashmap">
+		select 
+			mod_id, par_status, par_obs, to_char(par_datini, 'DD/MM/YYYY') as par_datini 
+		FROM 
+			parecer 
+		WHERE 
+			con_id = #con_id:NUMERIC#
+			AND mod_id = '12' 
+	</select>
+	
+	<select id="getQlfByNjrCondi" parameterClass="hashmap" resultClass="String">
+		select public.retorna_qlf_por_njr_condi(#njr:VARCHAR#, #condi:NUMERIC#)
+	</select>
+	
+	<select id="getProtocoloByCnpj" parameterClass="String" resultClass="hashmap">
+		select 
+			substr(cpfcnpj,1,2) || '.' || substr(cpfcnpj,3,3) || '.' || substr(cpfcnpj,6,3) || '/' || substr(cpfcnpj,9,4) || '-' || substr(cpfcnpj,13,2) as cpfcnpj,
+			protocolo, to_char(data_conciliacao, 'dd/MM/yyyy') as data
+		from 
+			tblconciliados
+		where 
+			cpfcnpj = #value:VARCHAR#
+	</select>
+</sqlMap> 
+ 

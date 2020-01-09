@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!DOCTYPE sqlMap PUBLIC "//iBATIS.com//DTD SQL Map 2.0//EN" "HTTP://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Rcl">
+	<typeAlias alias="RclVO" type="pmcg.fcn.domain.RclVO" />
+
+
+	<resultMap id="mapComplexQuerySimple" class="RclVO">
+		<result property="iddrcl" column="iddrcl" />
+		<result property="bomrcl" column="bomrcl" />
+		<result property="semrcl" column="semrcl" />
+		<result property="visrcl" column="visrcl" />
+	</resultMap>
+
+	<resultMap id="mapComplexQuery" class="RclVO">
+		<result property="iddrcl" column="iddrcl" />
+		<result property="bomrcl" column="bomrcl" />
+		<result property="semrcl" column="semrcl" />
+		<result property="visrcl" column="visrcl" />
+	</resultMap>
+
+	<select id="getRegByCod" parameterClass="Long" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnrcl WHERE iddrcl = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCodComplex" parameterClass="Long" resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnrcl WHERE iddrcl = #value:NUMERIC#
+	</select>
+
+	<select id="getRegByCriterio" parameterClass="RclVO"
+		resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnrcl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddrcl" prepend=" AND ">
+				iddrcl = #iddrcl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="bomrcl" prepend=" AND ">
+				bomrcl ILIKE '%' || #bomrcl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="semrcl" prepend=" AND ">
+				semrcl ILIKE '%' || #semrcl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="visrcl" prepend=" AND ">
+				visrcl ILIKE '%' || #visrcl:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getRegByCriterioComplex" parameterClass="RclVO"
+		resultMap="mapComplexQuery">
+		SELECT * FROM fcn.fcnrcl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddrcl" prepend=" AND "> iddrcl =
+				#iddrcl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="bomrcl" prepend=" AND ">
+				bomrcl ILIKE '%' || #bomrcl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="semrcl" prepend=" AND ">
+				semrcl ILIKE '%' || #semrcl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="visrcl" prepend=" AND ">
+				visrcl ILIKE '%' || #visrcl:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTodos" resultMap="mapComplexQuerySimple">
+		SELECT * FROM fcn.fcnrcl
+	</select>
+
+	<insert id="insReg" parameterClass="RclVO">
+		<selectKey keyProperty="iddrcl" resultClass="Long">
+			SELECT NEXTVAL('fcn.seqrcl')
+		</selectKey>
+		INSERT INTO fcn.fcnrcl(iddrcl,bomrcl,semrcl,visrcl) VALUES
+		(#iddrcl:NUMERIC#, UPPER(#bomrcl:VARCHAR#), UPPER(#semrcl:VARCHAR#),
+		UPPER(#visrcl:VARCHAR#) )
+	</insert>
+
+	<update id="updRegByCod" parameterClass="RclVO">
+		UPDATE fcn.fcnrcl SET bomrcl= UPPER(#bomrcl:VARCHAR#),semrcl=
+		UPPER(#semrcl:VARCHAR#),visrcl= UPPER(#visrcl:VARCHAR#) WHERE iddrcl =
+		#iddrcl:NUMERIC#
+	</update>
+	<delete id="delByCod" parameterClass="Long">
+		DELETE FROM fcn.fcnrcl WHERE iddrcl = #value:NUMERIC#
+	</delete>
+	<delete id="delByCodigos" parameterClass="String">
+		DELETE FROM fcn.fcnrcl WHERE iddrcl in ($value$)
+	</delete>
+
+	<select id="getCountByCriterio" parameterClass="RclVO"
+		resultClass="Integer">
+		SELECT count(iddrcl) FROM fcn.fcnrcl
+		<dynamic prepend=" WHERE ">
+			<isNotNull property="iddrcl" prepend=" AND "> iddrcl =
+				#iddrcl:NUMERIC#
+			</isNotNull>
+			<isNotNull property="bomrcl" prepend=" AND ">
+				bomrcl ILIKE '%' || #bomrcl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="semrcl" prepend=" AND ">
+				semrcl ILIKE '%' || #semrcl:VARCHAR# || '%'
+			</isNotNull>
+			<isNotNull property="visrcl" prepend=" AND ">
+				visrcl ILIKE '%' || #visrcl:VARCHAR# || '%'
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap> 
+ 

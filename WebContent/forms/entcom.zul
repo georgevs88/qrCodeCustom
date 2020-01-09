@@ -1,0 +1,33 @@
+<?page title="Entrar Como" cacheable="false" language="xul/html" zscriptLanguage="Java" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window use="pmcg.imti.view.ext.EntCom" id="ent" border="normal" shadow="false" width="330px"  position="center"
+		mode="modal" sizable="false" closable="false" onCreate="ent.initComponentes()">
+		<div style="background:#eaebeb;">
+			<space height="4px" />
+			<hbox>
+				<space width="5px" />
+				<label value="Entrar Como..." style="background:none;font-weight:bold;font-size:12px;" />
+				<space width="192px" />
+				<image src="/images/close.png" align="rigth" id="profile" onClick="ent.sair()" width="15px" />
+			</hbox>
+			<space height="1px" />
+		</div>
+		<separator height="10px"/>
+		<hbox>
+			<separator width="10px" />
+			<vbox>
+				<separator height="1px" />
+				<label value="CPF/CNPJ:" style="font-size:15px;" />
+			</vbox>
+			<textbox id="cpfcnpj" value="@{ent.cpfcnpjEntrar}" width="150px" maxlength="18" onBlur="ent.verificaUsuario()" style="background-color:#a8bec7;text-align:center;font-size:15px;font-weight:bold;" />
+		</hbox>
+		<separator height="13px" />
+		<hbox>
+			<separator width="108px" />
+			<button class="btn btn-lg btn-default" label="Entrar" onClick="ent.entrar()" style="margin-top: 15px;"/>
+		</hbox>
+	</window>
+</zk>
